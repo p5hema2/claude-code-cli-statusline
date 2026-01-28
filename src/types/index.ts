@@ -28,3 +28,25 @@ export type {
   WidgetsResponse,
 } from './ConfigureAPI.js';
 export type { RenderContext, Widget } from './Widget.js';
+export type { AnsiColor, AnsiModifier, ColorValue } from './Colors.js';
+export { VALID_COLORS, isValidColor } from './Colors.js';
+export type {
+  DirectoryOptions,
+  GitBranchColors,
+  GitBranchSymbols,
+  GitBranchOptions,
+  VimModeColors,
+  VimModeOptions,
+  UsageBarColors,
+  UsageWidgetOptions,
+  ModelColors,
+  ModelOptions,
+  OutputStyleColors,
+  OutputStyleOptions,
+  UsageAgeOptions,
+  ContextUsageOptions,
+  SessionUsageOptions,
+  WeeklyUsageOptions,
+  WeeklySonnetOptions,
+  WidgetOptionsType,
+} from './WidgetOptions.js';

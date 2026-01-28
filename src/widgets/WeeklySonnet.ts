@@ -6,9 +6,11 @@
  */
 
 import chalk from 'chalk';
-import { createUsageBar } from '../utils/colors.js';
+import { createUsageBar, colorize } from '../utils/colors.js';
 import { formatResetTime } from '../utils/cache.js';
 import type { Widget, RenderContext } from './Widget.js';
+import type { WeeklySonnetOptions } from '../types/WidgetOptions.js';
+import { getWidgetConfig, formatLabel } from './helpers.js';
 
 export const WeeklySonnetWidget: Widget = {
   name: 'weeklySonnet',
@@ -17,13 +19,22 @@ export const WeeklySonnetWidget: Widget = {
   render(ctx: RenderContext): string | null {
     if (!ctx.usage?.weekly_sonnet) return null;
 
-    const { percent_used, reset_time } = ctx.usage.weekly_sonnet;
-    const resetStr = formatResetTime(reset_time);
+    const config = getWidgetConfig(ctx, 'weeklySonnet');
+    const options = config?.options as WeeklySonnetOptions | undefined;
 
-    return (
-      chalk.dim('7d-S:') +
-      createUsageBar(percent_used) +
-      chalk.dim(` (${resetStr})`)
-    );
+    const { percent_used, reset_time } = ctx.usage.weekly_sonnet;
+
+    const label = formatLabel(config, '7d-S');
+    const bar = createUsageBar(percent_used, options?.barColors);
+
+    // Optionally hide reset time
+    const showResetTime = options?.showResetTime !== false;
+    let resetSuffix = '';
+    if (showResetTime) {
+      const resetStr = formatResetTime(reset_time);
+      resetSuffix = colorize(` (${resetStr})`, config?.contentColor, chalk.dim);
+    }
+
+    return label + bar + resetSuffix;
   },
 };

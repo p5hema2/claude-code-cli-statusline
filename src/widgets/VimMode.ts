@@ -2,35 +2,62 @@
  * Vim mode widget
  *
  * Displays the current vim mode (normal, insert, visual, etc.)
- * with mode-specific coloring.
+ * with configurable mode-specific coloring.
  */
 
-import chalk from 'chalk';
 import type { Widget, RenderContext } from './Widget.js';
+import type { VimModeOptions, VimModeColors } from '../types/WidgetOptions.js';
+import type { ColorValue } from '../types/Colors.js';
+import { getWidgetConfig, formatLabel } from './helpers.js';
+import { colorize } from '../utils/colors.js';
+
+/** Vim mode types for color mapping */
+type VimModeType = 'normal' | 'insert' | 'visual' | 'replace' | 'command';
+
+/** Default colors for each vim mode */
+const DEFAULT_MODE_COLORS: Record<VimModeType, ColorValue> = {
+  normal: 'green',
+  insert: 'yellow',
+  visual: 'magenta',
+  replace: 'red',
+  command: 'blue',
+};
 
 /**
- * Get color for vim mode
+ * Get the mode type for color lookup
  */
-function getModeColor(
-  mode: string
-): (text: string) => string {
+function getModeType(mode: string): VimModeType | undefined {
   const lowerMode = mode.toLowerCase();
   switch (lowerMode) {
     case 'normal':
-      return chalk.green;
+      return 'normal';
     case 'insert':
-      return chalk.yellow;
+      return 'insert';
     case 'visual':
     case 'visual-line':
     case 'visual-block':
-      return chalk.magenta;
+      return 'visual';
     case 'replace':
-      return chalk.red;
+      return 'replace';
     case 'command':
-      return chalk.blue;
+      return 'command';
     default:
-      return chalk.white;
+      return undefined;
   }
+}
+
+/**
+ * Get color for vim mode with custom colors support
+ */
+function getModeColor(
+  mode: string,
+  customColors?: VimModeColors
+): ColorValue {
+  const modeType = getModeType(mode);
+  if (!modeType) return 'white';
+
+  // Use custom color if provided, otherwise use default
+  return customColors?.[modeType] ?? DEFAULT_MODE_COLORS[modeType];
 }
 
 /**
@@ -66,10 +93,17 @@ export const VimModeWidget: Widget = {
     const vimMode = ctx.status.vim_mode;
     if (!vimMode?.mode) return null;
 
+    const config = getWidgetConfig(ctx, 'vimMode');
+    const options = config?.options as VimModeOptions | undefined;
+
     const mode = vimMode.mode;
     const shortened = shortenMode(mode);
-    const colorFn = getModeColor(mode);
+    const label = formatLabel(config, '');
 
-    return colorFn(`[${shortened}]`);
+    // Get mode-specific color
+    const modeColor = getModeColor(mode, options?.colors);
+    const content = colorize(`[${shortened}]`, modeColor);
+
+    return label + content;
   },
 };

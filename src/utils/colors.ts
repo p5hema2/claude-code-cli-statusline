@@ -4,7 +4,49 @@
  * Provides color-coded usage bars and text formatting for the statusline.
  */
 
-import chalk from 'chalk';
+import chalk, { type ChalkInstance } from 'chalk';
+import type { ColorValue, UsageBarColors } from '../types/index.js';
+
+/**
+ * Get a chalk function for a ColorValue
+ *
+ * Maps ColorValue strings to their corresponding chalk methods.
+ * Returns identity function if color is undefined or invalid.
+ *
+ * @param color - ColorValue to convert to chalk function
+ * @returns Chalk function for the specified color
+ */
+export function getChalkColor(color: ColorValue | undefined): ChalkInstance {
+  if (!color) return chalk;
+  // All ColorValue strings are valid chalk method names
+  const chalkMethod = chalk[color as keyof typeof chalk];
+  if (typeof chalkMethod === 'function') {
+    return chalkMethod as ChalkInstance;
+  }
+  return chalk;
+}
+
+/**
+ * Apply color to text with optional fallback
+ *
+ * @param text - Text to colorize
+ * @param color - ColorValue to apply (undefined = use fallback)
+ * @param fallback - Fallback chalk function if color is undefined
+ * @returns Colored string
+ */
+export function colorize(
+  text: string,
+  color?: ColorValue,
+  fallback?: (text: string) => string
+): string {
+  if (color) {
+    return getChalkColor(color)(text);
+  }
+  if (fallback) {
+    return fallback(text);
+  }
+  return text;
+}
 
 /**
  * Create a visual usage bar with color coding based on percentage
@@ -15,17 +57,27 @@ import chalk from 'chalk';
  * - Red (80-100%): High usage
  *
  * @param percent - Usage percentage (0-100)
+ * @param colors - Optional custom colors for each threshold
  * @returns Formatted string like "[██████░░░░  60%]"
  */
-export function createUsageBar(percent: number): string {
+export function createUsageBar(
+  percent: number,
+  colors?: UsageBarColors
+): string {
   const pctInt = Math.floor(Math.max(0, Math.min(100, percent)));
   const filled = Math.min(10, Math.max(0, Math.ceil(pctInt / 10)));
   const empty = 10 - filled;
 
-  // Color based on percentage thresholds
-  const colorFn =
-    pctInt < 50 ? chalk.green : pctInt < 80 ? chalk.yellow : chalk.red;
+  // Get colors with defaults
+  const lowColor = colors?.low ?? 'green';
+  const mediumColor = colors?.medium ?? 'yellow';
+  const highColor = colors?.high ?? 'red';
 
+  // Select color based on percentage thresholds
+  const selectedColor =
+    pctInt < 50 ? lowColor : pctInt < 80 ? mediumColor : highColor;
+
+  const colorFn = getChalkColor(selectedColor);
   const bar = '█'.repeat(filled) + '░'.repeat(empty);
   const pctStr = String(pctInt).padStart(3);
 

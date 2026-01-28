@@ -9,6 +9,9 @@
 
 import chalk from 'chalk';
 import type { Widget, RenderContext } from './Widget.js';
+import type { UsageAgeOptions } from '../types/WidgetOptions.js';
+import { getWidgetConfig, formatLabel } from './helpers.js';
+import { colorize } from '../utils/colors.js';
 
 /**
  * Format timestamp as absolute time (HH:MM)
@@ -30,8 +33,16 @@ export const UsageAgeWidget: Widget = {
   render(ctx: RenderContext): string | null {
     if (!ctx.usage?.timestamp) return null;
 
-    const timeStr = formatQueryTime(ctx.usage.timestamp);
+    const config = getWidgetConfig(ctx, 'usageAge');
+    const options = config?.options as UsageAgeOptions | undefined;
 
-    return chalk.dim('⟳ ') + chalk.gray(timeStr);
+    const timeStr = formatQueryTime(ctx.usage.timestamp);
+    const label = formatLabel(config, '');
+
+    // Colorize icon and time separately
+    const icon = colorize('⟳ ', options?.iconColor, chalk.dim);
+    const time = colorize(timeStr, options?.timeColor ?? config?.contentColor, chalk.gray);
+
+    return label + icon + time;
   },
 };

@@ -4,10 +4,18 @@
  * Configuration options for customizing the statusline appearance and behavior.
  */
 
+import type { ColorValue } from './Colors.js';
+
 /** Widget configuration */
 export interface WidgetConfig {
   /** Whether the widget is enabled */
-  enabled: boolean;
+  enabled?: boolean;
+  /** Custom label text (empty string = no label, undefined = default label) */
+  label?: string;
+  /** Color for the label text */
+  labelColor?: ColorValue;
+  /** Color for the widget content (for simple widgets) */
+  contentColor?: ColorValue;
   /** Widget-specific options */
   options?: Record<string, unknown>;
 }

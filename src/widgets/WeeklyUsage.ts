@@ -5,9 +5,11 @@
  */
 
 import chalk from 'chalk';
-import { createUsageBar } from '../utils/colors.js';
+import { createUsageBar, colorize } from '../utils/colors.js';
 import { formatResetTime } from '../utils/cache.js';
 import type { Widget, RenderContext } from './Widget.js';
+import type { WeeklyUsageOptions } from '../types/WidgetOptions.js';
+import { getWidgetConfig, formatLabel } from './helpers.js';
 
 export const WeeklyUsageWidget: Widget = {
   name: 'weeklyUsage',
@@ -16,13 +18,22 @@ export const WeeklyUsageWidget: Widget = {
   render(ctx: RenderContext): string | null {
     if (!ctx.usage?.weekly_all) return null;
 
-    const { percent_used, reset_time } = ctx.usage.weekly_all;
-    const resetStr = formatResetTime(reset_time);
+    const config = getWidgetConfig(ctx, 'weeklyUsage');
+    const options = config?.options as WeeklyUsageOptions | undefined;
 
-    return (
-      chalk.dim('7d:') +
-      createUsageBar(percent_used) +
-      chalk.dim(` (${resetStr})`)
-    );
+    const { percent_used, reset_time } = ctx.usage.weekly_all;
+
+    const label = formatLabel(config, '7d');
+    const bar = createUsageBar(percent_used, options?.barColors);
+
+    // Optionally hide reset time
+    const showResetTime = options?.showResetTime !== false;
+    let resetSuffix = '';
+    if (showResetTime) {
+      const resetStr = formatResetTime(reset_time);
+      resetSuffix = colorize(` (${resetStr})`, config?.contentColor, chalk.dim);
+    }
+
+    return label + bar + resetSuffix;
   },
 };

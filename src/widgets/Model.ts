@@ -2,10 +2,28 @@
  * Model widget
  *
  * Displays the current Claude model name in a shortened format.
+ * Supports configurable colors per model family (Opus, Sonnet, Haiku).
  */
 
 import chalk from 'chalk';
 import type { Widget, RenderContext } from './Widget.js';
+import type { ModelOptions } from '../types/WidgetOptions.js';
+import { getWidgetConfig, formatLabel } from './helpers.js';
+import { colorize } from '../utils/colors.js';
+
+/** Model family type */
+type ModelFamily = 'opus' | 'sonnet' | 'haiku' | 'unknown';
+
+/**
+ * Detect model family from name
+ */
+function detectModelFamily(name: string): ModelFamily {
+  const lowerName = name.toLowerCase();
+  if (lowerName.includes('opus')) return 'opus';
+  if (lowerName.includes('sonnet')) return 'sonnet';
+  if (lowerName.includes('haiku')) return 'haiku';
+  return 'unknown';
+}
 
 /**
  * Shorten model name for display
@@ -64,7 +82,21 @@ export const ModelWidget: Widget = {
     const name = model.display_name || model.id;
     if (!name) return null;
 
+    const config = getWidgetConfig(ctx, 'model');
+    const options = config?.options as ModelOptions | undefined;
+
     const shortened = shortenModelName(name);
-    return chalk.magenta(shortened);
+    const family = detectModelFamily(name);
+    const label = formatLabel(config, 'Model');
+
+    // Determine color: use family-specific color from options, or contentColor, or default magenta
+    let content: string;
+    if (family !== 'unknown' && options?.colors?.[family]) {
+      content = colorize(shortened, options.colors[family]);
+    } else {
+      content = colorize(shortened, config?.contentColor, chalk.magenta);
+    }
+
+    return label + content;
   },
 };
