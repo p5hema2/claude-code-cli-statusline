@@ -21,7 +21,8 @@ export const GitBranchWidget: Widget = {
     const dir = ctx.status.current_dir;
     if (!dir) return null;
 
-    const gitInfo = getGitInfo(dir);
+    // Use mock git info if available (preview mode), otherwise get real git info
+    const gitInfo = ctx.mockGitInfo !== undefined ? ctx.mockGitInfo : getGitInfo(dir);
     if (!gitInfo) return null;
 
     const indicators = formatGitIndicators(gitInfo);

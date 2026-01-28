@@ -13,6 +13,7 @@ export { ContextUsageWidget } from './ContextUsage.js';
 export { SessionUsageWidget } from './SessionUsage.js';
 export { WeeklyUsageWidget } from './WeeklyUsage.js';
 export { WeeklySonnetWidget } from './WeeklySonnet.js';
+export { UsageAgeWidget } from './UsageAge.js';
 export { OutputStyleWidget } from './OutputStyle.js';
 export { VimModeWidget } from './VimMode.js';
 
@@ -24,6 +25,7 @@ import { ContextUsageWidget } from './ContextUsage.js';
 import { SessionUsageWidget } from './SessionUsage.js';
 import { WeeklyUsageWidget } from './WeeklyUsage.js';
 import { WeeklySonnetWidget } from './WeeklySonnet.js';
+import { UsageAgeWidget } from './UsageAge.js';
 import { OutputStyleWidget } from './OutputStyle.js';
 import { VimModeWidget } from './VimMode.js';
 
@@ -41,6 +43,7 @@ export const DEFAULT_WIDGETS: Widget[] = [
   SessionUsageWidget,
   WeeklyUsageWidget,
   WeeklySonnetWidget,
+  UsageAgeWidget,
   OutputStyleWidget,
   VimModeWidget,
 ];
@@ -56,6 +59,7 @@ export const WIDGET_REGISTRY: Record<string, Widget> = {
   sessionUsage: SessionUsageWidget,
   weeklyUsage: WeeklyUsageWidget,
   weeklySonnet: WeeklySonnetWidget,
+  usageAge: UsageAgeWidget,
   outputStyle: OutputStyleWidget,
   vimMode: VimModeWidget,
 };

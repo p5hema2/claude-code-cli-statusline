@@ -5,12 +5,20 @@
  */
 
 import { homedir } from 'node:os';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { dirname } from 'node:path';
 import type { Settings } from '../types/Settings.js';
 import { DEFAULT_SETTINGS } from '../types/Settings.js';
 
 /** Path to user settings file */
 const SETTINGS_PATH = `${homedir()}/.claude/statusline-settings.json`;
+
+/**
+ * Get the settings file path
+ */
+export function getSettingsPath(): string {
+  return SETTINGS_PATH;
+}
 
 /**
  * Deep merge two settings objects
@@ -43,6 +51,9 @@ function deepMergeSettings(
   // Override simple values
   if (source.separator !== undefined) result.separator = source.separator;
   if (source.cacheTtl !== undefined) result.cacheTtl = source.cacheTtl;
+
+  // Override rows (complete replacement, not merge)
+  if (source.rows !== undefined) result.rows = source.rows;
 
   return result;
 }
@@ -78,4 +89,25 @@ export function loadSettings(): Settings {
 export function isWidgetEnabled(settings: Settings, widgetName: string): boolean {
   const widgetConfig = settings.widgets?.[widgetName];
   return widgetConfig?.enabled !== false;
+}
+
+/**
+ * Save settings to disk
+ *
+ * Writes the settings to the user's configuration file.
+ * Creates the directory structure if it doesn't exist.
+ *
+ * @param settings - Settings object to save
+ * @throws Error if unable to write file
+ */
+export function saveSettings(settings: Settings): void {
+  // Ensure directory exists
+  const dir = dirname(SETTINGS_PATH);
+  if (!existsSync(dir)) {
+    mkdirSync(dir, { recursive: true });
+  }
+
+  // Write settings with pretty formatting
+  const json = JSON.stringify(settings, null, 2);
+  writeFileSync(SETTINGS_PATH, json, 'utf-8');
 }

@@ -22,6 +22,17 @@ export interface ColorScheme {
   separator?: string;
 }
 
+/** Row alignment options */
+export type RowAlign = 'left' | 'center' | 'right' | 'spread';
+
+/** Configuration for a single statusline row */
+export interface RowConfig {
+  /** Widget IDs in display order */
+  widgets: string[];
+  /** Row alignment (default: 'left') */
+  align?: RowAlign;
+}
+
 /** User settings for the statusline */
 export interface Settings {
   /** Widget configurations keyed by widget name */
@@ -32,6 +43,11 @@ export interface Settings {
   separator?: string;
   /** Cache TTL in milliseconds (default: 300000 = 5 minutes) */
   cacheTtl?: number;
+  /**
+   * Multi-row layout configuration
+   * When specified, replaces the default single-row widget order
+   */
+  rows?: RowConfig[];
 }
 
 /** Default settings */

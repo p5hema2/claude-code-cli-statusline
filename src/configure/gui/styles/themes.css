@@ -1,0 +1,33 @@
+/**
+ * Terminal theme styles for the preview
+ */
+
+.terminal-preview.theme-monokai {
+  background-color: #272822;
+  color: #f8f8f2;
+}
+
+.terminal-preview.theme-dark {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+
+.terminal-preview.theme-light {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.terminal-preview.theme-solarized-dark {
+  background-color: #002b36;
+  color: #839496;
+}
+
+.terminal-preview.theme-dracula {
+  background-color: #282a36;
+  color: #f8f8f2;
+}
+
+.terminal-preview.theme-nord {
+  background-color: #2e3440;
+  color: #d8dee9;
+}

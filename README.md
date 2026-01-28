@@ -56,6 +56,22 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 
 ## Configuration
 
+### Visual Configuration GUI
+
+Open a browser-based WYSIWYG editor to configure your statusline:
+
+```bash
+npx @p5hema2/claude-code-cli-statusline --configure
+```
+
+The GUI allows you to:
+- **Drag & drop** widgets to arrange your layout
+- **Multi-row support** for complex statuslines
+- **Live preview** with different terminal themes
+- **N/A state toggles** to preview various widget states
+
+### Manual Configuration
+
 Create `~/.claude/statusline-settings.json` to customize:
 
 ```json
@@ -76,6 +92,19 @@ Create `~/.claude/statusline-settings.json` to customize:
 }
 ```
 
+### Multi-Row Layout
+
+Configure multiple rows using the `rows` option:
+
+```json
+{
+  "rows": [
+    { "widgets": ["directory", "gitBranch", "model"] },
+    { "widgets": ["contextUsage", "sessionUsage", "weeklyUsage", "vimMode"] }
+  ]
+}
+```
+
 ### Settings Reference
 
 | Setting | Type | Default | Description |
@@ -83,6 +112,7 @@ Create `~/.claude/statusline-settings.json` to customize:
 | `widgets.<name>.enabled` | boolean | true | Enable/disable specific widget |
 | `separator` | string | `\|` | Character between widgets |
 | `cacheTtl` | number | 300000 | Cache TTL in ms (5 min) |
+| `rows` | array | - | Multi-row layout configuration |
 
 ### Available Widgets
 

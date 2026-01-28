@@ -7,6 +7,7 @@
 import type { StatusJSON } from './StatusJSON.js';
 import type { UsageCache } from './UsageData.js';
 import type { Settings } from './Settings.js';
+import type { GitInfo } from '../utils/git.js';
 
 /** Context passed to widgets during rendering */
 export interface RenderContext {
@@ -18,6 +19,8 @@ export interface RenderContext {
   terminalWidth: number;
   /** User settings */
   settings: Settings;
+  /** Mock git info for preview mode (bypasses real git commands) */
+  mockGitInfo?: GitInfo | null;
 }
 
 /** Widget interface that all statusline widgets must implement */
