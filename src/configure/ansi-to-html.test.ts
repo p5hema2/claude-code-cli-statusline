@@ -23,7 +23,9 @@ describe('ansiToHtml', () => {
 
   it('should convert dim text', () => {
     const ansi = '\x1b[2mdim\x1b[0m';
-    expect(ansiToHtml(ansi)).toBe('<span style="opacity:0.5">dim</span>');
+    // Dim darkens the default foreground color (#e5e5e5 in xterm) by 50%
+    // 0xe5 * 0.5 = 114.5 -> 115 = 0x73
+    expect(ansiToHtml(ansi)).toBe('<span style="color:#737373">dim</span>');
   });
 
   it('should convert italic text', () => {
