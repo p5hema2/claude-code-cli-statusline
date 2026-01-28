@@ -1,0 +1,16 @@
+{
+  "current_dir": "/home/user/projects/my-app",
+  "model": {
+    "id": "claude-sonnet-4-20250514",
+    "display_name": "Claude 4 Sonnet"
+  },
+  "context_window": {
+    "remaining_percentage": 75
+  },
+  "output_style": {
+    "name": "concise"
+  },
+  "vim_mode": {
+    "mode": "normal"
+  }
+}

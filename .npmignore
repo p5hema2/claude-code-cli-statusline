@@ -1,0 +1,29 @@
+# Source files (dist is published)
+src/
+
+# Scripts and examples
+scripts/
+
+# Config files
+*.config.*
+tsconfig.json
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# GitHub
+.github/
+
+# Tests
+coverage/
+**/*.test.ts
+**/*.spec.ts
+
+# Documentation (keep README)
+*.md
+!README.md
+
+# Development
+.env*

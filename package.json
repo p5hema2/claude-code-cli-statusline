@@ -1,0 +1,61 @@
+{
+  "name": "@p5hema2/claude-code-cli-statusline",
+  "version": "0.1.0",
+  "description": "A customizable statusline for Claude Code CLI with OAuth usage metrics",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "claude-code-cli-statusline": "dist/index.js"
+  },
+  "files": [
+    "dist/"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src/",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "statusline",
+    "terminal",
+    "cli",
+    "oauth",
+    "usage-limits"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p5hema2/claude-code-cli-statusline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/p5hema2/claude-code-cli-statusline/issues"
+  },
+  "homepage": "https://github.com/p5hema2/claude-code-cli-statusline#readme",
+  "author": "Martin Heß",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^22.10.10",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.18.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}
