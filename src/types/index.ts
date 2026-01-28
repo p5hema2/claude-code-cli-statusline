@@ -9,6 +9,22 @@ export type {
   CachedUsageEntry,
   UsageCache,
 } from './UsageData.js';
-export type { WidgetConfig, ColorScheme, Settings } from './Settings.js';
+export type {
+  WidgetConfig,
+  ColorScheme,
+  RowAlign,
+  RowConfig,
+  Settings,
+} from './Settings.js';
 export { DEFAULT_SETTINGS } from './Settings.js';
+export type {
+  WidgetMetadata,
+  WidgetPreviewState,
+  WidgetCategory,
+  TerminalTheme,
+  PreviewRequest,
+  PreviewResponse,
+  APIResponse,
+  WidgetsResponse,
+} from './ConfigureAPI.js';
 export type { RenderContext, Widget } from './Widget.js';

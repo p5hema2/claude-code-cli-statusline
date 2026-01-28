@@ -107,16 +107,20 @@ export async function refreshUsageCache(): Promise<UsageCache | null> {
   return cache;
 }
 
+/** Pending refresh promise, if any */
+let pendingRefresh: Promise<UsageCache | null> | null = null;
+
 /**
- * Load usage cache with non-blocking refresh
+ * Load usage cache with deferred refresh
  *
  * This is the main entry point for getting usage data.
  * Strategy:
  * - If valid cache exists: return immediately
- * - If stale cache exists: return stale data, trigger background refresh
+ * - If stale cache exists: return stale data, trigger refresh
  * - If no cache: return null (don't block on first API call)
  *
- * This ensures the statusline renders instantly without waiting for network.
+ * The refresh runs in parallel - call waitForPendingRefresh() after rendering
+ * to ensure the refresh completes before process exit.
  *
  * @param ttl - Cache TTL in milliseconds (default: 5 minutes)
  * @returns Usage cache or null if unavailable
@@ -128,24 +132,31 @@ export async function loadUsageCache(
 
   if (isCacheValid(cached, ttl)) {
     // Cache is fresh, return immediately
+    pendingRefresh = null;
     return cached;
   }
 
-  if (cached) {
-    // Cache is stale but exists - return stale data immediately
-    // and trigger background refresh (fire and forget)
-    refreshUsageCache().catch(() => {
-      // Silently ignore refresh errors
-    });
-    return cached;
-  }
+  // Cache is stale or missing - trigger refresh
+  // Store the promise so we can await it after rendering
+  pendingRefresh = refreshUsageCache().catch(() => null);
 
-  // No cache at all - trigger background refresh but don't wait
-  // User will see usage on next statusline render after cache is populated
-  refreshUsageCache().catch(() => {
-    // Silently ignore refresh errors
-  });
-  return null;
+  // Return stale cache (or null) immediately for fast rendering
+  return cached;
+}
+
+/**
+ * Wait for any pending cache refresh to complete
+ *
+ * Call this after rendering to ensure the refresh finishes before process exit.
+ * This is non-blocking if no refresh is pending.
+ *
+ * @returns The refreshed cache or null
+ */
+export async function waitForPendingRefresh(): Promise<UsageCache | null> {
+  if (!pendingRefresh) return null;
+  const result = await pendingRefresh;
+  pendingRefresh = null;
+  return result;
 }
 
 /**

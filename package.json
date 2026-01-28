@@ -8,15 +8,18 @@
     "claude-code-cli-statusline": "dist/index.js"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "scripts/"
   ],
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run build:gui",
+    "build:gui": "node scripts/copy-gui.js",
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
+    "configure": "tsx src/index.ts --configure",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src/",
