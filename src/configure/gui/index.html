@@ -19,32 +19,17 @@
       <section class="section preview-section">
         <div class="section-header">
           <h2>Preview</h2>
-          <div class="preview-controls">
-            <label class="control-label">
-              Terminal:
-              <select id="terminal-select" class="select">
-                <!-- Populated by JS from API -->
-              </select>
-            </label>
-            <label class="control-label">
-              BG:
-              <select id="theme-select" class="select">
-                <option value="dark">VS Code Dark</option>
-                <option value="monokai">Monokai</option>
-                <option value="light">Light</option>
-                <option value="solarized-dark">Solarized Dark</option>
-                <option value="dracula">Dracula</option>
-                <option value="nord">Nord</option>
-              </select>
-            </label>
-            <label class="control-label">
-              Width:
-              <input type="number" id="width-input" value="80" min="40" max="200" class="input-number">
-              <span>cols</span>
-            </label>
+          <div class="preview-actions">
+            <button id="reset-btn" class="btn btn-secondary">
+              <span class="btn-icon">↺</span>
+              Reset to Defaults
+            </button>
+            <button id="save-btn" class="btn btn-primary">
+              <span class="btn-icon">💾</span>
+              Save Settings
+            </button>
           </div>
         </div>
-        <p class="section-desc">Terminals interpret ANSI color codes differently. Select your terminal to see accurate colors.</p>
         <div id="terminal-preview" class="terminal-preview theme-dark">
           <div class="terminal-content">
             <div class="terminal-main">
@@ -60,6 +45,80 @@
             </div>
           </div>
         </div>
+
+        <!-- Collapsible Claude Code Context and Terminal Options -->
+        <details class="claude-context-details" id="claude-context-details" open>
+          <summary class="claude-context-summary">
+            <span class="summary-icon">▶</span>
+            <span class="summary-text">Claude Code Context and Terminal Options</span>
+          </summary>
+          <div class="claude-context-details-content" id="claude-context-details-content">
+            <!-- Terminal Configuration -->
+            <div class="terminal-config">
+              <h4 class="config-section-title">Terminal Configuration</h4>
+              <p class="section-desc">Terminals interpret ANSI color codes differently. Select your terminal to see accurate colors.</p>
+              <div class="preview-controls">
+                <label class="control-label">
+                  Terminal:
+                  <select id="terminal-select" class="select">
+                    <!-- Populated by JS from API -->
+                  </select>
+                </label>
+                <label class="control-label">
+                  BG:
+                  <select id="theme-select" class="select">
+                    <option value="dark">VS Code Dark</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="light">Light</option>
+                    <option value="solarized-dark">Solarized Dark</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="nord">Nord</option>
+                  </select>
+                </label>
+                <label class="control-label">
+                  Width:
+                  <input type="number" id="width-input" value="150" min="40" max="200" class="input-number">
+                  <span>cols</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Context Simulation -->
+            <div class="context-simulation-section">
+              <h4 class="config-section-title">Claude Code Context Simulation</h4>
+              <p class="section-desc">Simulate Claude Code's UI elements shown alongside your statusline</p>
+              <div class="context-toggles">
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="context-type" value="none">
+                    <span>No context</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="context-type" value="file" checked>
+                    <span>File context:</span>
+                    <input type="text" id="file-context-name" value="statusline-settings.json" class="input-text" placeholder="filename">
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="context-type" value="selection">
+                    <span>Line selection:</span>
+                    <input type="number" id="line-selection-count" value="13" min="1" max="999" class="input-number-sm">
+                    <span>lines</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="context-type" value="autocompact">
+                    <span>Context left until auto-compact:</span>
+                    <input type="number" id="autocompact-percent" value="5" min="1" max="20" class="input-number-sm">
+                    <span>%</span>
+                  </label>
+                </div>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="show-plan-mode" checked>
+                  <span>Show plan mode indicator</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </details>
       </section>
 
       <div class="editor-area">
@@ -71,18 +130,7 @@
           </div>
         </section>
 
-        <!-- Row Editor -->
-        <section class="section rows-section">
-          <div class="section-header">
-            <h2>Layout</h2>
-            <button id="add-row-btn" class="btn btn-secondary">+ Add Row</button>
-          </div>
-          <div id="row-editor" class="row-editor">
-            <!-- Rows will be populated by JS -->
-          </div>
-        </section>
-
-        <!-- Widget Config Panel (shown when widget is selected) -->
+        <!-- Widget Config Panel (replaces Layout when open) -->
         <section id="widget-config-panel" class="section config-section hidden">
           <div class="section-header">
             <h2 id="config-widget-title">Widget Settings</h2>
@@ -92,62 +140,34 @@
             <!-- Configuration options populated by JS -->
           </div>
         </section>
-      </div>
 
-      <!-- State Toggles -->
-      <section class="section states-section">
-        <h2>Preview States</h2>
-        <p class="section-desc">Toggle widget states to preview different scenarios</p>
-        <div id="state-toggles" class="state-toggles">
-          <!-- Toggles will be populated by JS -->
-        </div>
-      </section>
-
-      <!-- Claude Code Context Simulation -->
-      <section class="section context-section">
-        <h2>Claude Code Context</h2>
-        <p class="section-desc">Simulate Claude Code's UI elements shown alongside your statusline</p>
-        <div class="context-toggles">
-          <div class="radio-group">
-            <label class="radio-label">
-              <input type="radio" name="context-type" value="none">
-              <span>No context</span>
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="context-type" value="file" checked>
-              <span>File context:</span>
-              <input type="text" id="file-context-name" value="statusline-settings.json" class="input-text" placeholder="filename">
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="context-type" value="selection">
-              <span>Line selection:</span>
-              <input type="number" id="line-selection-count" value="13" min="1" max="999" class="input-number-sm">
-              <span>lines</span>
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="context-type" value="autocompact">
-              <span>Context left until auto-compact:</span>
-              <input type="number" id="autocompact-percent" value="5" min="1" max="20" class="input-number-sm">
-              <span>%</span>
-            </label>
+        <!-- Row Editor (hidden when config panel is open) -->
+        <section class="section rows-section">
+          <div class="section-header">
+            <h2>Layout</h2>
+            <button id="add-row-btn" class="btn btn-secondary">+ Add Row</button>
           </div>
-          <label class="checkbox-label">
-            <input type="checkbox" id="show-plan-mode" checked>
-            <span>Show plan mode indicator</span>
-          </label>
-        </div>
-      </section>
+          <div id="row-editor" class="row-editor">
+            <!-- Rows will be populated by JS -->
+          </div>
+        </section>
+      </div>
     </main>
 
-    <footer class="footer">
-      <div class="footer-actions">
-        <button id="reset-btn" class="btn btn-secondary">Reset to Defaults</button>
-        <button id="save-btn" class="btn btn-primary">Save Settings</button>
-      </div>
-      <div id="status-message" class="status-message"></div>
-    </footer>
+    <!-- Status message (positioned in upper right corner) -->
+    <div id="status-message" class="status-message"></div>
   </div>
 
+  <!-- Live reload for development -->
+  <script>
+    (function() {
+      const es = new EventSource('/__live-reload');
+      es.onmessage = (e) => {
+        if (e.data === 'reload') location.reload();
+      };
+      es.onerror = () => es.close();
+    })();
+  </script>
   <script type="module" src="main.js"></script>
 </body>
 </html>

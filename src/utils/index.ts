@@ -6,10 +6,10 @@ export {
   createUsageBar,
   createCompactUsage,
   colorLabel,
-  separator,
-} from './colors.js';
+  colorize,
+} from './colors.util.js';
 
-export { getAccessToken, fetchUsage } from './oauth.js';
+export { getAccessToken, fetchUsage } from './oauth.util.js';
 
 export {
   loadCacheFromDisk,
@@ -18,7 +18,8 @@ export {
   refreshUsageCache,
   loadUsageCache,
   formatResetTime,
-} from './cache.js';
+  waitForPendingRefresh,
+} from './cache.util.js';
 
 export {
   isGitRepo,
@@ -27,9 +28,14 @@ export {
   getAheadBehind,
   getGitInfo,
   formatGitIndicators,
-  type GitInfo,
-} from './git.js';
+} from './git.util.js';
+export type { GitInfo } from './git.util.js';
 
-export { loadSettings, isWidgetEnabled } from './config.js';
+export {
+  loadSettings,
+  saveSettings,
+  getSettingsPath,
+  getDefaultSettings,
+} from './config.util.js';
 
-export { renderStatusLine, renderWidget, getWidgetNames } from './renderer.js';
+export { renderStatusLine, renderStatusLineRows, renderWidget, getWidgetNames } from './renderer.util.js';

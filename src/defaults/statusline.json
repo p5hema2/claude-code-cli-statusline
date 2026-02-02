@@ -1,0 +1,25 @@
+{
+  "cacheTtl": 60000,
+  "rows": [
+    [
+      { "widget": "directory", "color": "blue" },
+      { "widget": "separator" },
+      { "widget": "gitBranch" },
+      { "widget": "separator" },
+      { "widget": "model" },
+      { "widget": "separator" },
+      { "widget": "outputStyle" },
+      { "widget": "separator" },
+      { "widget": "vimMode" }
+    ],
+    [
+      { "widget": "contextUsage" },
+      { "widget": "separator" },
+      { "widget": "sessionUsage" },
+      { "widget": "separator" },
+      { "widget": "weeklyUsage" },
+      { "widget": "separator" },
+      { "widget": "weeklySonnet" }
+    ]
+  ]
+}

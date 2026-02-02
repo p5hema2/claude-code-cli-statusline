@@ -1,0 +1,51 @@
+{
+  "rows": [
+    {
+      "widgets": [
+        {
+          "name": "directory",
+          "options": {
+            "path": {
+              "color": "blue"
+            }
+          }
+        },
+        {
+          "name": "gitBranch",
+          "options": {
+            "branch": {
+              "color": "green"
+            },
+            "icon": {
+              "show": true
+            }
+          }
+        }
+      ],
+      "alignment": "left",
+      "separator": "space"
+    },
+    {
+      "widgets": [
+        {
+          "name": "model",
+          "options": {
+            "name": {
+              "color": "cyan"
+            }
+          }
+        },
+        {
+          "name": "contextUsage",
+          "options": {
+            "percentage": {
+              "color": "yellow"
+            }
+          }
+        }
+      ],
+      "alignment": "right",
+      "separator": "pipe"
+    }
+  ]
+}

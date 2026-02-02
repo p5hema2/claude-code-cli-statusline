@@ -1,6 +1,8 @@
 import js from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import sheriff from '@softarc/eslint-plugin-sheriff';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
   js.configs.recommended,
@@ -23,6 +25,8 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
+      '@softarc/sheriff': sheriff,
+      'import': importPlugin,
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
@@ -35,6 +39,23 @@ export default [
       'no-console': 'off',
       // Allow control characters for ANSI escape sequence parsing
       'no-control-regex': 'off',
+      // Sheriff - Module boundary enforcement
+      '@softarc/sheriff/dependency-rule': 'error',
+      '@softarc/sheriff/encapsulation': 'error',
+      // Import rules - Enforce clean import patterns
+      'import/order': ['warn', {
+        'groups': [
+          'builtin',  // Node.js built-ins
+          'external', // npm packages
+          'internal', // Aliased modules
+          'parent',   // ../
+          'sibling',  // ./
+        ],
+        'newlines-between': 'always',
+        'alphabetize': { order: 'asc', caseInsensitive: true },
+      }],
+      'import/no-duplicates': 'error',
+      'import/newline-after-import': 'warn',
     },
   },
   {
@@ -52,6 +73,7 @@ export default [
         setTimeout: 'readonly',
         confirm: 'readonly',
         alert: 'readonly',
+        localStorage: 'readonly',
       },
     },
     rules: {
