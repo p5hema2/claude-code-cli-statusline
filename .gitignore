@@ -7,6 +7,7 @@ node_modules/
 
 # Build output
 dist/
+src/configure/gui/styles/output.css
 
 # Logs
 *.log

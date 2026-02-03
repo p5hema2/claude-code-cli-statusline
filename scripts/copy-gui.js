@@ -20,9 +20,15 @@ if (!existsSync(dirname(distGui))) {
   mkdirSync(dirname(distGui), { recursive: true });
 }
 
-// Copy GUI files
+// Copy GUI files, excluding Tailwind source files
 try {
-  cpSync(srcGui, distGui, { recursive: true });
+  cpSync(srcGui, distGui, {
+    recursive: true,
+    filter: (src) => {
+      // Exclude tailwind.css source file (we build output.css separately)
+      return !src.endsWith('tailwind.css');
+    },
+  });
   console.log('✓ GUI files copied to dist/configure/gui');
 } catch (error) {
   console.error('Failed to copy GUI files:', error.message);

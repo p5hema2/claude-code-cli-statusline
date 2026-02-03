@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Base element styles */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply m-0 p-0 font-sans bg-bg-primary text-text-primary leading-normal min-h-screen text-md;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  }
+}
+
+@layer components {
+  /* Terminal theme overrides */
+  .terminal-preview.theme-monokai { background-color: #272822; color: #f8f8f2; }
+  .terminal-preview.theme-dark { background-color: #1e1e1e; color: #d4d4d4; }
+  .terminal-preview.theme-light { background-color: #ffffff; color: #333333; }
+  .terminal-preview.theme-solarized-dark { background-color: #002b36; color: #839496; }
+  .terminal-preview.theme-dracula { background-color: #282a36; color: #f8f8f2; }
+  .terminal-preview.theme-nord { background-color: #2e3440; color: #d8dee9; }
+
+  /* Dynamic state classes */
+  .dragging { @apply opacity-50 cursor-grabbing; }
+  .drag-over { @apply border-accent bg-accent/10; }
+  .drag-over-left { @apply shadow-[-3px_0_0_#58a6ff]; }
+  .drag-over-right { @apply shadow-[3px_0_0_#58a6ff]; }
+  .selected { @apply border-accent bg-accent/15 ring-2 ring-accent/30; }
+
+  /* Buttons - Compact padding to match original */
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 px-3 py-1.5 border-0 rounded-sm text-base font-medium cursor-pointer transition-all duration-150;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-hover shadow-sm hover:shadow-md;
+  }
+  .btn-secondary {
+    @apply btn bg-bg-tertiary text-text-primary border border-border hover:border-accent hover:bg-bg-hover;
+  }
+  .btn-icon {
+    @apply w-7 h-7 flex items-center justify-center border-0 bg-transparent text-text-secondary cursor-pointer rounded-sm text-md leading-none transition-all duration-150 hover:bg-bg-hover hover:text-text-primary;
+  }
+
+  /* Form Elements - Flexible height based on padding */
+  .select, .input-number {
+    @apply px-2.5 py-1.5 bg-bg-tertiary border border-border rounded-sm text-text-primary text-base cursor-pointer;
+    @apply hover:border-accent;
+    @apply focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20;
+  }
+  .config-input {
+    @apply px-2.5 py-1.5 bg-bg-tertiary border border-border rounded-sm text-text-primary text-base w-full;
+    @apply focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20;
+    @apply placeholder:text-text-muted;
+  }
+  .input-text {
+    @apply px-2.5 py-1.5 bg-bg-tertiary border border-border rounded-sm text-text-primary text-base;
+    @apply focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20;
+    @apply placeholder:text-text-muted;
+    @apply max-w-[200px];
+  }
+  .input-number-sm {
+    @apply px-1.5 py-1 bg-bg-tertiary border border-border rounded-sm text-text-primary text-sm w-14 text-center;
+    @apply focus:outline-none focus:border-accent;
+  }
+  input[type="radio"], input[type="checkbox"] {
+    @apply accent-accent cursor-pointer w-4 h-4;
+  }
+
+  /* Custom Dropdown */
+  .custom-dropdown {
+    @apply relative w-full;
+  }
+  .custom-dropdown-trigger {
+    @apply flex items-center justify-between w-full px-2.5 py-1.5 bg-bg-tertiary border border-border rounded-sm text-text-primary text-base cursor-pointer text-left transition-[border-color] duration-150;
+    @apply hover:border-accent focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/20;
+  }
+  .custom-dropdown-options {
+    @apply hidden absolute top-full left-0 right-0 mt-1 bg-bg-tertiary border border-border rounded-sm shadow-custom z-[100] max-h-60 overflow-y-auto;
+  }
+  .custom-dropdown.open .custom-dropdown-options {
+    @apply block;
+  }
+  .custom-dropdown-option {
+    @apply px-3 py-2 cursor-pointer text-base font-medium transition-colors duration-100 hover:bg-bg-hover;
+  }
+  .custom-dropdown-option.selected {
+    @apply bg-accent/15;
+  }
+
+  /* Status Messages */
+  .status-message {
+    @apply fixed top-5 right-5 z-[1000] text-base px-4 py-3 rounded opacity-0 -translate-y-2.5 transition-[opacity,transform] duration-300 shadow-custom pointer-events-none;
+  }
+  .status-message.visible {
+    @apply opacity-100 translate-y-0 pointer-events-auto;
+  }
+  .status-message.success {
+    @apply bg-semantic-success/15 text-semantic-success border border-semantic-success/30;
+  }
+  .status-message.error {
+    @apply bg-semantic-error/15 text-semantic-error border border-semantic-error/30;
+  }
+
+  /* Terminal Preview */
+  .terminal-preview {
+    @apply rounded overflow-hidden font-mono text-base leading-normal shadow-custom border border-border min-w-[300px] max-w-full transition-[width] duration-200;
+  }
+  .terminal-content {
+    @apply p-3 px-4;
+  }
+  .terminal-main {
+    @apply flex justify-between gap-4;
+  }
+  .terminal-left {
+    @apply flex-[1_0_auto] min-w-0 whitespace-pre-wrap break-words;
+  }
+  .terminal-right {
+    @apply flex-[1_1_0] min-w-0 text-right opacity-80 whitespace-pre-wrap break-words;
+    color: #88c0d0;
+  }
+  .terminal-footer {
+    @apply mt-2 pt-2 border-t border-white/10 opacity-80 whitespace-pre-wrap break-words;
+  }
+  .preview-row {
+    @apply py-0.5 min-h-6;
+  }
+
+  /* Widget Palette - Increased contrast and spacing */
+  .widget-palette {
+    @apply flex flex-col gap-4;
+  }
+  .category-header {
+    @apply flex items-center gap-2 p-3 px-4 bg-bg-secondary rounded-sm cursor-pointer select-none transition-colors duration-150 hover:bg-bg-hover;
+  }
+  .category-toggle-icon {
+    @apply text-sm text-text-muted transition-transform duration-200 min-w-[1em];
+  }
+  .category-name {
+    @apply m-0 text-base font-semibold capitalize text-text-primary;
+  }
+  .category-content {
+    @apply flex flex-col gap-2 pt-3 pb-2 overflow-hidden max-h-[2000px] opacity-100 transition-[max-height,opacity] duration-300;
+  }
+  .category-content.hidden {
+    max-height: 0 !important;
+    opacity: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .widget-item {
+    @apply flex items-center p-2 px-3 bg-bg-tertiary rounded-sm cursor-grab transition-all duration-150 border border-transparent hover:bg-bg-hover hover:border-accent;
+  }
+  .widget-item-name {
+    @apply font-medium text-base text-text-primary;
+  }
+  .widget-item-desc {
+    @apply text-xs text-text-secondary mt-0.5;
+  }
+  .widget-config-btn {
+    @apply ml-auto opacity-0 transition-opacity duration-150;
+  }
+  .widget-item:hover .widget-config-btn {
+    @apply opacity-100;
+  }
+
+  /* Row Editor */
+  .row-container {
+    @apply relative pt-4 px-3 pb-3 bg-bg-tertiary rounded-sm border border-border transition-all duration-150 mt-3;
+  }
+  .row-label {
+    @apply absolute -top-2.5 left-3 text-xs font-semibold text-text-secondary bg-bg-secondary px-2 py-0.5 rounded-sm;
+  }
+  .row-close {
+    @apply absolute -top-2.5 -right-2.5 w-5 h-5 flex items-center justify-center bg-bg-tertiary border border-border rounded-full text-text-muted cursor-pointer transition-all duration-150 hover:bg-semantic-error hover:border-semantic-error hover:text-white;
+  }
+  .row-widgets {
+    @apply flex flex-wrap gap-1.5 min-h-8 items-center;
+  }
+  .row-widget {
+    @apply relative px-2 py-1 bg-bg-secondary rounded-sm border border-border text-sm cursor-grab transition-all duration-150 hover:border-accent;
+  }
+  .row-widget-remove {
+    @apply absolute -top-2 -right-2 w-[18px] h-[18px] hidden items-center justify-center bg-bg-tertiary border border-border rounded-full text-text-muted cursor-pointer transition-all duration-150;
+    font-size: 10px;
+    line-height: 1;
+    padding: 0;
+  }
+  .row-widget-remove:hover {
+    @apply bg-semantic-error border-semantic-error text-white;
+  }
+  .row-widget:hover .row-widget-remove {
+    @apply flex;
+  }
+
+  /* SVG icon sizing for delete buttons */
+  .row-widget-remove svg,
+  .row-close svg {
+    width: 10px;
+    height: 10px;
+    stroke: currentColor;
+  }
+
+  /* Config Panel */
+  .config-section {
+    @apply bg-bg-secondary border-l-[3px] border-accent rounded p-4 px-5 border border-border relative z-10;
+  }
+  .config-content {
+    @apply flex flex-col gap-4;
+  }
+  .config-group {
+    @apply flex flex-col gap-3;
+  }
+  .config-field {
+    @apply flex flex-col gap-1;
+  }
+  .config-label {
+    @apply text-base text-text-primary font-medium;
+  }
+  .config-hint {
+    @apply text-xs text-text-muted;
+  }
+  .color-preview {
+    @apply w-3.5 h-3.5 rounded-sm border border-border inline-block ml-1;
+  }
+
+  /* Labels */
+  .control-label {
+    @apply flex items-center gap-2 text-text-primary text-sm font-medium;
+  }
+  .radio-label, .checkbox-label {
+    @apply flex items-center flex-nowrap gap-2 cursor-pointer text-base text-text-primary;
+  }
+  .radio-label > span:first-of-type {
+    @apply whitespace-nowrap;
+  }
+
+  /* Section descriptions - higher visibility */
+  .section-desc {
+    @apply text-sm text-text-secondary leading-relaxed mb-3;
+  }
+
+  /* Config section styling */
+  .config-section-title {
+    @apply m-0 mb-3 text-base font-semibold text-text-primary;
+  }
+
+  /* Preview actions */
+  .preview-actions {
+    @apply flex gap-2 items-center ml-auto;
+  }
+
+  /* Claude Context Details (collapsible section) */
+  .claude-context-details {
+    @apply mt-6 p-4 bg-bg-secondary border border-border rounded;
+  }
+  .claude-context-summary {
+    @apply flex items-center gap-2 cursor-pointer select-none font-semibold text-base list-none;
+  }
+  .claude-context-summary::-webkit-details-marker {
+    display: none;
+  }
+  .summary-icon {
+    @apply text-sm inline-block w-4 transition-transform duration-150;
+  }
+  .claude-context-details[open] .summary-icon {
+    @apply rotate-90;
+  }
+  .claude-context-details-content {
+    @apply mt-4 pt-4 border-t border-border;
+  }
+
+  /* Terminal Config and Context Simulation sections */
+  .terminal-config, .context-simulation-section {
+    @apply mb-6 pb-6 border-b border-border last:border-b-0 last:mb-0 last:pb-0;
+  }
+
+  /* Context toggles */
+  .context-toggles {
+    @apply flex flex-col gap-3;
+  }
+  .radio-group {
+    @apply flex flex-col gap-2;
+  }
+
+  /* Preview controls */
+  .preview-controls {
+    @apply flex flex-wrap gap-5 items-center;
+  }
+
+  /* Editor area grid - responsive */
+  .editor-area {
+    @apply grid grid-cols-[260px_1fr] gap-5;
+  }
+  @media (max-width: 768px) {
+    .editor-area {
+      @apply grid-cols-1;
+    }
+  }
+}

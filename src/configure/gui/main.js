@@ -99,8 +99,12 @@ function setupEventListeners() {
 
       // Update UI
       const category = document.querySelector(`[data-category-id="${categoryId}"]`);
+      if (!category) return;
+
       const icon = category.querySelector('.category-toggle-icon');
       const content = category.querySelector('.category-content');
+
+      if (!icon || !content) return;
 
       icon.textContent = isExpanded ? '▼' : '▶';
 

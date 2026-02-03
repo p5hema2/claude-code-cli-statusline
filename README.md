@@ -139,16 +139,26 @@ cd claude-code-cli-statusline
 npm install
 
 # Build
-npm run build
+npm run build              # Full build (TypeScript + GUI + CSS)
+npm run build:production   # Production build with minified CSS
+
+# Build CSS separately
+npm run build:css          # Build Tailwind CSS
+npm run dev:css            # Watch Tailwind CSS (auto-rebuild on changes)
+
+# Development server
+npm run dev:configure      # Run config GUI with live CSS rebuilding
 
 # Test with example payload
 cat scripts/payload.example.json | npm start
 
 # Run tests
 npm test
+npm run test:e2e           # Run E2E tests
 
 # Lint
 npm run lint
+npm run lint:all           # ESLint + Sheriff
 ```
 
 ## How It Works
