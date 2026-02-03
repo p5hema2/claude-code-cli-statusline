@@ -1,0 +1,73 @@
+/**
+ * Weekly usage widget
+ *
+ * Displays the 7-day usage across all models from OAuth API.
+ */
+
+import chalk from 'chalk';
+
+import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
+import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
+import { getOption } from '../shared/index.js';
+
+/** Weekly usage widget schema - defines all GUI metadata */
+export const WeeklyUsageSchema: WidgetSchema = {
+  id: 'weeklyUsage',
+  meta: {
+    displayName: 'Weekly Usage',
+    description: 'Weekly usage limit progress',
+    category: 'usage',
+  },
+  options: {
+    bar: {
+      enabled: true,
+      colors: {
+        low: 'green',
+        medium: 'yellow',
+        high: 'red',
+      },
+    },
+    custom: [
+      { key: 'showBar', type: 'checkbox', label: 'Show usage bar', default: true },
+      { key: 'showPercent', type: 'checkbox', label: 'Show percentage', default: true },
+      { key: 'showResetTime', type: 'checkbox', label: 'Show reset time', default: true },
+    ],
+  },
+  previewStates: [
+    { id: 'low', label: 'Low', description: 'Low weekly usage' },
+    { id: 'medium', label: 'Medium', description: 'Medium weekly usage' },
+    { id: 'high', label: 'High', description: 'High weekly usage' },
+    { id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication' },
+  ],
+};
+
+export const WeeklyUsageWidget: Widget = {
+  name: 'weeklyUsage',
+
+  render(ctx: RenderContext, config?: WidgetConfig): string | null {
+    if (!ctx.usage?.weekly_all) return null;
+
+    const { percent_used, reset_time } = ctx.usage.weekly_all;
+
+    // Get options from inline config
+    const barColors = getOption<UsageBarColors>(config, 'barColors');
+    const showBar = getOption<boolean>(config, 'showBar');
+    const showPercent = getOption<boolean>(config, 'showPercent');
+    const showResetTime = getOption<boolean>(config, 'showResetTime') !== false;
+
+    const bar = createUsageBar(percent_used, {
+      colors: barColors,
+      showBar,
+      showPercent,
+    });
+
+    // Optionally add reset time
+    let resetSuffix = '';
+    if (showResetTime) {
+      const resetStr = formatResetTime(reset_time);
+      resetSuffix = colorize(` (${resetStr})`, config?.color, chalk.dim);
+    }
+
+    return bar + resetSuffix;
+  },
+};

@@ -88,7 +88,7 @@ Create `~/.claude/statusline-settings.json` to customize:
     "vimMode": { "enabled": true }
   },
   "separator": "|",
-  "cacheTtl": 300000
+  "cacheTtl": 60000
 }
 ```
 
@@ -111,7 +111,7 @@ Configure multiple rows using the `rows` option:
 |---------|------|---------|-------------|
 | `widgets.<name>.enabled` | boolean | true | Enable/disable specific widget |
 | `separator` | string | `\|` | Character between widgets |
-| `cacheTtl` | number | 300000 | Cache TTL in ms (5 min) |
+| `cacheTtl` | number | 60000 | Cache TTL in ms (5 min) |
 | `rows` | array | - | Multi-row layout configuration |
 
 ### Available Widgets

@@ -5,18 +5,17 @@
  * It's dynamically imported by index.ts after FORCE_COLOR is set.
  */
 
-import { StatusJSONSchema } from './types/StatusJSON.js';
-import { loadUsageCache, waitForPendingRefresh } from './utils/cache.js';
-import { loadSettings } from './utils/config.js';
-import { renderStatusLine } from './utils/renderer.js';
+import { StatusJSONSchema } from './types/index.js';
+import { loadUsageCache, waitForPendingRefresh, loadSettings, renderStatusLine } from './utils/index.js';
 
 /**
  * Check for --configure flag and start configuration server
  */
 async function checkConfigureFlag(): Promise<boolean> {
   if (process.argv.includes('--configure')) {
-    const { startConfigServer } = await import('./configure/server.js');
-    await startConfigServer();
+    const { startConfigServer } = await import('./configure/index.js');
+    const noOpen = process.argv.includes('--no-open');
+    await startConfigServer({ openBrowser: !noOpen });
     return true;
   }
   return false;

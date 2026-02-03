@@ -2,21 +2,17 @@
  * Type exports
  */
 
-export { StatusJSONSchema, type StatusJSON } from './StatusJSON.js';
+export { StatusJSONSchema, type StatusJSON } from './status-json.schema.js';
 export type {
   UsageLimit,
   UsageResponse,
   CachedUsageEntry,
   UsageCache,
-} from './UsageData.js';
+} from './usage-data.interface.js';
 export type {
   WidgetConfig,
-  ColorScheme,
-  RowAlign,
-  RowConfig,
   Settings,
-} from './Settings.js';
-export { DEFAULT_SETTINGS } from './Settings.js';
+} from './settings.interface.js';
 export type {
   WidgetMetadata,
   WidgetPreviewState,
@@ -26,5 +22,30 @@ export type {
   PreviewResponse,
   APIResponse,
   WidgetsResponse,
-} from './ConfigureAPI.js';
-export type { RenderContext, Widget } from './Widget.js';
+} from './configure-api.interface.js';
+export type { RenderContext, Widget } from './widget.interface.js';
+export type { WidgetSchema } from './widget-schema.interface.js';
+export type { AnsiColor, AnsiModifier, ColorValue } from './colors.type.js';
+export { VALID_COLORS, isValidColor } from './colors.type.js';
+export type {
+  DirectoryOptions,
+  GitBranchSymbols,
+  GitBranchIndicatorColors,
+  GitBranchIndicatorVisibility,
+  GitBranchOptions,
+  VimModeColors,
+  VimModeOptions,
+  UsageBarColors,
+  UsageWidgetOptions,
+  ModelColors,
+  ModelOptions,
+  OutputStyleColors,
+  OutputStyleOptions,
+  UsageAgeOptions,
+  ContextUsageOptions,
+  SessionUsageOptions,
+  WeeklyUsageOptions,
+  WeeklySonnetOptions,
+  WidgetOptionsType,
+} from './widget-options.interface.js';
+export type { GitInfo } from './git.interface.js';
