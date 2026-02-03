@@ -49,7 +49,15 @@ function renderClaudeContext() {
   rightColumn.innerHTML = '';
 
   const { contextType, fileName, lineCount, autocompactPercent } = state.claudeContext;
-  if (contextType === 'none') return;
+
+  // Hide terminal-right when no context is selected
+  if (contextType === 'none') {
+    rightColumn.style.display = 'none';
+    return;
+  }
+
+  // Show terminal-right for all other context types
+  rightColumn.style.display = 'block';
 
   const contextDiv = document.createElement('div');
   contextDiv.className = 'claude-context';

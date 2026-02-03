@@ -82,7 +82,7 @@ export function showConfigPanel() {
   }
 
   panel.classList.remove('hidden');
-  editorArea.classList.add('has-config');
+  if (editorArea) editorArea.classList.add('has-config');
   if (rowsSection) rowsSection.classList.add('hidden');
 }
 
@@ -92,7 +92,7 @@ export function hideConfigPanel() {
   const rowsSection = document.querySelector('.rows-section');
 
   panel.classList.add('hidden');
-  editorArea.classList.remove('has-config');
+  if (editorArea) editorArea.classList.remove('has-config');
   if (rowsSection) rowsSection.classList.remove('hidden');
 
   document.querySelectorAll('.row-widget.selected').forEach((el) => el.classList.remove('selected'));

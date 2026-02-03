@@ -16,7 +16,7 @@ export const state = {
   terminalPalettes: [],
   widgetSchemas: [],
   widgetStates: {},
-  terminalWidth: 150,
+  terminalWidth: 156,
   theme: 'dark',
   terminalPalette: 'vscode',
   isDirty: false,
