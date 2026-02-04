@@ -6,9 +6,9 @@
 
 import { exec } from 'node:child_process';
 import { createSocket } from 'node:dgram';
+import { EventEmitter } from 'node:events';
 import { readFileSync, existsSync, watch } from 'node:fs';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { EventEmitter } from 'node:events';
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
@@ -44,7 +44,7 @@ describe('isPortAvailable', () => {
     const promise = isPortAvailable(8765);
 
     // Simulate successful bind
-    setImmediate(() => mockSocket.emit('listening'));
+    process.nextTick(() => mockSocket.emit('listening'));
 
     const result = await promise;
     expect(result).toBe(true);
@@ -61,7 +61,7 @@ describe('isPortAvailable', () => {
     const promise = isPortAvailable(8765);
 
     // Simulate port already in use
-    setImmediate(() => mockSocket.emit('error', new Error('EADDRINUSE')));
+    process.nextTick(() => mockSocket.emit('error', new Error('EADDRINUSE')));
 
     const result = await promise;
     expect(result).toBe(false);
@@ -84,7 +84,7 @@ describe('findAvailablePort', () => {
     const promise = findAvailablePort(8765);
 
     // Simulate port available
-    setImmediate(() => mockSocket.emit('listening'));
+    process.nextTick(() => mockSocket.emit('listening'));
 
     const result = await promise;
     expect(result).toBe(8765);
@@ -102,7 +102,7 @@ describe('findAvailablePort', () => {
       socket.close = vi.fn();
 
       // First call fails, second succeeds
-      setImmediate(() => {
+      process.nextTick(() => {
         if (callCount === 0) {
           socket.emit('error', new Error('EADDRINUSE'));
         } else {
@@ -125,7 +125,7 @@ describe('findAvailablePort', () => {
       socket.close = vi.fn();
 
       // Always fail
-      setImmediate(() => {
+      process.nextTick(() => {
         socket.emit('error', new Error('EADDRINUSE'));
       });
 
@@ -157,6 +157,7 @@ describe('openBrowser', () => {
       configurable: true,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(exec).mockImplementation((() => {}) as any);
 
     openBrowser('http://localhost:8765');
@@ -173,6 +174,7 @@ describe('openBrowser', () => {
       configurable: true,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(exec).mockImplementation((() => {}) as any);
 
     openBrowser('http://localhost:8765');
@@ -189,6 +191,7 @@ describe('openBrowser', () => {
       configurable: true,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(exec).mockImplementation((() => {}) as any);
 
     openBrowser('http://localhost:8765');
@@ -202,6 +205,7 @@ describe('openBrowser', () => {
   it('should log error message if browser command fails', () => {
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(exec).mockImplementation(((cmd: string, callback: any) => {
       callback(new Error('Command failed'));
     }) as any);
@@ -219,13 +223,11 @@ describe('openBrowser', () => {
 describe('serveStaticFile - SECURITY TESTS', () => {
   let mockRes: Partial<ServerResponse>;
   let responseStatus: number;
-  let responseData: Buffer | string;
   let responseHeaders: Record<string, string>;
 
   beforeEach(() => {
     vi.clearAllMocks();
     responseStatus = 200;
-    responseData = '';
     responseHeaders = {};
 
     mockRes = {
@@ -234,8 +236,7 @@ describe('serveStaticFile - SECURITY TESTS', () => {
         if (headers) responseHeaders = headers;
         return mockRes as ServerResponse;
       }),
-      end: vi.fn((data?: Buffer | string) => {
-        if (data) responseData = data;
+      end: vi.fn(() => {
         return mockRes as ServerResponse;
       }),
     } as Partial<ServerResponse>;
@@ -483,7 +484,9 @@ describe('notifyReload', () => {
     };
 
     // Connect clients
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleSseConnection(mockClient1 as any);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleSseConnection(mockClient2 as any);
 
     // Notify
@@ -509,6 +512,7 @@ describe('setupFileWatcher', () => {
 
   it('should setup watcher if GUI dir exists', () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(watch).mockReturnValue(undefined as any);
 
     setupFileWatcher();
@@ -523,9 +527,11 @@ describe('setupFileWatcher', () => {
   it('should watch for HTML/JS/CSS file changes', async () => {
     vi.mocked(existsSync).mockReturnValue(true);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
     vi.mocked(watch).mockImplementation((path, options, callback) => {
       watchCallback = callback;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return undefined as any;
     });
 
@@ -550,9 +556,11 @@ describe('setupFileWatcher', () => {
   it('should ignore non-relevant file changes', async () => {
     vi.mocked(existsSync).mockReturnValue(true);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
     vi.mocked(watch).mockImplementation((path, options, callback) => {
       watchCallback = callback;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return undefined as any;
     });
 

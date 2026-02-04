@@ -5,7 +5,7 @@
 import { describe, it, expect } from 'vitest';
 
 import type { RenderContext } from '../../types/index.js';
-import { stripAnsi } from '../../configure/preview/ansi-to-html.util.js';
+import { stripAnsi } from '../../utils/index.js';
 
 import { VimModeWidget } from './vim-mode.widget.js';
 
