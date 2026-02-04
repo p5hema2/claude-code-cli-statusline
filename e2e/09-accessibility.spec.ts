@@ -121,7 +121,7 @@ test.describe('Accessibility', () => {
     await expect(configPanel).not.toBeVisible();
   });
 
-  test.skip('should have proper heading hierarchy', async ({ serverPage: page }) => {
+  test('should have proper heading hierarchy', async ({ serverPage: page }) => {
     // Get all headings
     const headings = await page.evaluate(() => {
       const headingTags = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
