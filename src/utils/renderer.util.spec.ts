@@ -27,7 +27,7 @@ vi.mock('../widgets/index.js', () => {
 
   const mockModelWidget: Widget = {
     name: 'model',
-    render: (ctx: any) => ctx.status.model || null,
+    render: (ctx: any) => ctx.status.model?.display_name || ctx.status.model?.id || null,
   };
 
   const mockSeparatorWidget: Widget = {
@@ -54,10 +54,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -76,10 +76,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -99,10 +99,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -128,10 +128,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -156,10 +156,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -184,10 +184,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -212,10 +212,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: undefined,
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -235,10 +235,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -255,10 +255,10 @@ describe('renderStatusLine', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -284,10 +284,10 @@ describe('renderStatusLineRows', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -307,10 +307,10 @@ describe('renderStatusLineRows', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: undefined,
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -330,10 +330,10 @@ describe('renderStatusLineRows', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -356,10 +356,10 @@ describe('renderWidget', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -374,10 +374,10 @@ describe('renderWidget', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,
@@ -392,10 +392,10 @@ describe('renderWidget', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test/dir',
-        model: 'sonnet',
-        vim_mode: 'normal',
-        context_window: { current: 10, max: 100 },
-        output_style: 'default',
+        model: { display_name: 'sonnet' },
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
       },
       usage: null,
       terminalWidth: 80,

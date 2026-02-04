@@ -48,11 +48,12 @@ describe('API Route Handlers', () => {
       writeHead: vi.fn((status: number, headers?: Record<string, string>) => {
         responseStatus = status;
         if (headers) responseHeaders = headers;
+        return mockRes;
       }),
       end: vi.fn((data: string) => {
         responseData = data;
       }),
-    } as Partial<ServerResponse>;
+    } as unknown as Partial<ServerResponse>;
   });
 
   describe('GET /api/settings', () => {

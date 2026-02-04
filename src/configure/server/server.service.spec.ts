@@ -206,7 +206,7 @@ describe('openBrowser', () => {
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(exec).mockImplementation(((cmd: string, callback: any) => {
+    vi.mocked(exec).mockImplementation(((_cmd: string, callback: any) => {
       callback(new Error('Command failed'));
     }) as any);
 
@@ -529,11 +529,12 @@ describe('setupFileWatcher', () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
-    vi.mocked(watch).mockImplementation((path, options, callback) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(watch).mockImplementation(((_path: any, _options: any, callback: any) => {
       watchCallback = callback;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return undefined as any;
-    });
+    }) as any);
 
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
@@ -558,11 +559,12 @@ describe('setupFileWatcher', () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
-    vi.mocked(watch).mockImplementation((path, options, callback) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(watch).mockImplementation(((_path: any, _options: any, callback: any) => {
       watchCallback = callback;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return undefined as any;
-    });
+    }) as any);
 
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
