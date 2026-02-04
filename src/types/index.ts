@@ -24,7 +24,14 @@ export type {
   WidgetsResponse,
 } from './configure-api.interface.js';
 export type { RenderContext, Widget } from './widget.interface.js';
-export type { WidgetSchema } from './widget-schema.interface.js';
+export type {
+  WidgetSchema,
+  ConfigOption,
+  TextConfigOption,
+  SelectConfigOption,
+  CheckboxConfigOption,
+  ColorConfigOption,
+} from './widget-schema.interface.js';
 export type { AnsiColor, AnsiModifier, ColorValue } from './colors.type.js';
 export { VALID_COLORS, isValidColor } from './colors.type.js';
 export type {

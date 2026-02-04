@@ -24,16 +24,11 @@ export const TextSchema: WidgetSchema = {
     custom: [
       {
         key: 'text',
-        type: 'select',
+        type: 'text',
         label: 'Text Content',
-        options: [
-          { value: '', label: '(empty)' },
-          { value: '⟩', label: '⟩ (chevron)' },
-          { value: '●', label: '● (bullet)' },
-          { value: '◆', label: '◆ (diamond)' },
-          { value: '▸', label: '▸ (arrow)' },
-        ],
         default: '',
+        maxLength: 50,
+        placeholder: 'Enter custom text, emoji, or Unicode...',
       },
     ],
   },
