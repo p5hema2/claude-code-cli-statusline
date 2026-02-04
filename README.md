@@ -58,7 +58,7 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 
 ### Visual Configuration GUI
 
-Open a browser-based WYSIWYG editor to configure your statusline:
+Open a browser-based WYSIWYG editor (built with **Tailwind CSS**):
 
 ```bash
 npx @p5hema2/claude-code-cli-statusline --configure
@@ -69,6 +69,7 @@ The GUI allows you to:
 - **Multi-row support** for complex statuslines
 - **Live preview** with different terminal themes
 - **N/A state toggles** to preview various widget states
+- **Modern responsive UI** powered by Tailwind CSS
 
 ### Manual Configuration
 
@@ -281,6 +282,8 @@ All endpoints return consistent error format:
 
 ## Development
 
+### Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/p5hema2/claude-code-cli-statusline.git
@@ -288,29 +291,47 @@ cd claude-code-cli-statusline
 
 # Install dependencies
 npm install
+```
 
-# Build
+### Build
+
+```bash
 npm run build              # Full build (TypeScript + GUI + CSS)
 npm run build:production   # Production build with minified CSS
-
-# Build CSS separately
 npm run build:css          # Build Tailwind CSS
+```
+
+### Development Workflow
+
+```bash
+# GUI Development
+npm run dev:configure      # Start config GUI with live CSS rebuilding
 npm run dev:css            # Watch Tailwind CSS (auto-rebuild on changes)
 
-# Development server
-npm run dev:configure      # Run config GUI with live CSS rebuilding
+# CLI Development
+npm run dev                # Watch mode for CLI
+cat scripts/payload.example.json | npm start  # Test with example payload
+```
 
-# Test with example payload
-cat scripts/payload.example.json | npm start
+### Testing
 
-# Run tests
-npm test
-npm run test:e2e           # Run E2E tests
-
-# Lint
-npm run lint
+```bash
+npm test                   # Run unit tests
+npm run test:e2e           # Run E2E tests (Playwright)
 npm run lint:all           # ESLint + Sheriff
 ```
+
+### Architecture
+
+See [TECH_STACK.md](TECH_STACK.md) for detailed architecture documentation:
+- Widget registry pattern
+- Config schema validation
+- Module boundaries (Sheriff)
+- FORCE_COLOR bootstrap pattern
+
+### Recent Changes
+
+See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 ## How It Works
 
