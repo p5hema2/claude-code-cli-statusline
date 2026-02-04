@@ -5,6 +5,7 @@
 import { describe, it, expect } from 'vitest';
 
 import type { RenderContext } from '../../types/index.js';
+import { stripAnsi } from '../../utils/index.js';
 
 import { TextWidget } from './text.widget.js';
 
@@ -30,7 +31,10 @@ describe('TextWidget', () => {
     const config = { widget: 'text', options: { text: 'Hello World' } };
     const result = TextWidget.render(ctx, config);
     expect(result).toBeTruthy();
-    // TODO: Add assertion checking if "Hello World" is in result
+
+    // Validate content: "Hello World" appears in output
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('Hello World');
   });
 
   it('should return null when no text configured', () => {

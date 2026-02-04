@@ -5,6 +5,7 @@
 import { describe, it, expect } from 'vitest';
 
 import type { RenderContext } from '../../types/index.js';
+import { stripAnsi } from '../../utils/index.js';
 
 import { SeparatorWidget } from './separator.widget.js';
 
@@ -29,7 +30,10 @@ describe('SeparatorWidget', () => {
 
     const result = SeparatorWidget.render(ctx);
     expect(result).toBeTruthy();
-    // Default separator is '|'
+
+    // Validate content: default separator is '|'
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('|');
   });
 
   it('should render custom separator text', () => {
@@ -49,6 +53,9 @@ describe('SeparatorWidget', () => {
     const config = { widget: 'separator', options: { text: '•' } };
     const result = SeparatorWidget.render(ctx, config);
     expect(result).toBeTruthy();
-    // TODO: Add assertion checking if custom separator is used
+
+    // Validate content: custom separator '•'
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('•');
   });
 });

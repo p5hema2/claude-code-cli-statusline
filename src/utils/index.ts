@@ -39,3 +39,5 @@ export {
 } from './config.util.js';
 
 export { renderStatusLine, renderStatusLineRows, renderWidget, getWidgetNames } from './renderer.util.js';
+
+export { stripAnsi } from './ansi.util.js';

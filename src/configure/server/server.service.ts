@@ -48,8 +48,9 @@ function getGuiDir(): string {
 
 /**
  * Check if a port is available
+ * @internal - Exported for testing
  */
-async function isPortAvailable(port: number): Promise<boolean> {
+export async function isPortAvailable(port: number): Promise<boolean> {
   return new Promise((resolve) => {
     const socket = createSocket('udp4');
     socket.once('error', () => {
@@ -66,8 +67,9 @@ async function isPortAvailable(port: number): Promise<boolean> {
 
 /**
  * Find an available port starting from the given port
+ * @internal - Exported for testing
  */
-async function findAvailablePort(startPort: number): Promise<number> {
+export async function findAvailablePort(startPort: number): Promise<number> {
   for (let port = startPort; port < startPort + 100; port++) {
     if (await isPortAvailable(port)) {
       return port;
@@ -78,8 +80,9 @@ async function findAvailablePort(startPort: number): Promise<number> {
 
 /**
  * Open URL in default browser
+ * @internal - Exported for testing
  */
-function openBrowser(url: string): void {
+export function openBrowser(url: string): void {
   const platform = process.platform;
   let command: string;
 
@@ -104,8 +107,9 @@ function openBrowser(url: string): void {
 
 /**
  * Serve static file
+ * @internal - Exported for testing
  */
-function serveStaticFile(
+export function serveStaticFile(
   res: ServerResponse,
   filePath: string
 ): boolean {
@@ -128,8 +132,9 @@ function serveStaticFile(
 
 /**
  * Handle SSE connection for live reload
+ * @internal - Exported for testing
  */
-function handleSseConnection(res: ServerResponse): void {
+export function handleSseConnection(res: ServerResponse): void {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
@@ -151,8 +156,9 @@ function handleSseConnection(res: ServerResponse): void {
 
 /**
  * Notify all connected clients to reload
+ * @internal - Exported for testing
  */
-function notifyReload(): void {
+export function notifyReload(): void {
   for (const client of sseClients) {
     client.write('data: reload\n\n');
   }
@@ -160,8 +166,9 @@ function notifyReload(): void {
 
 /**
  * Handle HTTP requests
+ * @internal - Exported for testing
  */
-async function handleRequest(
+export async function handleRequest(
   req: IncomingMessage,
   res: ServerResponse
 ): Promise<void> {
@@ -210,8 +217,9 @@ async function handleRequest(
 
 /**
  * Set up file watcher for live reload
+ * @internal - Exported for testing
  */
-function setupFileWatcher(): void {
+export function setupFileWatcher(): void {
   const guiDir = getGuiDir();
 
   // Only watch if GUI directory exists (dev mode)

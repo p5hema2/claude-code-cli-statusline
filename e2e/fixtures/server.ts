@@ -9,11 +9,17 @@ export const test = base.extend({
     // Navigate to the configure GUI
     await page.goto(baseURL || 'http://localhost:8765');
 
+    // Wait for page to fully load before evaluating JavaScript
+    await page.waitForLoadState('domcontentloaded');
+
     // Clear localStorage to ensure clean state for each test
     await page.evaluate(() => localStorage.clear());
 
     // Reload page after clearing localStorage
     await page.reload();
+
+    // Wait for reload to complete
+    await page.waitForLoadState('domcontentloaded');
 
     // Wait for the app container to be fully loaded
     await page.waitForSelector('#app', { state: 'visible', timeout: 30000 });
