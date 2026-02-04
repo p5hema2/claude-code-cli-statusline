@@ -117,6 +117,17 @@ function setupEventListeners() {
     }
   });
 
+  // Global keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Escape key closes config panel
+    if (e.key === 'Escape') {
+      const configPanel = document.getElementById('widget-config-panel');
+      if (configPanel && !configPanel.classList.contains('hidden')) {
+        hideConfigPanel();
+      }
+    }
+  });
+
   window.addEventListener('beforeunload', (e) => {
     if (state.isDirty) {
       e.preventDefault();

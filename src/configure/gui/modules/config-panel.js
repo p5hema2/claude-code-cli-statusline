@@ -95,8 +95,14 @@ export function hideConfigPanel() {
   if (editorArea) editorArea.classList.remove('has-config');
   if (rowsSection) rowsSection.classList.remove('hidden');
 
+  // Restore focus to previously selected widget for accessibility
+  const selected = document.querySelector('.row-widget.selected');
   document.querySelectorAll('.row-widget.selected').forEach((el) => el.classList.remove('selected'));
   state.selectedInstance = null;
+
+  if (selected) {
+    selected.focus();
+  }
 }
 
 // ============================================================================

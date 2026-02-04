@@ -104,7 +104,7 @@ test.describe('Accessibility', () => {
     expect(activeElementAfter).toBeTruthy();
   });
 
-  test.skip('should close config panel with Escape key', async ({ serverPage: page }) => {
+  test('should close config panel with Escape key', async ({ serverPage: page }) => {
     // Open config panel by clicking a widget
     const firstWidget = page.locator(SELECTORS.rows.allWidgetsInRow(0)).first();
     await firstWidget.waitFor({ state: 'visible' });
