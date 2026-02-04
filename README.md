@@ -128,6 +128,157 @@ Configure multiple rows using the `rows` option:
 | `outputStyle` | Output style name |
 | `vimMode` | Vim mode indicator |
 
+## Configuration API Reference
+
+The configuration GUI communicates with a built-in REST API. These endpoints can also be accessed programmatically.
+
+### GET /api/settings
+
+Retrieve current statusline settings.
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "rows": [
+      { "widgets": ["directory", "gitBranch", "model"] }
+    ],
+    "separator": "|",
+    "cacheTtl": 60000
+  }
+}
+```
+
+**cURL Example:**
+```bash
+curl http://localhost:3000/api/settings
+```
+
+### PUT /api/settings
+
+Update statusline settings.
+
+**Request Body:**
+```json
+{
+  "rows": [
+    { "widgets": ["directory", "gitBranch"] }
+  ],
+  "separator": " | ",
+  "cacheTtl": 120000
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "rows": [{ "widgets": ["directory", "gitBranch"] }],
+    "separator": " | ",
+    "cacheTtl": 120000
+  }
+}
+```
+
+**Error Response:** `400 Bad Request` (invalid schema)
+```json
+{
+  "success": false,
+  "error": "Invalid settings format"
+}
+```
+
+**cURL Example:**
+```bash
+curl -X PUT http://localhost:3000/api/settings \
+  -H "Content-Type: application/json" \
+  -d '{"rows":[{"widgets":["directory","gitBranch"]}]}'
+```
+
+### POST /api/preview
+
+Generate statusline preview HTML.
+
+**Request Body:**
+```json
+{
+  "settings": {
+    "rows": [{ "widgets": ["directory", "gitBranch"] }]
+  },
+  "terminalWidth": 80,
+  "widgetStates": {
+    "git": { "enabled": true, "dirty": true }
+  },
+  "terminalPalette": "dracula"
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "htmlRows": ["<pre>...</pre>"]
+  }
+}
+```
+
+**cURL Example:**
+```bash
+curl -X POST http://localhost:3000/api/preview \
+  -H "Content-Type: application/json" \
+  -d '{"settings":{"rows":[{"widgets":["directory","gitBranch"]}]},"terminalWidth":80}'
+```
+
+### GET /api/widgets
+
+Retrieve widget metadata and schemas.
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "widgets": [
+      {
+        "id": "directory",
+        "name": "Directory",
+        "description": "Current working directory (fish-style)",
+        "category": "location",
+        "previewStates": []
+      }
+    ],
+    "categories": [
+      {
+        "id": "location",
+        "name": "location",
+        "widgets": ["directory"]
+      }
+    ],
+    "widgetSchemas": []
+  }
+}
+```
+
+**cURL Example:**
+```bash
+curl http://localhost:3000/api/widgets
+```
+
+### Error Handling
+
+All endpoints return consistent error format:
+
+**500 Internal Server Error:**
+```json
+{
+  "success": false,
+  "error": "Error message description"
+}
+```
+
 ## Development
 
 ```bash
