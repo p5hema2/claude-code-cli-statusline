@@ -227,7 +227,7 @@ test.describe('Accessibility', () => {
     expect(landmarks.length).toBeGreaterThan(0);
   });
 
-  test.skip('should have form labels associated with inputs', async ({ serverPage: page }) => {
+  test('should have form labels associated with inputs', async ({ serverPage: page }) => {
     // Get all input elements
     const inputs = await page.evaluate(() => {
       const allInputs = Array.from(
@@ -247,7 +247,7 @@ test.describe('Accessibility', () => {
     // Each input should have at least one label association
     for (const input of inputs) {
       const hasAccessibleLabel =
-        input.hasLabel || input.ariaLabel || input.ariaLabelledBy || input.placeholder;
+        !!(input.hasLabel || input.ariaLabel || input.ariaLabelledBy || input.placeholder);
 
       expect(hasAccessibleLabel).toBe(true);
     }

@@ -58,13 +58,13 @@
               <h3 class="config-section-title">Terminal Configuration</h3>
               <p class="section-desc">Terminals interpret ANSI color codes differently. Select your terminal to see accurate colors.</p>
               <div class="preview-controls">
-                <label class="control-label">
+                <label class="control-label" for="terminal-select">
                   Terminal:
                   <select id="terminal-select" class="select">
                     <!-- Populated by JS from API -->
                   </select>
                 </label>
-                <label class="control-label">
+                <label class="control-label" for="theme-select">
                   BG:
                   <select id="theme-select" class="select">
                     <option value="dark">VS Code Dark</option>
@@ -75,7 +75,7 @@
                     <option value="nord">Nord</option>
                   </select>
                 </label>
-                <label class="control-label">
+                <label class="control-label" for="width-input">
                   Width:
                   <input type="number" id="width-input" value="156" min="40" max="200" class="input-number">
                   <span>cols</span>
@@ -89,29 +89,29 @@
               <p class="section-desc">Simulate Claude Code's UI elements shown alongside your statusline</p>
               <div class="context-toggles">
                 <div class="radio-group">
-                  <label class="radio-label">
-                    <input type="radio" name="context-type" value="none">
+                  <label class="radio-label" for="context-none">
+                    <input type="radio" id="context-none" name="context-type" value="none">
                     <span>No context</span>
                   </label>
-                  <label class="radio-label">
-                    <input type="radio" name="context-type" value="file" checked>
+                  <label class="radio-label" for="context-file">
+                    <input type="radio" id="context-file" name="context-type" value="file" checked>
                     <span>File context:</span>
-                    <input type="text" id="file-context-name" value="statusline-settings.json" class="input-text" placeholder="filename">
+                    <input type="text" id="file-context-name" value="statusline-settings.json" class="input-text" placeholder="filename" aria-label="File context filename">
                   </label>
-                  <label class="radio-label">
-                    <input type="radio" name="context-type" value="selection">
+                  <label class="radio-label" for="context-selection">
+                    <input type="radio" id="context-selection" name="context-type" value="selection">
                     <span>Line selection:</span>
-                    <input type="number" id="line-selection-count" value="13" min="1" max="999" class="input-number-sm">
+                    <input type="number" id="line-selection-count" value="13" min="1" max="999" class="input-number-sm" aria-label="Line selection count">
                     <span>lines</span>
                   </label>
-                  <label class="radio-label">
-                    <input type="radio" name="context-type" value="autocompact">
+                  <label class="radio-label" for="context-autocompact">
+                    <input type="radio" id="context-autocompact" name="context-type" value="autocompact">
                     <span>Context left until auto-compact:</span>
-                    <input type="number" id="autocompact-percent" value="5" min="1" max="20" class="input-number-sm">
+                    <input type="number" id="autocompact-percent" value="5" min="1" max="20" class="input-number-sm" aria-label="Context left until auto-compact percentage">
                     <span>%</span>
                   </label>
                 </div>
-                <label class="checkbox-label">
+                <label class="checkbox-label" for="show-plan-mode">
                   <input type="checkbox" id="show-plan-mode" checked>
                   <span>Show plan mode indicator</span>
                 </label>
