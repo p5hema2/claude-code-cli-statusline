@@ -2,10 +2,11 @@
  * Tests for OAuth token retrieval and API calls
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { platform } from 'node:os';
+
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import { getAccessToken, fetchUsage } from './oauth.util.js';
 
@@ -15,7 +16,7 @@ vi.mock('node:fs');
 vi.mock('node:os');
 
 // Mock fetch globally
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn();
 
 describe('getAccessToken', () => {
   beforeEach(() => {
@@ -177,7 +178,8 @@ describe('fetchUsage', () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
       json: async () => mockResponse,
-    } as Response);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     const result = await fetchUsage('test-token-123');
 
@@ -200,7 +202,8 @@ describe('fetchUsage', () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: false,
       status: 401,
-    } as Response);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     const result = await fetchUsage('invalid-token');
     expect(result).toBeNull();
@@ -219,7 +222,8 @@ describe('fetchUsage', () => {
       json: async () => {
         throw new Error('Invalid JSON');
       },
-    } as Response);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     const result = await fetchUsage('test-token');
     expect(result).toBeNull();
@@ -229,7 +233,8 @@ describe('fetchUsage', () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
       json: async () => ({}),
-    } as Response);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
 
     await fetchUsage('token-123');
 

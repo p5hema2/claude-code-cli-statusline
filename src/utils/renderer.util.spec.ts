@@ -5,6 +5,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import type { RenderContext, Widget, WidgetConfig } from '../types/index.js';
+
 import {
   renderStatusLine,
   renderStatusLineRows,

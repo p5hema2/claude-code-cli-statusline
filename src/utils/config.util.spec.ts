@@ -2,11 +2,13 @@
  * Tests for settings management
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+import type { Settings } from '../types/index.js';
+
 import { loadSettings, saveSettings, getDefaultSettings, getSettingsPath } from './config.util.js';
-import type { Settings, WidgetConfig } from '../types/index.js';
 
 // Mock Node.js modules
 vi.mock('node:fs');

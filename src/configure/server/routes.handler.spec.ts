@@ -2,9 +2,13 @@
  * Integration tests for REST API route handlers
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { IncomingMessage, ServerResponse } from 'node:http';
 import { EventEmitter } from 'node:events';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+import type { Settings } from '../../types/index.js';
+import * as configUtil from '../../utils/index.js';
 
 import {
   handleGetSettings,
@@ -12,8 +16,6 @@ import {
   handleGetWidgets,
   handlePostPreview,
 } from './routes.handler.js';
-import * as configUtil from '../../utils/config.util.js';
-import type { Settings } from '../../types/index.js';
 
 // Mock utilities
 vi.mock('../../utils/config.util.js');

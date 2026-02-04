@@ -2,8 +2,9 @@
  * Tests for git operations
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { execSync } from 'node:child_process';
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import {
   isGitRepo,
