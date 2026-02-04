@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0](https://github.com/p5hema2/claude-code-cli-statusline/compare/v0.2.0...v0.3.0) (2026-02-04)
+
+
+### Features
+
+* **configure:** migrate GUI from custom CSS to Tailwind CSS ([#13](https://github.com/p5hema2/claude-code-cli-statusline/issues/13)) ([#15](https://github.com/p5hema2/claude-code-cli-statusline/issues/15)) ([294e068](https://github.com/p5hema2/claude-code-cli-statusline/commit/294e068a856586d8d44c6350eae4e08523396072))
+
 ## [Unreleased]
 
 ### Changed
