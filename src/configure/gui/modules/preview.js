@@ -39,6 +39,15 @@ export async function updatePreview() {
     renderClaudeContext();
     renderPlanModeFooter();
 
+    // Announce preview update to screen readers (WCAG 2.0 accessibility)
+    const announcer = document.getElementById('preview-announcer');
+    if (announcer) {
+      announcer.textContent = 'Preview updated';
+      setTimeout(() => {
+        announcer.textContent = '';
+      }, 1000);
+    }
+
   } catch (error) {
     console.error('Failed to update preview:', error);
   }
@@ -159,6 +168,10 @@ export function showStatus(message, type = 'success') {
   const el = document.getElementById('status-message');
   el.textContent = message;
   el.className = `status-message visible ${type}`;
+
+  // Force reflow to ensure screen readers announce the change (WCAG 2.0 accessibility)
+  void el.offsetHeight;
+
   setTimeout(() => el.classList.remove('visible'), 3000);
 }
 

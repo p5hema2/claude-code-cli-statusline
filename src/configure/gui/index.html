@@ -155,7 +155,10 @@
     </main>
 
     <!-- Status message (positioned in upper right corner) -->
-    <div id="status-message" class="status-message"></div>
+    <div id="status-message" class="status-message" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Hidden live region for preview updates (screen readers only) -->
+    <div id="preview-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
   </div>
 
   <!-- Live reload for development -->

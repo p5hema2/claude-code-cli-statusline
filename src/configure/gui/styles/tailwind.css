@@ -150,6 +150,12 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
+  /* Screen reader only utility (WCAG 2.0 accessibility) */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
   .widget-item {
     @apply flex items-center p-2 px-3 bg-bg-tertiary rounded-sm cursor-grab transition-all duration-150 border border-transparent hover:bg-bg-hover hover:border-accent;
   }

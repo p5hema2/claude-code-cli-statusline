@@ -180,7 +180,7 @@ test.describe('Accessibility', () => {
     expect(isFocused).toBe(true);
   });
 
-  test.skip('should announce dynamic content changes to screen readers', async ({ serverPage: page }) => {
+  test('should announce dynamic content changes to screen readers', async ({ serverPage: page }) => {
     // Check for ARIA live regions
     const liveRegions = await page.evaluate(() => {
       const regions = Array.from(document.querySelectorAll('[aria-live]'));
