@@ -10,7 +10,7 @@ import { SELECTORS } from './utils/selectors.js';
  * Skipped for #19 (backend test coverage - not GUI work)
  */
 test.describe('Accessibility', () => {
-  test.skip('should not have any WCAG 2.0 Level AA violations', async ({ serverPage: page }) => {
+  test('should not have any WCAG 2.0 Level AA violations', async ({ serverPage: page }) => {
     // Run axe accessibility scan
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
