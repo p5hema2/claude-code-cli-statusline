@@ -8,16 +8,17 @@ export default {
       },
       colors: {
         bg: {
-          primary: '#ffffff',
-          secondary: '#f8f9fa',
-          tertiary: '#e9ecef',
-          hover: '#dee2e6',
+          primary: 'rgb(var(--color-bg-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--color-bg-secondary) / <alpha-value>)',
+          tertiary: 'rgb(var(--color-bg-tertiary) / <alpha-value>)',
+          hover: 'rgb(var(--color-bg-hover) / <alpha-value>)',
         },
         text: {
-          primary: '#212529',
-          secondary: '#495057',
-          muted: '#6c757d',
+          primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
         },
+        border: 'rgb(var(--color-border) / <alpha-value>)',
         accent: {
           DEFAULT: '#4468F0', // Smart Commerce primary blue
           hover: '#3654d6', // Darkened for hover state
@@ -33,14 +34,13 @@ export default {
           warning: '#FCAA1E',
           error: '#e74266',
         },
-        border: '#dee2e6',
       },
       borderRadius: {
         sm: '4px',
         DEFAULT: '6px',
       },
       boxShadow: {
-        custom: '0 4px 12px rgba(68, 104, 240, 0.12)',
+        custom: '0 4px 12px rgb(var(--color-shadow))',
       },
       fontSize: {
         xs: '11px',

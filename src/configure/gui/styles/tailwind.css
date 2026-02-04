@@ -6,14 +6,52 @@
 @tailwind utilities;
 
 @layer base {
+  /* Theme CSS Variables - Default to Dark Theme */
+  :root {
+    /* Dark theme (default) */
+    --color-bg-primary: 13 17 23; /* #0d1117 */
+    --color-bg-secondary: 22 27 34; /* #161b22 */
+    --color-bg-tertiary: 33 38 45; /* #21262d */
+    --color-bg-hover: 48 54 61; /* #30363d */
+    --color-text-primary: 230 237 243; /* #e6edf3 */
+    --color-text-secondary: 139 148 158; /* #8b949e */
+    --color-text-muted: 110 118 129; /* #6e7681 */
+    --color-border: 48 54 61; /* #30363d */
+    --color-shadow: 0 0 0 / 0.4;
+  }
+
+  /* Light theme */
+  :root.light {
+    --color-bg-primary: 255 255 255; /* #ffffff */
+    --color-bg-secondary: 248 249 250; /* #f8f9fa */
+    --color-bg-tertiary: 233 236 239; /* #e9ecef */
+    --color-bg-hover: 222 226 230; /* #dee2e6 */
+    --color-text-primary: 33 37 41; /* #212529 */
+    --color-text-secondary: 73 80 87; /* #495057 */
+    --color-text-muted: 108 117 125; /* #6c757d */
+    --color-border: 222 226 230; /* #dee2e6 */
+    --color-shadow: 68 104 240 / 0.12;
+  }
+
   /* Base element styles */
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
   body {
-    @apply m-0 p-0 font-sans bg-bg-primary text-text-primary leading-normal min-h-screen text-md;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    @apply m-0 p-0 font-sans leading-normal min-h-screen text-md;
+    background-color: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-primary));
+    font-family: Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  }
+
+  /* Logo inversion for dark theme */
+  header img[alt="Smart Commerce"] {
+    filter: brightness(0) invert(1);
+  }
+
+  :root.light header img[alt="Smart Commerce"] {
+    filter: none;
   }
 }
 

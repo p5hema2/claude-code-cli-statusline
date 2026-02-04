@@ -7,14 +7,30 @@
   <meta name="description" content="Configure your Claude Code statusline with Smart Commerce eCommerce expertise">
   <link rel="stylesheet" href="styles/output.css">
   <link rel="stylesheet" href="styles/themes.css">
+  <!-- Theme initialization (runs before page render to prevent flash) -->
+  <script>
+    (function() {
+      // Load theme from localStorage (default: dark)
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    })();
+  </script>
 </head>
 <body>
   <div id="app" class="flex flex-col min-h-screen max-w-[1200px] mx-auto px-6">
     <header class="header py-8 pb-6 border-b border-border mb-6">
       <div class="flex justify-between items-center mb-4">
         <img src="assets/smart-commerce-logo.svg" alt="Smart Commerce" class="h-10">
-        <a href="https://www.smartcommerce.de/en/contact/" target="_blank" rel="noopener noreferrer"
-           class="btn btn-primary">Contact Sales</a>
+        <div class="flex items-center gap-2">
+          <button id="theme-toggle" class="btn btn-secondary" title="Toggle light/dark theme">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-label">Light</span>
+          </button>
+          <a href="https://www.smartcommerce.de/en/contact/" target="_blank" rel="noopener noreferrer"
+             class="btn btn-primary">Contact Sales</a>
+        </div>
       </div>
       <div class="text-center">
         <h1 class="m-0 text-lg font-semibold text-text-primary">Claude Statusline Configuration</h1>
@@ -165,7 +181,11 @@
     <footer class="mt-10 py-8 border-t border-border text-center">
       <p class="text-lg font-semibold text-brand-blue mb-3">"We have eCommerce in our blood."</p>
       <p class="text-base text-text-secondary mb-4">
-        Enterprise-grade eCommerce solutions powered by Shopware expertise
+        Enterprise eCommerce solutions: Intershop • Shopware • commercetools • Spryker • Emporix<br>
+        Digital Strategy • Cloud Operations • PIM • AI Solutions
+      </p>
+      <p class="text-sm text-text-muted mb-4">
+        Partner: <a href="https://www.deepr.agency/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">deepr agency</a> — Full-service digital partner
       </p>
       <a href="https://www.smartcommerce.de/en/contact/" target="_blank" rel="noopener noreferrer"
          class="btn btn-primary">Get in Touch</a>
@@ -177,6 +197,42 @@
     <!-- Hidden live region for preview updates (screen readers only) -->
     <div id="preview-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
   </div>
+
+  <!-- Theme toggle script -->
+  <script>
+    (function() {
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const themeLabel = document.getElementById('theme-label');
+
+      // Load theme from localStorage (default: dark)
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+
+      function setTheme(theme) {
+        if (theme === 'light') {
+          html.classList.add('light');
+          themeIcon.textContent = '🌙';
+          themeLabel.textContent = 'Dark';
+        } else {
+          html.classList.remove('light');
+          themeIcon.textContent = '☀️';
+          themeLabel.textContent = 'Light';
+        }
+        localStorage.setItem('theme', theme);
+      }
+
+      // Apply saved theme
+      setTheme(savedTheme);
+
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.classList.contains('light') ? 'light' : 'dark';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+      });
+    })();
+  </script>
 
   <!-- Live reload for development -->
   <script>
