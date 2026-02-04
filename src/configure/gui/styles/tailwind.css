@@ -150,6 +150,12 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
+  /* Screen reader only utility (WCAG 2.0 accessibility) */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
   .widget-item {
     @apply flex items-center p-2 px-3 bg-bg-tertiary rounded-sm cursor-grab transition-all duration-150 border border-transparent hover:bg-bg-hover hover:border-accent;
   }
@@ -193,6 +199,31 @@
   }
   .row-widget:hover .row-widget-remove {
     @apply flex;
+  }
+
+  /* WCAG 2.0 AA Focus Indicators (3:1 contrast, 2px outline) */
+  .category-header:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  .widget-item:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent ring-2 ring-accent/30;
+  }
+
+  .row-widget:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent ring-2 ring-accent/30;
+  }
+
+  .btn:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent ring-2 ring-accent/30;
+  }
+
+  .btn-icon:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  #config-close-btn:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
   }
 
   /* SVG icon sizing for delete buttons */

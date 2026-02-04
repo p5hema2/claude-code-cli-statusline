@@ -95,8 +95,14 @@ export function hideConfigPanel() {
   if (editorArea) editorArea.classList.remove('has-config');
   if (rowsSection) rowsSection.classList.remove('hidden');
 
+  // Restore focus to previously selected widget for accessibility
+  const selected = document.querySelector('.row-widget.selected');
   document.querySelectorAll('.row-widget.selected').forEach((el) => el.classList.remove('selected'));
   state.selectedInstance = null;
+
+  if (selected) {
+    selected.focus();
+  }
 }
 
 // ============================================================================
@@ -115,10 +121,20 @@ function createPreviewStateConfig(widget) {
   const field = document.createElement('div');
   field.className = 'config-field';
 
+  // Generate unique ID for label association (WCAG 2.0 accessibility)
+  const fieldId = `preview-state-${Math.random().toString(36).substring(2, 11)}`;
+
+  const labelEl = document.createElement('label');
+  labelEl.className = 'config-label';
+  labelEl.textContent = 'Select preview state';
+  labelEl.setAttribute('for', fieldId);
+  field.appendChild(labelEl);
+
   const options = widget.previewStates.map((ps) => ({ value: ps.id, label: ps.label }));
   const currentValue = state.widgetStates[widget.id] || options[0]?.value;
 
   const dropdown = createCustomDropdown({
+    id: fieldId,
     options,
     currentValue,
     onChange: (value) => {
@@ -364,6 +380,7 @@ function createCustomOptions(config, customOptions) {
       checkbox.type = 'checkbox';
       checkbox.checked = config.options[ind.show.key] ?? ind.show.default;
       checkbox.title = ind.show.label;
+      checkbox.setAttribute('aria-label', ind.show.label); // WCAG 2.0 accessibility
       checkbox.addEventListener('change', (e) => {
         const value = e.target.checked;
         if (value === ind.show.default) {
@@ -477,13 +494,18 @@ function createIndicatorColorField(opt, optionsObj) {
 // UI Components
 // ============================================================================
 
-function createCustomDropdown({ options, currentValue, onChange, renderOption, renderTrigger }) {
+function createCustomDropdown({ id, options, currentValue, onChange, renderOption, renderTrigger }) {
   const dropdown = document.createElement('div');
   dropdown.className = 'custom-dropdown';
 
   const trigger = document.createElement('button');
   trigger.type = 'button';
   trigger.className = 'custom-dropdown-trigger';
+
+  // Add ID for label association if provided (WCAG 2.0 accessibility)
+  if (id) {
+    trigger.id = id;
+  }
 
   const optionsPanel = document.createElement('div');
   optionsPanel.className = 'custom-dropdown-options';
@@ -563,14 +585,19 @@ function createColorField(label, currentValue, onChange, defaultValue = 'dim') {
   const field = document.createElement('div');
   field.className = 'config-field';
 
+  // Generate unique ID for label association (WCAG 2.0 accessibility)
+  const fieldId = `color-field-${Math.random().toString(36).substring(2, 11)}`;
+
   const labelEl = document.createElement('label');
   labelEl.className = 'config-label';
   labelEl.textContent = label;
+  labelEl.setAttribute('for', fieldId);
   field.appendChild(labelEl);
 
   const effectiveValue = currentValue || defaultValue;
 
   const dropdown = createCustomDropdown({
+    id: fieldId,
     options: ANSI_COLORS,
     currentValue: effectiveValue,
     onChange: (value) => {
@@ -603,14 +630,19 @@ function createSelectField(opt, optionsObj) {
   const field = document.createElement('div');
   field.className = 'config-field';
 
+  // Generate unique ID for label association (WCAG 2.0 accessibility)
+  const fieldId = `select-field-${Math.random().toString(36).substring(2, 11)}`;
+
   const labelEl = document.createElement('label');
   labelEl.className = 'config-label';
   labelEl.textContent = opt.label;
+  labelEl.setAttribute('for', fieldId);
   field.appendChild(labelEl);
 
   const currentValue = optionsObj[opt.key] ?? opt.default;
 
   const dropdown = createCustomDropdown({
+    id: fieldId,
     options: opt.options,
     currentValue,
     onChange: (value) => {
@@ -632,11 +664,16 @@ function createCheckboxField(opt, optionsObj) {
   const field = document.createElement('div');
   field.className = 'config-field';
 
+  // Generate unique ID for label association (WCAG 2.0 accessibility)
+  const fieldId = `checkbox-field-${Math.random().toString(36).substring(2, 11)}`;
+
   const label = document.createElement('label');
   label.className = 'config-checkbox-label';
+  label.setAttribute('for', fieldId);
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
+  checkbox.id = fieldId;
   checkbox.checked = optionsObj[opt.key] ?? opt.default;
 
   checkbox.addEventListener('change', (e) => {

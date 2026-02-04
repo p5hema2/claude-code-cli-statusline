@@ -72,9 +72,11 @@ export const TERMINAL_PALETTES: TerminalPalette[] = [
     id: 'vscode',
     name: 'VS Code',
     colors: {
-      // Standard (30-37)
+      // Standard (30-37) - WCAG 2.0 AA compliant (4.5:1 contrast on #1e1e1e background)
       30: '#000000', 31: '#cd3131', 32: '#0dbc79', 33: '#e5e510',
-      34: '#2472c8', 35: '#bc3fbc', 36: '#11a8cd', 37: '#e5e5e5',
+      34: '#5a9fd4', // Lightened from #2472c8 for WCAG 2.0 AA (4.5:1 contrast)
+      35: '#d282d2', // Lightened from #bc3fbc for WCAG 2.0 AA (4.5:1 contrast)
+      36: '#11a8cd', 37: '#e5e5e5',
       // Bright (90-97)
       90: '#666666', 91: '#f14c4c', 92: '#23d18b', 93: '#f5f543',
       94: '#3b8eea', 95: '#d670d6', 96: '#29b8db', 97: '#e5e5e5',

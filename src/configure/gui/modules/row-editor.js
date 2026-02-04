@@ -98,6 +98,22 @@ function createRowWidget(widget, config, rowIndex, widgetIndex) {
   el.dataset.rowIndex = rowIndex;
   el.dataset.widgetIndex = widgetIndex;
 
+  // Accessibility: Make widget focusable and keyboard-operable
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('role', 'button');
+  el.setAttribute('aria-label', `${widget.name} widget configuration`);
+
+  // Keyboard navigation: Enter/Space to configure, Delete/Backspace to remove
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      selectWidgetInstance(rowIndex, widgetIndex);
+    } else if (e.key === 'Delete' || e.key === 'Backspace') {
+      e.preventDefault();
+      removeWidgetFromRow(rowIndex, widgetIndex);
+    }
+  });
+
   // Highlight if selected
   if (state.selectedInstance?.rowIndex === rowIndex &&
       state.selectedInstance?.widgetIndex === widgetIndex) {
