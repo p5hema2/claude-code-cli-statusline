@@ -58,7 +58,7 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 
 ### Visual Configuration GUI
 
-Open a browser-based WYSIWYG editor to configure your statusline:
+Open a browser-based WYSIWYG editor (built with **Tailwind CSS**):
 
 ```bash
 npx @p5hema2/claude-code-cli-statusline --configure
@@ -69,6 +69,7 @@ The GUI allows you to:
 - **Multi-row support** for complex statuslines
 - **Live preview** with different terminal themes
 - **N/A state toggles** to preview various widget states
+- **Modern responsive UI** powered by Tailwind CSS
 
 ### Manual Configuration
 
@@ -128,7 +129,160 @@ Configure multiple rows using the `rows` option:
 | `outputStyle` | Output style name |
 | `vimMode` | Vim mode indicator |
 
+## Configuration API Reference
+
+The configuration GUI communicates with a built-in REST API. These endpoints can also be accessed programmatically.
+
+### GET /api/settings
+
+Retrieve current statusline settings.
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "rows": [
+      { "widgets": ["directory", "gitBranch", "model"] }
+    ],
+    "separator": "|",
+    "cacheTtl": 60000
+  }
+}
+```
+
+**cURL Example:**
+```bash
+curl http://localhost:3000/api/settings
+```
+
+### PUT /api/settings
+
+Update statusline settings.
+
+**Request Body:**
+```json
+{
+  "rows": [
+    { "widgets": ["directory", "gitBranch"] }
+  ],
+  "separator": " | ",
+  "cacheTtl": 120000
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "rows": [{ "widgets": ["directory", "gitBranch"] }],
+    "separator": " | ",
+    "cacheTtl": 120000
+  }
+}
+```
+
+**Error Response:** `400 Bad Request` (invalid schema)
+```json
+{
+  "success": false,
+  "error": "Invalid settings format"
+}
+```
+
+**cURL Example:**
+```bash
+curl -X PUT http://localhost:3000/api/settings \
+  -H "Content-Type: application/json" \
+  -d '{"rows":[{"widgets":["directory","gitBranch"]}]}'
+```
+
+### POST /api/preview
+
+Generate statusline preview HTML.
+
+**Request Body:**
+```json
+{
+  "settings": {
+    "rows": [{ "widgets": ["directory", "gitBranch"] }]
+  },
+  "terminalWidth": 80,
+  "widgetStates": {
+    "git": { "enabled": true, "dirty": true }
+  },
+  "terminalPalette": "dracula"
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "htmlRows": ["<pre>...</pre>"]
+  }
+}
+```
+
+**cURL Example:**
+```bash
+curl -X POST http://localhost:3000/api/preview \
+  -H "Content-Type: application/json" \
+  -d '{"settings":{"rows":[{"widgets":["directory","gitBranch"]}]},"terminalWidth":80}'
+```
+
+### GET /api/widgets
+
+Retrieve widget metadata and schemas.
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "widgets": [
+      {
+        "id": "directory",
+        "name": "Directory",
+        "description": "Current working directory (fish-style)",
+        "category": "location",
+        "previewStates": []
+      }
+    ],
+    "categories": [
+      {
+        "id": "location",
+        "name": "location",
+        "widgets": ["directory"]
+      }
+    ],
+    "widgetSchemas": []
+  }
+}
+```
+
+**cURL Example:**
+```bash
+curl http://localhost:3000/api/widgets
+```
+
+### Error Handling
+
+All endpoints return consistent error format:
+
+**500 Internal Server Error:**
+```json
+{
+  "success": false,
+  "error": "Error message description"
+}
+```
+
 ## Development
+
+### Setup
 
 ```bash
 # Clone the repository
@@ -137,29 +291,47 @@ cd claude-code-cli-statusline
 
 # Install dependencies
 npm install
+```
 
-# Build
+### Build
+
+```bash
 npm run build              # Full build (TypeScript + GUI + CSS)
 npm run build:production   # Production build with minified CSS
-
-# Build CSS separately
 npm run build:css          # Build Tailwind CSS
+```
+
+### Development Workflow
+
+```bash
+# GUI Development
+npm run dev:configure      # Start config GUI with live CSS rebuilding
 npm run dev:css            # Watch Tailwind CSS (auto-rebuild on changes)
 
-# Development server
-npm run dev:configure      # Run config GUI with live CSS rebuilding
+# CLI Development
+npm run dev                # Watch mode for CLI
+cat scripts/payload.example.json | npm start  # Test with example payload
+```
 
-# Test with example payload
-cat scripts/payload.example.json | npm start
+### Testing
 
-# Run tests
-npm test
-npm run test:e2e           # Run E2E tests
-
-# Lint
-npm run lint
+```bash
+npm test                   # Run unit tests
+npm run test:e2e           # Run E2E tests (Playwright)
 npm run lint:all           # ESLint + Sheriff
 ```
+
+### Architecture
+
+See [TECH_STACK.md](TECH_STACK.md) for detailed architecture documentation:
+- Widget registry pattern
+- Config schema validation
+- Module boundaries (Sheriff)
+- FORCE_COLOR bootstrap pattern
+
+### Recent Changes
+
+See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
 ## How It Works
 
