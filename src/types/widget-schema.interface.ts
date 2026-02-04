@@ -38,7 +38,7 @@ export interface StateColorOption {
 }
 
 /** Generic config option types */
-export type ConfigOptionType = 'select' | 'checkbox' | 'color';
+export type ConfigOptionType = 'select' | 'checkbox' | 'color' | 'text';
 
 /** Base interface for config options */
 interface ConfigOptionBase {
@@ -73,8 +73,19 @@ export interface ColorConfigOption extends ConfigOptionBase {
   default: ColorValue;
 }
 
+/** Text input option */
+export interface TextConfigOption extends ConfigOptionBase {
+  type: 'text';
+  /** Default text value */
+  default: string;
+  /** Maximum length (optional, enforced in GUI) */
+  maxLength?: number;
+  /** Placeholder text (optional) */
+  placeholder?: string;
+}
+
 /** Union type for all config option types */
-export type ConfigOption = SelectConfigOption | CheckboxConfigOption | ColorConfigOption;
+export type ConfigOption = SelectConfigOption | CheckboxConfigOption | ColorConfigOption | TextConfigOption;
 
 /** Bar color configuration for usage widgets */
 export interface BarColorConfig {

@@ -424,6 +424,8 @@ function createCustomOptions(config, customOptions) {
           state.isDirty = true;
           updatePreview();
         }, opt.default));
+      } else if (opt.type === 'text') {
+        container.appendChild(createTextField(opt, config.options));
       }
     }
   }
@@ -690,5 +692,72 @@ function createCheckboxField(opt, optionsObj) {
   label.appendChild(checkbox);
   label.appendChild(document.createTextNode(opt.label));
   field.appendChild(label);
+  return field;
+}
+
+/**
+ * Create a text input field
+ */
+function createTextField(opt, optionsObj) {
+  const field = document.createElement('div');
+  field.className = 'config-field';
+
+  // Generate unique ID for label association (WCAG 2.0 accessibility)
+  const fieldId = `text-field-${Math.random().toString(36).substring(2, 11)}`;
+
+  // Label
+  const label = document.createElement('label');
+  label.className = 'config-label';
+  label.setAttribute('for', fieldId);
+  label.textContent = opt.label;
+
+  // Text input
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.id = fieldId;
+  input.className = 'config-input';
+  input.value = optionsObj[opt.key] ?? opt.default;
+  input.placeholder = opt.placeholder || '';
+  if (opt.maxLength) {
+    input.maxLength = opt.maxLength;
+  }
+
+  // Character counter (if maxLength specified)
+  let counterEl;
+  if (opt.maxLength) {
+    counterEl = document.createElement('span');
+    counterEl.className = 'text-xs text-text-muted';
+    counterEl.textContent = `${input.value.length}/${opt.maxLength}`;
+  }
+
+  input.addEventListener('input', (e) => {
+    const value = e.target.value;
+
+    // Update character counter
+    if (counterEl) {
+      counterEl.textContent = `${value.length}/${opt.maxLength}`;
+    }
+
+    // Update options
+    if (value === opt.default || value === '') {
+      delete optionsObj[opt.key];
+    } else {
+      optionsObj[opt.key] = value;
+    }
+    state.isDirty = true;
+    updatePreview();
+  });
+
+  field.appendChild(label);
+
+  // Wrapper for input and counter
+  const inputWrapper = document.createElement('div');
+  inputWrapper.className = 'flex items-center gap-2';
+  inputWrapper.appendChild(input);
+  if (counterEl) {
+    inputWrapper.appendChild(counterEl);
+  }
+
+  field.appendChild(inputWrapper);
   return field;
 }
