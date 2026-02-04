@@ -58,18 +58,19 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 
 ### Visual Configuration GUI
 
-Open a browser-based WYSIWYG editor (built with **Tailwind CSS**):
+Open a browser-based WYSIWYG editor with **Smart Commerce branding** (built with **Tailwind CSS**):
 
 ```bash
 npx @p5hema2/claude-code-cli-statusline --configure
 ```
 
-The GUI allows you to:
+The GUI features:
 - **Drag & drop** widgets to arrange your layout
 - **Multi-row support** for complex statuslines
 - **Live preview** with different terminal themes
 - **N/A state toggles** to preview various widget states
-- **Modern responsive UI** powered by Tailwind CSS
+- **Modern responsive UI** with Smart Commerce design system
+- **Light theme** optimized for readability and accessibility (WCAG 2.0 AA)
 
 ### Manual Configuration
 
@@ -349,3 +350,19 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 ## License
 
 MIT © Martin Heß
+
+---
+
+## Developed by Smart Commerce SE
+
+<div align="center">
+  <img src="docs/smart-commerce-logo.svg" alt="Smart Commerce SE" width="200">
+  <p><em>This tool was developed by <a href="https://www.smartcommerce.de/en/">Smart Commerce SE</a> — enterprise eCommerce solutions and digital commerce.</em></p>
+
+  **Technology Stack & Services:**
+  Intershop • Shopware • commercetools • Spryker • Emporix • Digital Strategy • Cloud Operations • PIM • AI Solutions
+
+  **Partner:** <a href="https://www.deepr.agency/">deepr agency</a> — Full-service digital partner for branding, web development, and online marketing
+
+  <p><a href="https://www.smartcommerce.de/en/contact/">Get in touch</a></p>
+</div>
