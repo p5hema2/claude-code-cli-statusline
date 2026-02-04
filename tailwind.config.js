@@ -3,35 +3,44 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+      },
       colors: {
         bg: {
-          primary: '#0d1117',
-          secondary: '#161b22',
-          tertiary: '#21262d',
-          hover: '#30363d',
+          primary: '#ffffff',
+          secondary: '#f8f9fa',
+          tertiary: '#e9ecef',
+          hover: '#dee2e6',
         },
         text: {
-          primary: '#e6edf3',
-          secondary: '#8b949e',
-          muted: '#6e7681',
+          primary: '#212529',
+          secondary: '#495057',
+          muted: '#6c757d',
         },
         accent: {
-          DEFAULT: '#2a75d5', // Darkened from #58a6ff for WCAG 2.0 AA (4.5:1 contrast with white)
-          hover: '#58a6ff', // Use original color for hover state
+          DEFAULT: '#4468F0', // Smart Commerce primary blue
+          hover: '#3654d6', // Darkened for hover state
+        },
+        brand: {
+          blue: '#4468F0',
+          yellow: '#FCAA1E',
+          red: '#e74266',
+          teal: '#20b69e',
         },
         semantic: {
-          success: '#3fb950',
-          warning: '#d29922',
-          error: '#f85149',
+          success: '#28a745',
+          warning: '#FCAA1E',
+          error: '#e74266',
         },
-        border: '#30363d',
+        border: '#dee2e6',
       },
       borderRadius: {
         sm: '4px',
         DEFAULT: '6px',
       },
       boxShadow: {
-        custom: '0 8px 24px rgba(0, 0, 0, 0.4)',
+        custom: '0 4px 12px rgba(68, 104, 240, 0.12)',
       },
       fontSize: {
         xs: '11px',

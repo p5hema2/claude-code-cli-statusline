@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Statusline Configuration</title>
+  <title>Smart Commerce — Claude Statusline Configuration</title>
+  <meta name="description" content="Configure your Claude Code statusline with Smart Commerce eCommerce expertise">
   <link rel="stylesheet" href="styles/output.css">
   <link rel="stylesheet" href="styles/themes.css">
 </head>
 <body>
   <div id="app" class="flex flex-col min-h-screen max-w-[1200px] mx-auto px-6">
-    <header class="header text-center py-8 pb-6 border-b border-border mb-6">
-      <h1 class="m-0 text-lg font-semibold text-text-primary">Claude Statusline Configuration</h1>
-      <p class="text-base text-text-secondary mt-2">Drag widgets to customize your statusline layout</p>
+    <header class="header py-8 pb-6 border-b border-border mb-6">
+      <div class="flex justify-between items-center mb-4">
+        <img src="assets/smart-commerce-logo.svg" alt="Smart Commerce" class="h-10">
+        <a href="https://www.smartcommerce.de/en/contact/" target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary">Contact Sales</a>
+      </div>
+      <div class="text-center">
+        <h1 class="m-0 text-lg font-semibold text-text-primary">Claude Statusline Configuration</h1>
+        <p class="text-base text-text-secondary mt-2">Drag widgets to customize your statusline layout</p>
+      </div>
     </header>
 
     <main class="flex-1 flex flex-col gap-5">
@@ -153,6 +161,15 @@
         </section>
       </div>
     </main>
+
+    <footer class="mt-10 py-8 border-t border-border text-center">
+      <p class="text-lg font-semibold text-brand-blue mb-3">"We have eCommerce in our blood."</p>
+      <p class="text-base text-text-secondary mb-4">
+        Enterprise-grade eCommerce solutions powered by Shopware expertise
+      </p>
+      <a href="https://www.smartcommerce.de/en/contact/" target="_blank" rel="noopener noreferrer"
+         class="btn btn-primary">Get in Touch</a>
+    </footer>
 
     <!-- Status message (positioned in upper right corner) -->
     <div id="status-message" class="status-message" role="status" aria-live="polite" aria-atomic="true"></div>

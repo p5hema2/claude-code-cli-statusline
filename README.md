@@ -1,10 +1,32 @@
 # @p5hema2/claude-code-cli-statusline
 
-A customizable statusline for Claude Code CLI with **OAuth usage metrics**.
+<div align="center">
+  <img src="docs/smart-commerce-logo.svg" alt="Smart Commerce" width="300">
+  <br><br>
+  <strong>"We have eCommerce in our blood."</strong>
+  <br><br>
+</div>
+
+A customizable statusline for Claude Code CLI with **OAuth usage metrics**, brought to you by [Smart Commerce SE](https://www.smartcommerce.de/en/).
 
 [![npm version](https://badge.fury.io/js/%40p5hema2%2Fclaude-code-cli-statusline.svg)](https://www.npmjs.com/package/@p5hema2/claude-code-cli-statusline)
 [![CI](https://github.com/p5hema2/claude-code-cli-statusline/actions/workflows/ci.yml/badge.svg)](https://github.com/p5hema2/claude-code-cli-statusline/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+## About Smart Commerce SE
+
+[Smart Commerce](https://www.smartcommerce.de/en/) is a leading **enterprise eCommerce solutions provider** specializing in **Shopware** development. With decades of eCommerce expertise, we help businesses build scalable, high-performance online stores.
+
+**Our Services:**
+- Shopware development & customization
+- Enterprise eCommerce consulting
+- System integration & APIs
+- Performance optimization
+- Cloud infrastructure & DevOps
+
+**[Contact us](https://www.smartcommerce.de/en/contact/)** for your next eCommerce project.
 
 ## Features
 
@@ -58,18 +80,19 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 
 ### Visual Configuration GUI
 
-Open a browser-based WYSIWYG editor (built with **Tailwind CSS**):
+Open a browser-based WYSIWYG editor with **Smart Commerce branding** (built with **Tailwind CSS**):
 
 ```bash
 npx @p5hema2/claude-code-cli-statusline --configure
 ```
 
-The GUI allows you to:
+The GUI features:
 - **Drag & drop** widgets to arrange your layout
 - **Multi-row support** for complex statuslines
 - **Live preview** with different terminal themes
 - **N/A state toggles** to preview various widget states
-- **Modern responsive UI** powered by Tailwind CSS
+- **Modern responsive UI** with Smart Commerce design system
+- **Light theme** optimized for readability and accessibility (WCAG 2.0 AA)
 
 ### Manual Configuration
 
