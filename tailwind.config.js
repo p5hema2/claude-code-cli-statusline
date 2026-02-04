@@ -16,8 +16,8 @@ export default {
           muted: '#6e7681',
         },
         accent: {
-          DEFAULT: '#58a6ff',
-          hover: '#79c0ff',
+          DEFAULT: '#2a75d5', // Darkened from #58a6ff for WCAG 2.0 AA (4.5:1 contrast with white)
+          hover: '#58a6ff', // Use original color for hover state
         },
         semantic: {
           success: '#3fb950',

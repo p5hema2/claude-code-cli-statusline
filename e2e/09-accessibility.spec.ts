@@ -153,7 +153,7 @@ test.describe('Accessibility', () => {
     }
   });
 
-  test.skip('should have sufficient color contrast', async ({ serverPage: page }) => {
+  test('should have sufficient color contrast', async ({ serverPage: page }) => {
     // Run axe color-contrast check
     const results = await new AxeBuilder({ page }).withTags(['wcag2aa']).include(['*']).analyze();
 
