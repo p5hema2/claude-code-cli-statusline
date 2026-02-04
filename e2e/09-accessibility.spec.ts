@@ -38,7 +38,7 @@ test.describe('Accessibility', () => {
     expect(firstFocusable.tagName).toBeTruthy();
   });
 
-  test.skip('should have visible focus indicators', async ({ serverPage: page }) => {
+  test('should have visible focus indicators', async ({ serverPage: page }) => {
     // Focus first interactive element
     await page.keyboard.press('Tab');
 

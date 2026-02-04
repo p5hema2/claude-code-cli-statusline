@@ -201,6 +201,31 @@
     @apply flex;
   }
 
+  /* WCAG 2.0 AA Focus Indicators (3:1 contrast, 2px outline) */
+  .category-header:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  .widget-item:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent ring-2 ring-accent/30;
+  }
+
+  .row-widget:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent ring-2 ring-accent/30;
+  }
+
+  .btn:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent ring-2 ring-accent/30;
+  }
+
+  .btn-icon:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  #config-close-btn:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
   /* SVG icon sizing for delete buttons */
   .row-widget-remove svg,
   .row-close svg {
