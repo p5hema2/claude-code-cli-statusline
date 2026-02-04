@@ -163,7 +163,7 @@ test.describe('Accessibility', () => {
     expect(colorContrastViolations.length).toBe(0);
   });
 
-  test.skip('should support keyboard navigation in widget palette', async ({ serverPage: page }) => {
+  test('should support keyboard navigation in widget palette', async ({ serverPage: page }) => {
     const palette = page.locator(SELECTORS.palette.container);
     await palette.waitFor({ state: 'visible' });
 

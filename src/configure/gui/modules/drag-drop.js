@@ -212,7 +212,7 @@ function cleanupSeparators(row) {
   }
 }
 
-function addWidgetToRow(widgetId, rowIndex) {
+export function addWidgetToRow(widgetId, rowIndex) {
   if (!state.settings.rows?.[rowIndex]) return;
 
   // Create new widget config
