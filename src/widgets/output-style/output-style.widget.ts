@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor } from '../shared/index.js';
+import { getColor, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Output style widget schema - defines all GUI metadata */
 export const OutputStyleSchema: WidgetSchema = {
@@ -26,6 +26,22 @@ export const OutputStyleSchema: WidgetSchema = {
         { key: 'explanatory', label: 'Explanatory Style', default: 'cyan' },
       ],
     },
+    custom: [
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Style"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
+    ],
   },
   previewStates: [
     { id: 'concise', label: 'Concise', description: 'Concise output style' },
@@ -53,7 +69,9 @@ export const OutputStyleWidget: Widget = {
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
     const outputStyle = ctx.status.output_style;
-    if (!outputStyle?.name) return null;
+    if (!outputStyle?.name) {
+      return renderWidgetWithLabel(null, config, 'cyan');
+    }
 
     const styleName = outputStyle.name;
     const styleType = detectStyleType(styleName);
@@ -63,6 +81,7 @@ export const OutputStyleWidget: Widget = {
       ? (getColor(config, styleType) ?? 'cyan')
       : (config?.color ?? 'cyan');
 
-    return colorize(styleName, color);
+    const content = colorize(styleName, color);
+    return renderWidgetWithLabel(content, config, 'cyan');
   },
 };

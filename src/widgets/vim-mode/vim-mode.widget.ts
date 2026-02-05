@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor } from '../shared/index.js';
+import { getColor, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Vim mode widget schema - defines all GUI metadata */
 export const VimModeSchema: WidgetSchema = {
@@ -27,6 +27,22 @@ export const VimModeSchema: WidgetSchema = {
         { key: 'command', label: 'Command Mode', default: 'blue' },
       ],
     },
+    custom: [
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Vim"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
+    ],
   },
   previewStates: [
     { id: 'normal', label: 'Normal', description: 'Vim normal mode' },
@@ -101,7 +117,9 @@ export const VimModeWidget: Widget = {
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
     const vimMode = ctx.status.vim_mode;
-    if (!vimMode?.mode) return null;
+    if (!vimMode?.mode) {
+      return renderWidgetWithLabel(null, config, 'white');
+    }
 
     const mode = vimMode.mode;
     const shortened = shortenMode(mode);
@@ -113,6 +131,7 @@ export const VimModeWidget: Widget = {
       ? (getColor(config, modeType) ?? defaultColor)
       : defaultColor;
 
-    return colorize(`[${shortened}]`, modeColor);
+    const content = colorize(`[${shortened}]`, modeColor);
+    return renderWidgetWithLabel(content, config, 'white');
   },
 };
