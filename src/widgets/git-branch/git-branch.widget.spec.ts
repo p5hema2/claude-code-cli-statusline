@@ -26,7 +26,7 @@ describe('GitBranchWidget', () => {
       usage: null,
       terminalWidth: 80,
       settings: {},
-      mockGitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: false },
+      mockGitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 0, behind: 0 },
     };
 
     const result = GitBranchWidget.render(ctx);
@@ -48,7 +48,7 @@ describe('GitBranchWidget', () => {
       usage: null,
       terminalWidth: 80,
       settings: {},
-      mockGitInfo: { branch: 'feat/test', isDirty: false, hasStaged: false, hasUntracked: false },
+      mockGitInfo: { branch: 'feat/test', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 0, behind: 0 },
     };
 
     const config = { widget: 'gitBranch', options: { label: 'Branch' } };
