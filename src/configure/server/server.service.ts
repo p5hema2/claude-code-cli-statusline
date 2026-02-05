@@ -230,6 +230,9 @@ export function setupFileWatcher(): void {
   // Only watch if GUI directory exists (dev mode)
   if (!existsSync(guiDir)) return;
 
+  // Skip file watcher in CI environments (recursive watch not supported on Linux)
+  if (process.env.CI === 'true') return;
+
   console.log(`  👀 Watching for changes: ${guiDir}`);
 
   // Debounce to avoid multiple reloads
