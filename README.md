@@ -305,8 +305,8 @@ npm run build:css          # Build Tailwind CSS
 ### Development Workflow
 
 ```bash
-# GUI Development
-npm run dev:configure      # Start config GUI with live CSS rebuilding
+# GUI Development (with live reload)
+npm run dev:configure      # Start config GUI with live console output (--raw flag)
 npm run dev:css            # Watch Tailwind CSS (auto-rebuild on changes)
 
 # CLI Development
@@ -314,12 +314,20 @@ npm run dev                # Watch mode for CLI
 cat scripts/payload.example.json | npm start  # Test with example payload
 ```
 
+**Live Development Features:**
+- Cache-Control headers prevent browser caching (changes appear immediately)
+- Server displays URL and file watcher status on startup
+- File changes trigger automatic browser reload (no manual refresh needed)
+- Console output shows real-time feedback from all processes
+
 ### Testing
 
 ```bash
-npm test                   # Run unit tests
-npm run test:e2e           # Run E2E tests (Playwright)
-npm run lint:all           # ESLint + Sheriff
+npm test                   # Run all tests (unit + E2E)
+npm run test:vitest        # Run unit tests only
+npm run test:e2e           # Run E2E tests (exits cleanly, no auto-open report)
+npm run test:e2e:report    # View last E2E test report
+npm run lint               # Run all linters (ESLint + Sheriff)
 ```
 
 ### Architecture

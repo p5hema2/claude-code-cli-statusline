@@ -504,14 +504,27 @@ describe('setupFileWatcher', () => {
 
   it('should not setup watcher if GUI dir does not exist', () => {
     vi.mocked(existsSync).mockReturnValue(false);
+    delete process.env.CI;
 
     setupFileWatcher();
 
     expect(watch).not.toHaveBeenCalled();
   });
 
+  it('should not setup watcher in CI environments', () => {
+    vi.mocked(existsSync).mockReturnValue(true);
+    process.env.CI = 'true';
+
+    setupFileWatcher();
+
+    expect(watch).not.toHaveBeenCalled();
+
+    delete process.env.CI;
+  });
+
   it('should setup watcher if GUI dir exists', () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    delete process.env.CI;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(watch).mockReturnValue(undefined as any);
 
@@ -526,6 +539,7 @@ describe('setupFileWatcher', () => {
 
   it('should watch for HTML/JS/CSS file changes', async () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    delete process.env.CI;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
@@ -540,6 +554,10 @@ describe('setupFileWatcher', () => {
 
     vi.useFakeTimers();
     setupFileWatcher();
+
+    // Should log watcher startup message
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('👀 Watching for changes:'));
+    consoleLogSpy.mockClear();
 
     // Simulate HTML file change
     watchCallback('change', 'index.html');
@@ -549,13 +567,14 @@ describe('setupFileWatcher', () => {
     vi.useRealTimers();
 
     // Should log the file change
-    expect(consoleLogSpy).toHaveBeenCalled();
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('↻ File changed: index.html'));
 
     consoleLogSpy.mockRestore();
   });
 
   it('should ignore non-relevant file changes', async () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    delete process.env.CI;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
@@ -571,6 +590,10 @@ describe('setupFileWatcher', () => {
     vi.useFakeTimers();
     setupFileWatcher();
 
+    // Should log watcher startup message
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('👀 Watching for changes:'));
+    consoleLogSpy.mockClear();
+
     // Simulate txt file change (ignored)
     watchCallback('change', 'test.txt');
 
@@ -578,7 +601,7 @@ describe('setupFileWatcher', () => {
     await vi.advanceTimersByTimeAsync(150);
     vi.useRealTimers();
 
-    // Should NOT log anything (file type ignored)
+    // Should NOT log file change (file type ignored)
     expect(consoleLogSpy).not.toHaveBeenCalled();
 
     consoleLogSpy.mockRestore();

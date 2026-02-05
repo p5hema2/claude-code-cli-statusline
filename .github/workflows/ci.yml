@@ -26,14 +26,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Lint eslint
+        run: npm run lint:eslint
+
+      - name: Lint sheriff
+        run: npm run lint:sheriff
+
+      - name: Test vitest
+        run: npm run test:vitest
 
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: npm test
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Test playwright
+        run: npm run test:e2e
 
   # Summary job for branch protection
   ci:

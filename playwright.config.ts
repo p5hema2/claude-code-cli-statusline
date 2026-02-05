@@ -58,8 +58,8 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI
-    ? [['html'], ['github']]
-    : [['html'], ['list']],
+    ? [['html', { open: 'never' }], ['github']]
+    : [['html', { open: 'never' }], ['list']],
 
   use: {
     baseURL: `http://localhost:${TEST_PORT}`,
