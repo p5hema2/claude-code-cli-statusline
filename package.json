@@ -1,6 +1,6 @@
 {
   "name": "@p5hema2/claude-code-cli-statusline",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A customizable statusline for Claude Code CLI with OAuth usage metrics",
   "type": "module",
   "main": "dist/index.js",
