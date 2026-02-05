@@ -5,6 +5,7 @@
 import { describe, it, expect } from 'vitest';
 
 import type { RenderContext } from '../../types/index.js';
+import { stripAnsi } from '../../utils/index.js';
 
 import { SessionUsageWidget } from './session-usage.widget.js';
 
@@ -53,5 +54,51 @@ describe('SessionUsageWidget', () => {
 
     const result = SessionUsageWidget.render(ctx);
     expect(result).toBeNull();
+  });
+
+  // Label tests
+  it('should render with label', () => {
+    const ctx: RenderContext = {
+      status: {
+        current_dir: '/test',
+        model: undefined,
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
+      },
+      usage: {
+        timestamp: Date.now(),
+        current_session: { percent_used: 25, reset_time: '2024-01-01T12:00:00Z' },
+        weekly_all: { percent_used: 10, reset_time: '2024-01-07T00:00:00Z' },
+        weekly_sonnet: { percent_used: 16, reset_time: '2024-01-07T00:00:00Z' },
+      },
+      terminalWidth: 80,
+      settings: {},
+    };
+
+    const config = { widget: 'sessionUsage', options: { label: '5h' } };
+    const result = SessionUsageWidget.render(ctx, config);
+    const plain = stripAnsi(result!);
+    expect(plain).toContain('5h:');
+  });
+
+  it('should show N/A when usage null and naVisibility=na', () => {
+    const ctx: RenderContext = {
+      status: {
+        current_dir: '/test',
+        model: undefined,
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
+      },
+      usage: null,
+      terminalWidth: 80,
+      settings: {},
+    };
+
+    const config = { widget: 'sessionUsage', options: { naVisibility: 'na' } };
+    const result = SessionUsageWidget.render(ctx, config);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('N/A');
   });
 });

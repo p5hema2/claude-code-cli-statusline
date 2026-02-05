@@ -95,4 +95,46 @@ describe('VimModeWidget', () => {
     const result = VimModeWidget.render(ctx);
     expect(result).toBeNull();
   });
+
+  // Label functionality tests
+  it('should render with label when label option provided', () => {
+    const ctx: RenderContext = {
+      status: {
+        current_dir: '/test',
+        model: undefined,
+        vim_mode: { mode: 'normal' },
+        context_window: undefined,
+        output_style: undefined,
+      },
+      usage: null,
+      terminalWidth: 80,
+      settings: {},
+    };
+
+    const config = { widget: 'vimMode', options: { label: 'Vim' } };
+    const result = VimModeWidget.render(ctx, config);
+    const plain = stripAnsi(result!);
+    expect(plain).toContain('Vim:');
+    expect(plain).toContain('[NOR]');
+  });
+
+  it('should show N/A when vim mode null and naVisibility=na', () => {
+    const ctx: RenderContext = {
+      status: {
+        current_dir: '/test',
+        model: undefined,
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
+      },
+      usage: null,
+      terminalWidth: 80,
+      settings: {},
+    };
+
+    const config = { widget: 'vimMode', options: { naVisibility: 'na', label: 'Vim' } };
+    const result = VimModeWidget.render(ctx, config);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('Vim: N/A');
+  });
 });
