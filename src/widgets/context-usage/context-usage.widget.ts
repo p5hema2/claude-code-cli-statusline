@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar } from '../../utils/index.js';
-import { getOption } from '../shared/index.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Context usage widget schema - defines all GUI metadata */
 export const ContextUsageSchema: WidgetSchema = {
@@ -29,6 +29,20 @@ export const ContextUsageSchema: WidgetSchema = {
     custom: [
       { key: 'showBar', type: 'checkbox', label: 'Show usage bar', default: true },
       { key: 'showPercent', type: 'checkbox', label: 'Show percentage', default: true },
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Ctx"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
     ],
   },
   previewStates: [
@@ -44,7 +58,9 @@ export const ContextUsageWidget: Widget = {
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
     const contextWindow = ctx.status.context_window;
-    if (!contextWindow?.remaining_percentage) return null;
+    if (!contextWindow?.remaining_percentage) {
+      return renderWidgetWithLabel(null, config, 'green');
+    }
 
     const remaining = contextWindow.remaining_percentage;
     // Convert remaining to used for consistent display
@@ -55,10 +71,12 @@ export const ContextUsageWidget: Widget = {
     const showBar = getOption<boolean>(config, 'showBar');
     const showPercent = getOption<boolean>(config, 'showPercent');
 
-    return createUsageBar(used, {
+    const content = createUsageBar(used, {
       colors: barColors,
       showBar,
       showPercent,
     });
+
+    return renderWidgetWithLabel(content, config, 'green');
   },
 };

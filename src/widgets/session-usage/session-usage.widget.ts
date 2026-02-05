@@ -9,7 +9,7 @@ import chalk from 'chalk';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
-import { getOption } from '../shared/index.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Session usage widget schema - defines all GUI metadata */
 export const SessionUsageSchema: WidgetSchema = {
@@ -32,6 +32,20 @@ export const SessionUsageSchema: WidgetSchema = {
       { key: 'showBar', type: 'checkbox', label: 'Show usage bar', default: true },
       { key: 'showPercent', type: 'checkbox', label: 'Show percentage', default: true },
       { key: 'showResetTime', type: 'checkbox', label: 'Show reset time', default: true },
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "5h"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
     ],
   },
   previewStates: [
@@ -46,7 +60,9 @@ export const SessionUsageWidget: Widget = {
   name: 'sessionUsage',
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
-    if (!ctx.usage?.current_session) return null;
+    if (!ctx.usage?.current_session) {
+      return renderWidgetWithLabel(null, config, 'green');
+    }
 
     const { percent_used, reset_time } = ctx.usage.current_session;
 
@@ -69,6 +85,7 @@ export const SessionUsageWidget: Widget = {
       resetSuffix = colorize(` (${resetStr})`, config?.color, chalk.dim);
     }
 
-    return bar + resetSuffix;
+    const content = bar + resetSuffix;
+    return renderWidgetWithLabel(content, config, 'green');
   },
 };

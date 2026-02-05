@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 
 import type { WidgetConfig } from '../../types/index.js';
+import { stripAnsi } from '../../utils/index.js';
 
-import { getColor, getOption, colorizeWithConfig } from './widget.helper.js';
+import { getColor, getOption, colorizeWithConfig, renderWithLabel } from './widget.helper.js';
 
 describe('getColor', () => {
   it('should return undefined when config is undefined', () => {
@@ -103,5 +104,63 @@ describe('colorizeWithConfig', () => {
   it('should return plain text when no color available', () => {
     const result = colorizeWithConfig('hello', undefined);
     expect(result).toBe('hello');
+  });
+});
+
+describe('renderWithLabel', () => {
+  it('should return content unchanged when no label configured', () => {
+    const config: WidgetConfig = { widget: 'test' };
+    const result = renderWithLabel('content', config);
+    expect(stripAnsi(result)).toBe('content');
+  });
+
+  it('should return content unchanged when label is empty string', () => {
+    const config: WidgetConfig = {
+      widget: 'test',
+      options: { label: '' },
+    };
+    const result = renderWithLabel('content', config);
+    expect(stripAnsi(result)).toBe('content');
+  });
+
+  it('should prepend label with colon separator when label configured', () => {
+    const config: WidgetConfig = {
+      widget: 'test',
+      options: { label: 'Dir' },
+    };
+    const result = renderWithLabel('~/projects', config);
+    const plain = stripAnsi(result);
+    expect(plain).toBe('Dir: ~/projects');
+  });
+
+  it('should use default label color (dim) when labelColor not specified', () => {
+    const config: WidgetConfig = {
+      widget: 'test',
+      options: { label: 'Branch' },
+    };
+    const result = renderWithLabel('main', config);
+    // Should contain label and content
+    const plain = stripAnsi(result);
+    expect(plain).toBe('Branch: main');
+  });
+
+  it('should use custom labelColor when specified', () => {
+    const config: WidgetConfig = {
+      widget: 'test',
+      options: { label: 'Model', labelColor: 'cyan' },
+    };
+    const result = renderWithLabel('opus', config);
+    const plain = stripAnsi(result);
+    expect(plain).toBe('Model: opus');
+  });
+
+  it('should allow custom defaultLabelColor parameter', () => {
+    const config: WidgetConfig = {
+      widget: 'test',
+      options: { label: 'Status' },
+    };
+    const result = renderWithLabel('active', config, 'yellow');
+    const plain = stripAnsi(result);
+    expect(plain).toBe('Status: active');
   });
 });

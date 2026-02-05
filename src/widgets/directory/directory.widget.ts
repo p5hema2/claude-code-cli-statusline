@@ -10,7 +10,7 @@
 import { homedir } from 'node:os';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema } from '../../types/index.js';
-import { getOption, colorizeWithConfig } from '../shared/index.js';
+import { getOption, colorizeWithConfig, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Directory widget schema - defines all GUI metadata */
 export const DirectorySchema: WidgetSchema = {
@@ -33,6 +33,20 @@ export const DirectorySchema: WidgetSchema = {
           { value: 'project-only', label: 'Project Name Only' },
         ],
         default: 'shortened',
+      },
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Dir"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
       },
     ],
   },
@@ -129,7 +143,11 @@ export const DirectoryWidget: Widget = {
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
     const dir = ctx.status.current_dir;
-    if (!dir) return null;
+
+    // Handle null content with naVisibility option
+    if (!dir) {
+      return renderWidgetWithLabel(null, config, 'blue');
+    }
 
     const options: DirectoryOptions = {
       format: getOption<DirectoryFormat>(config, 'format'),
@@ -137,6 +155,7 @@ export const DirectoryWidget: Widget = {
     };
 
     const formatted = formatPath(dir, options);
-    return colorizeWithConfig(formatted, config, undefined, 'blue');
+    const colored = colorizeWithConfig(formatted, config, undefined, 'blue');
+    return renderWidgetWithLabel(colored, config, 'blue');
   },
 };

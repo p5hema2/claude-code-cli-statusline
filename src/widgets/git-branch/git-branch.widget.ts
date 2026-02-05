@@ -13,7 +13,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { getGitInfo, colorize, type GitInfo } from '../../utils/index.js';
-import { getOption } from '../shared/index.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Git branch widget schema - defines all GUI metadata */
 export const GitBranchSchema: WidgetSchema = {
@@ -97,6 +97,22 @@ export const GitBranchSchema: WidgetSchema = {
       },
       { key: 'behindColor', type: 'color', label: 'Behind Color', default: 'red' },
       { key: 'showBehind', type: 'checkbox', label: 'Show Behind', default: true },
+
+      // Label options
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Branch"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
     ],
   },
   previewStates: [
@@ -204,11 +220,15 @@ export const GitBranchWidget: Widget = {
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
     const dir = ctx.status.current_dir;
-    if (!dir) return null;
+    if (!dir) {
+      return renderWidgetWithLabel(null, config, 'white');
+    }
 
     // Use mock git info if available (preview mode), otherwise get real git info
     const gitInfo = ctx.mockGitInfo !== undefined ? ctx.mockGitInfo : getGitInfo(dir);
-    if (!gitInfo) return null;
+    if (!gitInfo) {
+      return renderWidgetWithLabel(null, config, 'white');
+    }
 
     // Get symbols with defaults
     const symbols: Required<GitBranchSymbols> = {
@@ -244,6 +264,7 @@ export const GitBranchWidget: Widget = {
     const branchColor = getOption<ColorValue>(config, 'branchColor') ?? DEFAULT_BRANCH_COLOR;
     const branchStr = colorize(branch, branchColor);
 
-    return branchStr + indicatorStr;
+    const content = branchStr + indicatorStr;
+    return renderWidgetWithLabel(content, config, 'white');
   },
 };

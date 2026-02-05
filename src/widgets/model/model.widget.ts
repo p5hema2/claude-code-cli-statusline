@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor } from '../shared/index.js';
+import { getColor, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Model widget schema - defines all GUI metadata */
 export const ModelSchema: WidgetSchema = {
@@ -26,6 +26,22 @@ export const ModelSchema: WidgetSchema = {
         { key: 'haiku', label: 'Haiku Model', default: 'magenta' },
       ],
     },
+    custom: [
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Model"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
+    ],
   },
   previewStates: [
     { id: 'sonnet', label: 'Sonnet', description: 'Claude Sonnet model' },
@@ -99,10 +115,14 @@ export const ModelWidget: Widget = {
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
     const model = ctx.status.model;
-    if (!model) return null;
+    if (!model) {
+      return renderWidgetWithLabel(null, config, 'magenta');
+    }
 
     const name = model.display_name || model.id;
-    if (!name) return null;
+    if (!name) {
+      return renderWidgetWithLabel(null, config, 'magenta');
+    }
 
     const shortened = shortenModelName(name);
     const family = detectModelFamily(name);
@@ -112,6 +132,7 @@ export const ModelWidget: Widget = {
       ? (getColor(config, family) ?? 'magenta')
       : (config?.color ?? 'magenta');
 
-    return colorize(shortened, color);
+    const content = colorize(shortened, color);
+    return renderWidgetWithLabel(content, config, 'magenta');
   },
 };

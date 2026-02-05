@@ -9,7 +9,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getOption } from '../shared/index.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Usage age widget schema - defines all GUI metadata */
 export const UsageAgeSchema: WidgetSchema = {
@@ -23,6 +23,20 @@ export const UsageAgeSchema: WidgetSchema = {
     custom: [
       { key: 'iconColor', type: 'color', label: 'Icon Color', default: 'dim' },
       { key: 'timeColor', type: 'color', label: 'Time Color', default: 'gray' },
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "Queried"' },
+      { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
+      {
+        key: 'naVisibility',
+        type: 'select',
+        label: 'Visibility on N/A',
+        options: [
+          { value: 'hide', label: 'Hide widget' },
+          { value: 'na', label: 'Show "N/A"' },
+          { value: 'dash', label: 'Show "-"' },
+          { value: 'empty', label: 'Show empty' },
+        ],
+        default: 'hide',
+      },
     ],
   },
   previewStates: [
@@ -50,7 +64,9 @@ export const UsageAgeWidget: Widget = {
   name: 'usageAge',
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
-    if (!ctx.usage?.timestamp) return null;
+    if (!ctx.usage?.timestamp) {
+      return renderWidgetWithLabel(null, config, 'gray');
+    }
 
     const timeStr = formatQueryTime(ctx.usage.timestamp);
 
@@ -62,6 +78,7 @@ export const UsageAgeWidget: Widget = {
     const icon = colorize('⟳ ', iconColor);
     const time = colorize(timeStr, timeColor);
 
-    return icon + time;
+    const content = icon + time;
+    return renderWidgetWithLabel(content, config, 'gray');
   },
 };
