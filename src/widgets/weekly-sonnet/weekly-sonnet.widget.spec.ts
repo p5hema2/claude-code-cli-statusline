@@ -5,8 +5,9 @@
 import { describe, it, expect } from 'vitest';
 
 import type { RenderContext } from '../../types/index.js';
+import { stripAnsi } from '../../utils/index.js';
 
-import { WeeklySonnetWidget } from './weekly-sonnet.widget.js';
+import { WeeklySonnetWidget} from './weekly-sonnet.widget.js';
 
 describe('WeeklySonnetWidget', () => {
   it('should have correct name', () => {
@@ -53,5 +54,51 @@ describe('WeeklySonnetWidget', () => {
 
     const result = WeeklySonnetWidget.render(ctx);
     expect(result).toBeNull();
+  });
+
+  // Label tests
+  it('should render with label', () => {
+    const ctx: RenderContext = {
+      status: {
+        current_dir: '/test',
+        model: undefined,
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
+      },
+      usage: {
+        timestamp: Date.now(),
+        current_session: { percent_used: 25, reset_time: '2024-01-01T12:00:00Z' },
+        weekly_all: { percent_used: 10, reset_time: '2024-01-07T00:00:00Z' },
+        weekly_sonnet: { percent_used: 16, reset_time: '2024-01-07T00:00:00Z' },
+      },
+      terminalWidth: 80,
+      settings: {},
+    };
+
+    const config = { widget: 'weeklySonnet', options: { label: 'Sonnet' } };
+    const result = WeeklySonnetWidget.render(ctx, config);
+    const plain = stripAnsi(result!);
+    expect(plain).toContain('Sonnet:');
+  });
+
+  it('should show N/A when usage null and naVisibility=na', () => {
+    const ctx: RenderContext = {
+      status: {
+        current_dir: '/test',
+        model: undefined,
+        vim_mode: undefined,
+        context_window: undefined,
+        output_style: undefined,
+      },
+      usage: null,
+      terminalWidth: 80,
+      settings: {},
+    };
+
+    const config = { widget: 'weeklySonnet', options: { naVisibility: 'na' } };
+    const result = WeeklySonnetWidget.render(ctx, config);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('N/A');
   });
 });
