@@ -541,6 +541,10 @@ describe('setupFileWatcher', () => {
     vi.useFakeTimers();
     setupFileWatcher();
 
+    // Should log watcher startup message
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('👀 Watching for changes:'));
+    consoleLogSpy.mockClear();
+
     // Simulate HTML file change
     watchCallback('change', 'index.html');
 
@@ -549,7 +553,7 @@ describe('setupFileWatcher', () => {
     vi.useRealTimers();
 
     // Should log the file change
-    expect(consoleLogSpy).toHaveBeenCalled();
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('↻ File changed: index.html'));
 
     consoleLogSpy.mockRestore();
   });
@@ -571,6 +575,10 @@ describe('setupFileWatcher', () => {
     vi.useFakeTimers();
     setupFileWatcher();
 
+    // Should log watcher startup message
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('👀 Watching for changes:'));
+    consoleLogSpy.mockClear();
+
     // Simulate txt file change (ignored)
     watchCallback('change', 'test.txt');
 
@@ -578,7 +586,7 @@ describe('setupFileWatcher', () => {
     await vi.advanceTimersByTimeAsync(150);
     vi.useRealTimers();
 
-    // Should NOT log anything (file type ignored)
+    // Should NOT log file change (file type ignored)
     expect(consoleLogSpy).not.toHaveBeenCalled();
 
     consoleLogSpy.mockRestore();

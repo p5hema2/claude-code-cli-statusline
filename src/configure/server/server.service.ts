@@ -122,7 +122,12 @@ export function serveStaticFile(
     const ext = extname(filePath);
     const mimeType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    res.writeHead(200, { 'Content-Type': mimeType });
+    res.writeHead(200, {
+      'Content-Type': mimeType,
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
     res.end(content);
     return true;
   } catch {
@@ -225,6 +230,8 @@ export function setupFileWatcher(): void {
   // Only watch if GUI directory exists (dev mode)
   if (!existsSync(guiDir)) return;
 
+  console.log(`  👀 Watching for changes: ${guiDir}`);
+
   // Debounce to avoid multiple reloads
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -268,9 +275,7 @@ export async function startConfigServer(options: ConfigServerOptions = {}): Prom
       const url = `http://localhost:${port}`;
       console.log(`\n  🎨 Claude Statusline Configuration\n`);
       console.log(`  Server running at: ${url}`);
-      if (!shouldOpenBrowser) {
-        console.log(`  Live reload enabled`);
-      }
+      console.log(`  Live reload enabled`);
       console.log(`  Press Ctrl+C to stop\n`);
 
       if (shouldOpenBrowser) {

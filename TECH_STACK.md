@@ -144,7 +144,7 @@ feature:cli ──────> core:widgets ──────> domain:types
 **Verification:**
 ```bash
 npm run lint:sheriff  # Check Sheriff rules
-npm run lint:all      # Check ESLint + Sheriff
+npm run lint      # Check ESLint + Sheriff
 ```
 
 ## GUI Architecture
@@ -167,6 +167,19 @@ npm run lint:all      # Check ESLint + Sheriff
 - **Integration tests:** Vitest (server/API endpoints)
 - **E2E tests:** Playwright (browser-based GUI testing)
 - **Coverage target:** >80% overall
+
+**Test Commands:**
+```bash
+npm test                # Run all tests (vitest + playwright)
+npm run test:vitest     # Run unit tests only
+npm run test:e2e        # Run E2E tests (exits cleanly, no auto-open)
+npm run test:e2e:report # View last E2E HTML report
+```
+
+**Playwright Configuration:**
+- Reporter: `html` with `{ open: 'never' }` to prevent auto-opening and hanging
+- Tests exit cleanly without serving report forever
+- HTML report can be viewed later with `npm run test:e2e:report`
 
 **Test Patterns:**
 ```typescript
@@ -211,10 +224,18 @@ npm run build:css          # Build Tailwind CSS
 ```bash
 npm run dev                # Watch mode for CLI
 npm run dev:css            # Watch Tailwind CSS (auto-rebuild)
-npm run dev:configure      # Watch mode for config GUI (dev:css + server)
+npm run dev:configure      # Watch mode for config GUI (--raw for live console output)
 ```
 
-**Hot Reload:**
-- `dev:css` watches `src/configure/gui/styles/tailwind.css` and rebuilds on changes
-- `dev:configure` runs concurrent processes for CSS + server
-- SSE pushes CSS updates to browser without full reload
+**Live Development Features:**
+- `dev:configure` uses `concurrently --raw` to show real-time console output from both processes
+- Server outputs URL and file watcher status on startup
+- Cache-Control headers (`no-cache, no-store, must-revalidate`) prevent browser caching
+- SSE pushes reload events to browser when files change
+- File watcher monitors `.html`, `.js`, `.css` files with 100ms debounce
+
+**Hot Reload Flow:**
+1. `dev:css` watches `src/configure/gui/styles/tailwind.css` and rebuilds on changes
+2. Server file watcher detects file changes
+3. Server notifies browser via SSE (`/__live-reload` endpoint)
+4. Browser reloads automatically (no manual refresh needed)
