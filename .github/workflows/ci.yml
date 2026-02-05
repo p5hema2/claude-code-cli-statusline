@@ -35,11 +35,11 @@ jobs:
       - name: Test vitest
         run: npm run test:vitest
 
-      - name: Test playwright
-        run: npm run test:e2e
-
       - name: Build
         run: npm run build
+
+      - name: Test playwright
+        run: npm run test:e2e
 
   # Summary job for branch protection
   ci:
