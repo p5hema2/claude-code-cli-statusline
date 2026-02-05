@@ -504,14 +504,27 @@ describe('setupFileWatcher', () => {
 
   it('should not setup watcher if GUI dir does not exist', () => {
     vi.mocked(existsSync).mockReturnValue(false);
+    delete process.env.CI;
 
     setupFileWatcher();
 
     expect(watch).not.toHaveBeenCalled();
   });
 
+  it('should not setup watcher in CI environments', () => {
+    vi.mocked(existsSync).mockReturnValue(true);
+    process.env.CI = 'true';
+
+    setupFileWatcher();
+
+    expect(watch).not.toHaveBeenCalled();
+
+    delete process.env.CI;
+  });
+
   it('should setup watcher if GUI dir exists', () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    delete process.env.CI;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(watch).mockReturnValue(undefined as any);
 
@@ -526,6 +539,7 @@ describe('setupFileWatcher', () => {
 
   it('should watch for HTML/JS/CSS file changes', async () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    delete process.env.CI;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
@@ -560,6 +574,7 @@ describe('setupFileWatcher', () => {
 
   it('should ignore non-relevant file changes', async () => {
     vi.mocked(existsSync).mockReturnValue(true);
+    delete process.env.CI;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let watchCallback: any;
