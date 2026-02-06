@@ -17,4 +17,8 @@ export interface GitInfo {
   ahead: number;
   /** Number of commits behind remote */
   behind: number;
+  /** Diff statistics (insertions/deletions) for git-changes widget */
+  diffStats?: { insertions: number; deletions: number };
+  /** Worktree name for git-worktree widget (null = main working directory) */
+  worktreeName?: string | null;
 }
