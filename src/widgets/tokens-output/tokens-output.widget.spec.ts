@@ -59,4 +59,21 @@ describe('TokensOutputWidget', () => {
     const plain = stripAnsi(result!);
     expect(plain).toBe('N/A');
   });
+
+  // Transcript-hydrated scenarios
+  it('should render transcript-hydrated large token count', () => {
+    const ctx = makeCtx({ status: { token_metrics: { output_tokens: 1_750_000 } } });
+
+    const result = TokensOutputWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('1.8M');
+  });
+
+  it('should render zero output tokens', () => {
+    const ctx = makeCtx({ status: { token_metrics: { output_tokens: 0 } } });
+
+    const result = TokensOutputWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('0');
+  });
 });
