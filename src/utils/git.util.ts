@@ -144,6 +144,77 @@ export function getGitInfo(dir: string): GitInfo | null {
 }
 
 /**
+ * Parse insertion count from git diff --shortstat output
+ */
+function parseInsertions(shortstat: string): number {
+  const match = shortstat.match(/(\d+) insertion/);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
+/**
+ * Parse deletion count from git diff --shortstat output
+ */
+function parseDeletions(shortstat: string): number {
+  const match = shortstat.match(/(\d+) deletion/);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
+/**
+ * Get combined diff statistics (staged + unstaged)
+ *
+ * @param dir - Directory to check
+ * @returns Object with insertion and deletion counts
+ */
+export function getDiffStats(dir: string): { insertions: number; deletions: number } {
+  try {
+    const unstaged = execSync('git diff --shortstat', {
+      cwd: dir,
+      stdio: ['pipe', 'pipe', 'pipe'],
+      encoding: 'utf-8',
+    }).trim();
+
+    const staged = execSync('git diff --cached --shortstat', {
+      cwd: dir,
+      stdio: ['pipe', 'pipe', 'pipe'],
+      encoding: 'utf-8',
+    }).trim();
+
+    return {
+      insertions: parseInsertions(unstaged) + parseInsertions(staged),
+      deletions: parseDeletions(unstaged) + parseDeletions(staged),
+    };
+  } catch {
+    return { insertions: 0, deletions: 0 };
+  }
+}
+
+/**
+ * Get current git worktree name
+ *
+ * @param dir - Directory to check
+ * @returns Worktree name, or null if in main working directory or not a repo
+ */
+export function getWorktreeName(dir: string): string | null {
+  try {
+    const gitDir = execSync('git rev-parse --git-dir', {
+      cwd: dir,
+      stdio: ['pipe', 'pipe', 'pipe'],
+      encoding: 'utf-8',
+    }).trim();
+
+    // Worktrees: gitDir = '/path/to/main/.git/worktrees/<worktree-name>'
+    if (gitDir.includes('.git/worktrees/')) {
+      const parts = gitDir.split('/');
+      return parts[parts.length - 1];
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Format git status indicators
  *
  * @param info - Git info object

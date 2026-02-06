@@ -27,6 +27,8 @@ export {
   getGitStatus,
   getAheadBehind,
   getGitInfo,
+  getDiffStats,
+  getWorktreeName,
   formatGitIndicators,
 } from './git.util.js';
 export type { GitInfo } from './git.util.js';

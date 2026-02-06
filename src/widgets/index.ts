@@ -15,6 +15,7 @@ export { mockCachedEntry, mockTimestampAt } from './mock/mock.helper.js';
 // Widget exports
 export { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
 export { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
+export { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.widget.js';
 export { ModelWidget, ModelSchema } from './model/model.widget.js';
 export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
 export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
@@ -31,6 +32,7 @@ import type { WidgetSchema, Widget } from '../types/index.js';
 import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
 import { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
 import { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
+import { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.widget.js';
 import { ModelWidget, ModelSchema } from './model/model.widget.js';
 import { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
 import { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
@@ -58,6 +60,7 @@ export interface WidgetEntry {
 export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   directory: { widget: DirectoryWidget, schema: DirectorySchema },
   gitBranch: { widget: GitBranchWidget, schema: GitBranchSchema },
+  gitChanges: { widget: GitChangesWidget, schema: GitChangesSchema },
   model: { widget: ModelWidget, schema: ModelSchema },
   contextUsage: { widget: ContextUsageWidget, schema: ContextUsageSchema },
   sessionUsage: { widget: SessionUsageWidget, schema: SessionUsageSchema },
