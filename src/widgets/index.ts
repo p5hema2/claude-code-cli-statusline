@@ -26,6 +26,9 @@ export { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-s
 export { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
 export { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
 export { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
+export { TokensInputWidget, TokensInputSchema } from './tokens-input/tokens-input.widget.js';
+export { TokensOutputWidget, TokensOutputSchema } from './tokens-output/tokens-output.widget.js';
+export { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-cached.widget.js';
 export { TextWidget, TextSchema } from './text/text.widget.js';
 export { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
 
@@ -42,6 +45,9 @@ import { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.j
 import { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
 import { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 import { TextWidget, TextSchema } from './text/text.widget.js';
+import { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-cached.widget.js';
+import { TokensInputWidget, TokensInputSchema } from './tokens-input/tokens-input.widget.js';
+import { TokensOutputWidget, TokensOutputSchema } from './tokens-output/tokens-output.widget.js';
 import { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
 import { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
 import { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
@@ -75,6 +81,9 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   usageAge: { widget: UsageAgeWidget, schema: UsageAgeSchema },
   outputStyle: { widget: OutputStyleWidget, schema: OutputStyleSchema },
   vimMode: { widget: VimModeWidget, schema: VimModeSchema },
+  tokensInput: { widget: TokensInputWidget, schema: TokensInputSchema },
+  tokensOutput: { widget: TokensOutputWidget, schema: TokensOutputSchema },
+  tokensCached: { widget: TokensCachedWidget, schema: TokensCachedSchema },
   text: { widget: TextWidget, schema: TextSchema },
   separator: { widget: SeparatorWidget, schema: SeparatorSchema },
 };
