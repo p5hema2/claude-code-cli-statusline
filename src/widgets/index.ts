@@ -20,6 +20,7 @@ export { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktre
 export { ModelWidget, ModelSchema } from './model/model.widget.js';
 export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
 export { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
+export { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
 export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 export { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
 export { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
@@ -44,6 +45,7 @@ import { ModelWidget, ModelSchema } from './model/model.widget.js';
 import { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
 import { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
 import { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
+import { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
 import { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 import { TextWidget, TextSchema } from './text/text.widget.js';
 import { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-cached.widget.js';
@@ -77,6 +79,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   model: { widget: ModelWidget, schema: ModelSchema },
   contextUsage: { widget: ContextUsageWidget, schema: ContextUsageSchema },
   sessionClock: { widget: SessionClockWidget, schema: SessionClockSchema },
+  sessionId: { widget: SessionIdWidget, schema: SessionIdSchema },
   sessionUsage: { widget: SessionUsageWidget, schema: SessionUsageSchema },
   weeklyUsage: { widget: WeeklyUsageWidget, schema: WeeklyUsageSchema },
   weeklySonnet: { widget: WeeklySonnetWidget, schema: WeeklySonnetSchema },
