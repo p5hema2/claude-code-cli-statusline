@@ -23,20 +23,9 @@ export const sheriffConfig: SheriffConfig = {
     'src/defaults': 'domain:defaults',
 
     // Core layer - business logic
+    // Widget subdirectories have no barrel files (index.ts) — all files
+    // are directly importable within the core:widgets boundary.
     'src/widgets': 'core:widgets',
-    'src/widgets/<shared>': 'core:widgets',
-    'src/widgets/<directory>': 'core:widgets',
-    'src/widgets/<git-branch>': 'core:widgets',
-    'src/widgets/<model>': 'core:widgets',
-    'src/widgets/<context-usage>': 'core:widgets',
-    'src/widgets/<session-usage>': 'core:widgets',
-    'src/widgets/<weekly-usage>': 'core:widgets',
-    'src/widgets/<weekly-sonnet>': 'core:widgets',
-    'src/widgets/<usage-age>': 'core:widgets',
-    'src/widgets/<output-style>': 'core:widgets',
-    'src/widgets/<vim-mode>': 'core:widgets',
-    'src/widgets/<text>': 'core:widgets',
-    'src/widgets/<separator>': 'core:widgets',
     'src/utils': 'core:utils',
 
     // Feature layer - application features

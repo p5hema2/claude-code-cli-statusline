@@ -78,18 +78,6 @@ export const TRASH_ICON_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="curr
 // Default Values
 // ============================================================================
 
-export const DEFAULT_WIDGET_STATES = {
-  directory: 'short',
-  gitBranch: 'clean',
-  model: 'sonnet',
-  outputStyle: 'concise',
-  contextUsage: 'low',
-  sessionUsage: 'low',
-  weeklyUsage: 'low',
-  weeklySonnet: 'low',
-  vimMode: 'normal',
-};
-
 // Default rows with WidgetConfig objects
 export const DEFAULT_ROWS = [
   [

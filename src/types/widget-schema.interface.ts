@@ -13,9 +13,28 @@
  */
 
 import type { ColorValue } from './colors.type.js';
+import type { GitInfo } from './git.interface.js';
+import type { StatusJSON } from './status-json.schema.js';
+import type { UsageCache } from './usage-data.interface.js';
 
 /** Category IDs - widgets group themselves into these */
 export type WidgetCategoryId = 'location' | 'model' | 'usage' | 'editor';
+
+/**
+ * Mock data fragments that a preview state contributes to the preview context.
+ *
+ * Each widget's preview state can supply partial data for status, usage,
+ * and/or gitInfo. The preview engine merges fragments from all active
+ * widget states into a complete RenderContext.
+ */
+export interface WidgetMockData {
+  /** Partial StatusJSON fields this state sets (e.g., current_dir, model) */
+  status?: Partial<StatusJSON>;
+  /** Partial UsageCache fields, or null to indicate no OAuth */
+  usage?: Partial<UsageCache> | null;
+  /** Git repository info, or null for "not a repo" */
+  gitInfo?: GitInfo | null;
+}
 
 /** Preview state for the config GUI (simulates different widget states) */
 export interface PreviewState {
@@ -25,6 +44,8 @@ export interface PreviewState {
   label: string;
   /** Description of what this state represents */
   description: string;
+  /** Mock data this state contributes to the preview context */
+  mockData?: WidgetMockData;
 }
 
 /** Color option with state-based semantics (e.g., "clean branch" = green) */

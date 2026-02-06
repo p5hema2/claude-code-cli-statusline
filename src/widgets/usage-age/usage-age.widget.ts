@@ -9,7 +9,8 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/index.js';
+import { mockTimestampAt } from '../mock/mock.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Usage age widget schema - defines all GUI metadata */
 export const UsageAgeSchema: WidgetSchema = {
@@ -40,10 +41,22 @@ export const UsageAgeSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'morning', label: 'Morning', description: 'Shows @ 09:30' },
-    { id: 'afternoon', label: 'Afternoon', description: 'Shows @ 14:15' },
-    { id: 'evening', label: 'Evening', description: 'Shows @ 19:45' },
-    { id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication' },
+    {
+      id: 'afternoon', label: 'Afternoon', description: 'Shows @ 14:15',
+      mockData: { usage: { timestamp: mockTimestampAt(14, 15) } },
+    },
+    {
+      id: 'morning', label: 'Morning', description: 'Shows @ 09:30',
+      mockData: { usage: { timestamp: mockTimestampAt(9, 30) } },
+    },
+    {
+      id: 'evening', label: 'Evening', description: 'Shows @ 19:45',
+      mockData: { usage: { timestamp: mockTimestampAt(19, 45) } },
+    },
+    {
+      id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication',
+      mockData: { usage: null },
+    },
   ],
 };
 

@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor, renderWidgetWithLabel } from '../shared/index.js';
+import { getColor, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Output style widget schema - defines all GUI metadata */
 export const OutputStyleSchema: WidgetSchema = {
@@ -44,9 +44,18 @@ export const OutputStyleSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'concise', label: 'Concise', description: 'Concise output style' },
-    { id: 'verbose', label: 'Verbose', description: 'Verbose output style' },
-    { id: 'explanatory', label: 'Explanatory', description: 'Explanatory output style' },
+    {
+      id: 'concise', label: 'Concise', description: 'Concise output style',
+      mockData: { status: { output_style: { name: 'concise' } } },
+    },
+    {
+      id: 'verbose', label: 'Verbose', description: 'Verbose output style',
+      mockData: { status: { output_style: { name: 'verbose' } } },
+    },
+    {
+      id: 'explanatory', label: 'Explanatory', description: 'Explanatory output style',
+      mockData: { status: { output_style: { name: 'explanatory' } } },
+    },
   ],
 };
 

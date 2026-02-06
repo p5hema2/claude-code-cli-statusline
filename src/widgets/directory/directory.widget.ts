@@ -10,7 +10,7 @@
 import { homedir } from 'node:os';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema } from '../../types/index.js';
-import { getOption, colorizeWithConfig, renderWidgetWithLabel } from '../shared/index.js';
+import { getOption, colorizeWithConfig, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Directory widget schema - defines all GUI metadata */
 export const DirectorySchema: WidgetSchema = {
@@ -51,8 +51,14 @@ export const DirectorySchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'short', label: 'Short Path', description: 'Show ~/project' },
-    { id: 'long', label: 'Long Path', description: 'Show full path' },
+    {
+      id: 'short', label: 'Short Path', description: 'Show ~/project',
+      mockData: { status: { current_dir: '~/my-project' } },
+    },
+    {
+      id: 'long', label: 'Long Path', description: 'Show full path',
+      mockData: { status: { current_dir: '/home/user/projects/my-awesome-app/src/components' } },
+    },
   ],
 };
 

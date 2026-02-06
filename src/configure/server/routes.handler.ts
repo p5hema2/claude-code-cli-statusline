@@ -24,11 +24,9 @@ import { loadSettings, saveSettings , renderStatusLineRows } from '../../utils/i
 import { getAllSchemas } from '../../widgets/index.js';
 import { ansiToHtml, TERMINAL_PALETTES } from '../preview/ansi-to-html.util.js';
 import {
-  generateMockStatus,
-  generateMockUsage,
-  getMockGitInfo,
-  DEFAULT_WIDGET_STATES,
-} from '../preview/mock-data.fixture.js';
+  generateMockContext,
+  getDefaultWidgetStates,
+} from '../preview/mock-data.util.js';
 import { TERMINAL_THEMES } from '../preview/terminal-themes.const.js';
 
 /**
@@ -176,13 +174,12 @@ export async function handlePostPreview(
     const body = await readBody<PreviewRequest>(req);
     const { settings, terminalWidth, widgetStates, terminalPalette } = body;
 
-    // Merge default states with provided overrides
-    const states = { ...DEFAULT_WIDGET_STATES, ...widgetStates };
+    // Derive defaults from schemas, merge with provided overrides
+    const schemas = getAllSchemas();
+    const states = { ...getDefaultWidgetStates(schemas), ...widgetStates };
 
-    // Generate mock data based on states
-    const status = generateMockStatus(states);
-    const usage = generateMockUsage(states);
-    const mockGitInfo = getMockGitInfo(states);
+    // Generate mock data from schema-defined mockData
+    const { status, usage, gitInfo: mockGitInfo } = generateMockContext(states, schemas);
 
     // Render the status line rows
     const ansiRows = renderStatusLineRows({

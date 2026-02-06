@@ -19,16 +19,25 @@ import {
 
 // Mock utilities
 vi.mock('../../utils/config.util.js');
-vi.mock('../../widgets/index.js', () => ({
-  getAllSchemas: () => [
-    {
-      id: 'directory',
-      meta: { displayName: 'Directory', description: 'Current directory', category: 'location' },
-      options: { content: { color: 'blue' } },
-      previewStates: [],
-    },
-  ],
-}));
+vi.mock('../../widgets/index.js', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../widgets/index.js')>();
+  return {
+    ...actual,
+    getAllSchemas: () => [
+      {
+        id: 'directory',
+        meta: { displayName: 'Directory', description: 'Current directory', category: 'location' },
+        options: { content: { color: 'blue' } },
+        previewStates: [
+          {
+            id: 'short', label: 'Short Path', description: 'Show ~/project',
+            mockData: { status: { current_dir: '~/my-project' } },
+          },
+        ],
+      },
+    ],
+  };
+});
 
 describe('API Route Handlers', () => {
   let mockReq: Partial<IncomingMessage>;

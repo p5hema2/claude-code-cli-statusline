@@ -10,7 +10,7 @@
  * - No global widget configuration - each instance in layout has its own config
  */
 
-import { state, DEFAULT_WIDGET_STATES, loadStateFromLocalStorage, toggleCategoryCollapse } from './modules/state.js';
+import { state, loadStateFromLocalStorage, toggleCategoryCollapse } from './modules/state.js';
 import { apiGet } from './modules/api.js';
 import { migrateSettings } from './modules/migration.js';
 import { renderWidgetPalette } from './modules/components.js';
@@ -47,7 +47,14 @@ async function init() {
     state.themes = widgetData.themes;
     state.terminalPalettes = widgetData.terminalPalettes || [];
     state.widgetSchemas = widgetData.widgetSchemas || [];
-    state.widgetStates = { ...DEFAULT_WIDGET_STATES };
+
+    // Derive default widget states from schemas (first previewState of each)
+    state.widgetStates = {};
+    for (const schema of state.widgetSchemas) {
+      if (schema.previewStates?.length > 0) {
+        state.widgetStates[schema.id] = schema.previewStates[0].id;
+      }
+    }
 
     populateTerminalDropdown();
 

@@ -26,6 +26,7 @@ export type {
 export type { RenderContext, Widget } from './widget.interface.js';
 export type {
   WidgetSchema,
+  WidgetMockData,
   ConfigOption,
   TextConfigOption,
   SelectConfigOption,
