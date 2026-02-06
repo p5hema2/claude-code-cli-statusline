@@ -5,8 +5,16 @@
  * It's dynamically imported by index.ts after FORCE_COLOR is set.
  */
 
+import type { StatusJSON } from './types/index.js';
 import { StatusJSONSchema } from './types/index.js';
-import { loadUsageCache, waitForPendingRefresh, loadSettings, renderStatusLine } from './utils/index.js';
+import {
+  loadUsageCache,
+  waitForPendingRefresh,
+  loadSettings,
+  renderStatusLine,
+  parseTranscriptMetrics,
+  formatDuration,
+} from './utils/index.js';
 
 /**
  * Check for --configure flag and start configuration server
@@ -58,6 +66,49 @@ async function readStdin(): Promise<string> {
 }
 
 /**
+ * Hydrate status data from transcript file when fields are missing
+ *
+ * Claude Code sends a transcript_path pointing to the session JSONL file.
+ * When token_metrics or session_duration are not provided directly, we
+ * parse the transcript to compute them. Upstream values take precedence.
+ */
+function hydrateFromTranscript(status: StatusJSON): void {
+  const transcriptPath = status.transcript_path;
+  if (!transcriptPath) return;
+
+  // Only parse if we're missing data that the transcript can provide
+  const needsTokens = !status.token_metrics?.input_tokens;
+  const needsDuration = !status.session_duration;
+  const needsTurnCount = status.turn_count === undefined;
+
+  if (!needsTokens && !needsDuration && !needsTurnCount) return;
+
+  const metrics = parseTranscriptMetrics(transcriptPath);
+  if (!metrics) return;
+
+  // Hydrate token_metrics (prefer upstream values)
+  if (needsTokens) {
+    status.token_metrics = {
+      input_tokens: status.token_metrics?.input_tokens ?? metrics.inputTokens,
+      output_tokens: status.token_metrics?.output_tokens ?? metrics.outputTokens,
+      cached_tokens: status.token_metrics?.cached_tokens ?? metrics.cachedTokens,
+      cache_read_tokens: status.token_metrics?.cache_read_tokens ?? metrics.cacheReadTokens,
+      total_tokens: status.token_metrics?.total_tokens ?? metrics.totalTokens,
+    };
+  }
+
+  // Hydrate session_duration
+  if (needsDuration && metrics.sessionDurationMs > 0) {
+    status.session_duration = formatDuration(metrics.sessionDurationMs);
+  }
+
+  // Hydrate turn_count
+  if (needsTurnCount && metrics.turnCount > 0) {
+    status.turn_count = metrics.turnCount;
+  }
+}
+
+/**
  * Main entry point
  */
 export async function main(): Promise<void> {
@@ -102,6 +153,9 @@ export async function main(): Promise<void> {
     if (!result.data.current_dir) {
       result.data.current_dir = process.cwd();
     }
+
+    // Hydrate missing fields from transcript file (if available)
+    hydrateFromTranscript(result.data);
 
     // Load settings and usage cache
     const settings = loadSettings();

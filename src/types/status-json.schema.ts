@@ -63,10 +63,39 @@ export const StatusJSONSchema = z
         input_tokens: z.number().optional(),
         /** Output tokens generated */
         output_tokens: z.number().optional(),
-        /** Cached tokens (prompt caching) */
+        /** Cached tokens (cache_creation + cache_read) */
         cached_tokens: z.number().optional(),
+        /** Cache read input tokens */
+        cache_read_tokens: z.number().optional(),
+        /** Total tokens (all categories summed) */
+        total_tokens: z.number().optional(),
       })
       .optional(),
+
+    /** Path to the session transcript JSONL file */
+    transcript_path: z.string().optional(),
+
+    /** Cost and duration metrics from Claude Code */
+    cost: z
+      .object({
+        /** Total session cost in USD */
+        total_cost_usd: z.number().optional(),
+        /** Total wall-clock duration in milliseconds */
+        total_duration_ms: z.number().optional(),
+        /** Total API call duration in milliseconds */
+        total_api_duration_ms: z.number().optional(),
+        /** Total lines of code added */
+        total_lines_added: z.number().optional(),
+        /** Total lines of code removed */
+        total_lines_removed: z.number().optional(),
+      })
+      .optional(),
+
+    /** Whether context usage exceeds 200K tokens */
+    exceeds_200k_tokens: z.boolean().optional(),
+
+    /** Number of conversation turns */
+    turn_count: z.number().optional(),
   })
   .passthrough();
 

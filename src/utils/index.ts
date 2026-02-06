@@ -44,4 +44,7 @@ export { renderStatusLine, renderStatusLineRows, renderWidget, getWidgetNames } 
 
 export { stripAnsi } from './ansi.util.js';
 
-export { formatTokens } from './format.util.js';
+export { formatTokens, formatDuration, formatCost } from './format.util.js';
+
+export { parseTranscriptMetrics } from './transcript.util.js';
+export type { TranscriptMetrics } from './transcript.util.js';
