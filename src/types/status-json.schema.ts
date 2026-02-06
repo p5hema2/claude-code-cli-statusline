@@ -46,6 +46,27 @@ export const StatusJSONSchema = z
         mode: z.string().optional(),
       })
       .optional(),
+
+    /** Session duration (e.g., "2hr 15m", "45m") */
+    session_duration: z.string().optional(),
+
+    /** Session identifier */
+    session_id: z.string().optional(),
+
+    /** CLI version string (e.g., "1.2.3") */
+    version: z.string().optional(),
+
+    /** Granular token usage metrics */
+    token_metrics: z
+      .object({
+        /** Input tokens consumed */
+        input_tokens: z.number().optional(),
+        /** Output tokens generated */
+        output_tokens: z.number().optional(),
+        /** Cached tokens (prompt caching) */
+        cached_tokens: z.number().optional(),
+      })
+      .optional(),
   })
   .passthrough();
 
