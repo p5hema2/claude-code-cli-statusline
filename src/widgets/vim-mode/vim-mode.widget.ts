@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor, renderWidgetWithLabel } from '../shared/index.js';
+import { getColor, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Vim mode widget schema - defines all GUI metadata */
 export const VimModeSchema: WidgetSchema = {
@@ -45,10 +45,22 @@ export const VimModeSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'normal', label: 'Normal', description: 'Vim normal mode' },
-    { id: 'insert', label: 'Insert', description: 'Vim insert mode' },
-    { id: 'visual', label: 'Visual', description: 'Vim visual mode' },
-    { id: 'disabled', label: 'Disabled', description: 'Vim mode not enabled' },
+    {
+      id: 'normal', label: 'Normal', description: 'Vim normal mode',
+      mockData: { status: { vim_mode: { mode: 'normal' } } },
+    },
+    {
+      id: 'insert', label: 'Insert', description: 'Vim insert mode',
+      mockData: { status: { vim_mode: { mode: 'insert' } } },
+    },
+    {
+      id: 'visual', label: 'Visual', description: 'Vim visual mode',
+      mockData: { status: { vim_mode: { mode: 'visual' } } },
+    },
+    {
+      id: 'disabled', label: 'Disabled', description: 'Vim mode not enabled',
+      mockData: { status: {} },
+    },
   ],
 };
 

@@ -9,7 +9,8 @@ import chalk from 'chalk';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/index.js';
+import { mockCachedEntry } from '../mock/mock.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Weekly Sonnet usage widget schema - defines all GUI metadata */
 export const WeeklySonnetSchema: WidgetSchema = {
@@ -49,10 +50,22 @@ export const WeeklySonnetSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'low', label: 'Low', description: 'Low Sonnet usage' },
-    { id: 'medium', label: 'Medium', description: 'Medium Sonnet usage' },
-    { id: 'high', label: 'High', description: 'High Sonnet usage' },
-    { id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication' },
+    {
+      id: 'low', label: 'Low', description: 'Low Sonnet usage',
+      mockData: { usage: { weekly_sonnet: mockCachedEntry(20) } },
+    },
+    {
+      id: 'medium', label: 'Medium', description: 'Medium Sonnet usage',
+      mockData: { usage: { weekly_sonnet: mockCachedEntry(50) } },
+    },
+    {
+      id: 'high', label: 'High', description: 'High Sonnet usage',
+      mockData: { usage: { weekly_sonnet: mockCachedEntry(80) } },
+    },
+    {
+      id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication',
+      mockData: { usage: null },
+    },
   ],
 };
 

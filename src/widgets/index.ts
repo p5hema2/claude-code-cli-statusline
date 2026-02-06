@@ -9,34 +9,37 @@
 export type { Widget, RenderContext } from '../types/index.js';
 export type { WidgetSchema } from '../types/index.js';
 
+// Mock helpers (re-exported for external consumers like configure/preview)
+export { mockCachedEntry, mockTimestampAt } from './mock/mock.helper.js';
+
 // Widget exports
-export { DirectoryWidget, DirectorySchema } from './directory/index.js';
-export { GitBranchWidget, GitBranchSchema } from './git-branch/index.js';
-export { ModelWidget, ModelSchema } from './model/index.js';
-export { ContextUsageWidget, ContextUsageSchema } from './context-usage/index.js';
-export { SessionUsageWidget, SessionUsageSchema } from './session-usage/index.js';
-export { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/index.js';
-export { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/index.js';
-export { UsageAgeWidget, UsageAgeSchema } from './usage-age/index.js';
-export { OutputStyleWidget, OutputStyleSchema } from './output-style/index.js';
-export { VimModeWidget, VimModeSchema } from './vim-mode/index.js';
-export { TextWidget, TextSchema } from './text/index.js';
-export { SeparatorWidget, SeparatorSchema } from './separator/index.js';
+export { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
+export { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
+export { ModelWidget, ModelSchema } from './model/model.widget.js';
+export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
+export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
+export { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
+export { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
+export { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
+export { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
+export { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
+export { TextWidget, TextSchema } from './text/text.widget.js';
+export { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
 
-import type { WidgetSchema , Widget } from '../types/index.js';
+import type { WidgetSchema, Widget } from '../types/index.js';
 
-import { ContextUsageWidget, ContextUsageSchema } from './context-usage/index.js';
-import { DirectoryWidget, DirectorySchema } from './directory/index.js';
-import { GitBranchWidget, GitBranchSchema } from './git-branch/index.js';
-import { ModelWidget, ModelSchema } from './model/index.js';
-import { OutputStyleWidget, OutputStyleSchema } from './output-style/index.js';
-import { SeparatorWidget, SeparatorSchema } from './separator/index.js';
-import { SessionUsageWidget, SessionUsageSchema } from './session-usage/index.js';
-import { TextWidget, TextSchema } from './text/index.js';
-import { UsageAgeWidget, UsageAgeSchema } from './usage-age/index.js';
-import { VimModeWidget, VimModeSchema } from './vim-mode/index.js';
-import { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/index.js';
-import { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/index.js';
+import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
+import { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
+import { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
+import { ModelWidget, ModelSchema } from './model/model.widget.js';
+import { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
+import { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
+import { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
+import { TextWidget, TextSchema } from './text/text.widget.js';
+import { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
+import { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
+import { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
+import { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
 
 /** Widget entry with both implementation and schema */
 export interface WidgetEntry {

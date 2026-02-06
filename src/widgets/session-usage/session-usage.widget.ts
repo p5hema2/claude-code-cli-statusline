@@ -9,7 +9,8 @@ import chalk from 'chalk';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/index.js';
+import { mockCachedEntry } from '../mock/mock.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Session usage widget schema - defines all GUI metadata */
 export const SessionUsageSchema: WidgetSchema = {
@@ -49,10 +50,22 @@ export const SessionUsageSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'low', label: 'Low', description: 'Low session usage' },
-    { id: 'medium', label: 'Medium', description: 'Medium session usage' },
-    { id: 'high', label: 'High', description: 'High session usage' },
-    { id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication' },
+    {
+      id: 'low', label: 'Low', description: 'Low session usage',
+      mockData: { usage: { current_session: mockCachedEntry(20) } },
+    },
+    {
+      id: 'medium', label: 'Medium', description: 'Medium session usage',
+      mockData: { usage: { current_session: mockCachedEntry(50) } },
+    },
+    {
+      id: 'high', label: 'High', description: 'High session usage',
+      mockData: { usage: { current_session: mockCachedEntry(80) } },
+    },
+    {
+      id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication',
+      mockData: { usage: null },
+    },
   ],
 };
 

@@ -13,7 +13,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { getGitInfo, colorize, type GitInfo } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/index.js';
+import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Git branch widget schema - defines all GUI metadata */
 export const GitBranchSchema: WidgetSchema = {
@@ -117,20 +117,53 @@ export const GitBranchSchema: WidgetSchema = {
   },
   previewStates: [
     // Basic states
-    { id: 'clean', label: 'Clean', description: 'No uncommitted changes' },
-    { id: 'dirty', label: 'Dirty', description: 'Uncommitted changes only' },
-    { id: 'staged', label: 'Staged', description: 'Staged changes only' },
-    { id: 'untracked', label: 'Untracked', description: 'Untracked files only' },
+    {
+      id: 'clean', label: 'Clean', description: 'No uncommitted changes',
+      mockData: { gitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 0, behind: 0 } },
+    },
+    {
+      id: 'dirty', label: 'Dirty', description: 'Uncommitted changes only',
+      mockData: { gitInfo: { branch: 'main', isDirty: true, hasStaged: false, hasUntracked: false, ahead: 0, behind: 0 } },
+    },
+    {
+      id: 'staged', label: 'Staged', description: 'Staged changes only',
+      mockData: { gitInfo: { branch: 'main', isDirty: false, hasStaged: true, hasUntracked: false, ahead: 0, behind: 0 } },
+    },
+    {
+      id: 'untracked', label: 'Untracked', description: 'Untracked files only',
+      mockData: { gitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: true, ahead: 0, behind: 0 } },
+    },
     // Remote states
-    { id: 'ahead', label: 'Ahead', description: 'Local commits not pushed' },
-    { id: 'behind', label: 'Behind', description: 'Remote commits not pulled' },
-    { id: 'diverged', label: 'Diverged', description: 'Both ahead and behind remote' },
+    {
+      id: 'ahead', label: 'Ahead', description: 'Local commits not pushed',
+      mockData: { gitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 3, behind: 0 } },
+    },
+    {
+      id: 'behind', label: 'Behind', description: 'Remote commits not pulled',
+      mockData: { gitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 0, behind: 2 } },
+    },
+    {
+      id: 'diverged', label: 'Diverged', description: 'Both ahead and behind remote',
+      mockData: { gitInfo: { branch: 'main', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 3, behind: 2 } },
+    },
     // Combined states
-    { id: 'mixed', label: 'Mixed', description: 'Dirty + staged + untracked' },
-    { id: 'working', label: 'Working', description: 'All indicators active' },
+    {
+      id: 'mixed', label: 'Mixed', description: 'Dirty + staged + untracked',
+      mockData: { gitInfo: { branch: 'main', isDirty: true, hasStaged: true, hasUntracked: true, ahead: 0, behind: 0 } },
+    },
+    {
+      id: 'working', label: 'Working', description: 'All indicators active',
+      mockData: { gitInfo: { branch: 'main', isDirty: true, hasStaged: true, hasUntracked: true, ahead: 3, behind: 2 } },
+    },
     // Special states
-    { id: 'detached', label: 'Detached', description: 'Detached HEAD state' },
-    { id: 'notRepo', label: 'Not a Repo', description: 'Not a git repository' },
+    {
+      id: 'detached', label: 'Detached', description: 'Detached HEAD state',
+      mockData: { gitInfo: { branch: '(HEAD detached at abc1234)', isDirty: false, hasStaged: false, hasUntracked: false, ahead: 0, behind: 0 } },
+    },
+    {
+      id: 'notRepo', label: 'Not a Repo', description: 'Not a git repository',
+      mockData: { gitInfo: null },
+    },
   ],
 };
 

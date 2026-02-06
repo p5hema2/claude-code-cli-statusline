@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/index.js';
+import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Context usage widget schema - defines all GUI metadata */
 export const ContextUsageSchema: WidgetSchema = {
@@ -46,10 +46,22 @@ export const ContextUsageSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'low', label: 'Low (20%)', description: '20% context used' },
-    { id: 'medium', label: 'Medium (50%)', description: '50% context used' },
-    { id: 'high', label: 'High (80%)', description: '80% context used' },
-    { id: 'unavailable', label: 'Unavailable', description: 'Context info not available' },
+    {
+      id: 'low', label: 'Low (20%)', description: '20% context used',
+      mockData: { status: { context_window: { remaining_percentage: 80 } } },
+    },
+    {
+      id: 'medium', label: 'Medium (50%)', description: '50% context used',
+      mockData: { status: { context_window: { remaining_percentage: 50 } } },
+    },
+    {
+      id: 'high', label: 'High (80%)', description: '80% context used',
+      mockData: { status: { context_window: { remaining_percentage: 20 } } },
+    },
+    {
+      id: 'unavailable', label: 'Unavailable', description: 'Context info not available',
+      mockData: { status: {} },
+    },
   ],
 };
 

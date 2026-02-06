@@ -8,7 +8,8 @@ import chalk from 'chalk';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/index.js';
+import { mockCachedEntry } from '../mock/mock.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Weekly usage widget schema - defines all GUI metadata */
 export const WeeklyUsageSchema: WidgetSchema = {
@@ -48,10 +49,22 @@ export const WeeklyUsageSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'low', label: 'Low', description: 'Low weekly usage' },
-    { id: 'medium', label: 'Medium', description: 'Medium weekly usage' },
-    { id: 'high', label: 'High', description: 'High weekly usage' },
-    { id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication' },
+    {
+      id: 'low', label: 'Low', description: 'Low weekly usage',
+      mockData: { usage: { weekly_all: mockCachedEntry(20) } },
+    },
+    {
+      id: 'medium', label: 'Medium', description: 'Medium weekly usage',
+      mockData: { usage: { weekly_all: mockCachedEntry(50) } },
+    },
+    {
+      id: 'high', label: 'High', description: 'High weekly usage',
+      mockData: { usage: { weekly_all: mockCachedEntry(80) } },
+    },
+    {
+      id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication',
+      mockData: { usage: null },
+    },
   ],
 };
 

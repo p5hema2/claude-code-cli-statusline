@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor, renderWidgetWithLabel } from '../shared/index.js';
+import { getColor, renderWidgetWithLabel } from '../shared/widget.helper.js';
 
 /** Model widget schema - defines all GUI metadata */
 export const ModelSchema: WidgetSchema = {
@@ -44,9 +44,18 @@ export const ModelSchema: WidgetSchema = {
     ],
   },
   previewStates: [
-    { id: 'sonnet', label: 'Sonnet', description: 'Claude Sonnet model' },
-    { id: 'opus', label: 'Opus', description: 'Claude Opus model' },
-    { id: 'haiku', label: 'Haiku', description: 'Claude Haiku model' },
+    {
+      id: 'sonnet', label: 'Sonnet', description: 'Claude Sonnet model',
+      mockData: { status: { model: { id: 'claude-sonnet-4-20250514', display_name: 'Claude 4 Sonnet' } } },
+    },
+    {
+      id: 'opus', label: 'Opus', description: 'Claude Opus model',
+      mockData: { status: { model: { id: 'claude-opus-4-20250514', display_name: 'Claude 4 Opus' } } },
+    },
+    {
+      id: 'haiku', label: 'Haiku', description: 'Claude Haiku model',
+      mockData: { status: { model: { id: 'claude-haiku-3-20240307', display_name: 'Claude 3 Haiku' } } },
+    },
   ],
 };
 
