@@ -59,4 +59,21 @@ describe('TokensInputWidget', () => {
     const plain = stripAnsi(result!);
     expect(plain).toBe('N/A');
   });
+
+  // Transcript-hydrated scenarios
+  it('should render transcript-hydrated large token count', () => {
+    const ctx = makeCtx({ status: { token_metrics: { input_tokens: 2_350_000 } } });
+
+    const result = TokensInputWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('2.4M');
+  });
+
+  it('should render zero input tokens', () => {
+    const ctx = makeCtx({ status: { token_metrics: { input_tokens: 0 } } });
+
+    const result = TokensInputWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('0');
+  });
 });
