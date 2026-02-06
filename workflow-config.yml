@@ -1,0 +1,66 @@
+# Workflow Configuration
+# Generated: 2026-02-06
+# Project: claude-code-cli-statusline
+
+git:
+  source:
+    branch: master
+
+  branching:
+    format: "{type}/{ticket}-{slug}"
+    # Example: refactor/9-separate-preview-state-mockdata
+
+  tickets:
+    system: github
+    example: "#9"
+    format: "^#\\d+$"
+
+  commits:
+    format: "{type}({scope}): {title}"
+    body:
+      format: bullet-list
+    footer:
+      refs: true
+      # Adds "Refs: #<ticket>" in commit footer
+
+  merge:
+    squash_before_push: false
+    sync_with_source: true
+    sync_method: merge
+    push:
+      timing: after-all-subtasks
+    auto_create_pr: true
+    platform: github
+    auto_merge: true
+    auto_merge_method: squash
+    delete_branch_after_merge: true
+
+quality:
+  pre_commit:
+    - lint: "npm run lint"
+    - types: "npx tsc --noEmit"
+    - tests: "npm run test:vitest"
+    - e2e: "npm run test:e2e"
+    - build: "npm run build"
+  pre_push:
+    - audit: "npm audit --production"
+  error_tolerance:
+    warnings: allow
+    errors: block
+
+workflow:
+  subtasks:
+    min: 1
+    max: 5
+    granularity:
+      - user_facing
+      - single_sentence
+      - independent
+      - deployable
+  pipelines:
+    branch:
+      wait_timeout_seconds: 300
+      poll_interval_seconds: 30
+    pr:
+      wait_timeout_seconds: 300
+      poll_interval_seconds: 30
