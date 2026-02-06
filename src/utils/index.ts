@@ -43,3 +43,5 @@ export {
 export { renderStatusLine, renderStatusLineRows, renderWidget, getWidgetNames } from './renderer.util.js';
 
 export { stripAnsi } from './ansi.util.js';
+
+export { formatTokens } from './format.util.js';
