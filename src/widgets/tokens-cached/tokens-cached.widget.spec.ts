@@ -59,4 +59,21 @@ describe('TokensCachedWidget', () => {
     const plain = stripAnsi(result!);
     expect(plain).toBe('N/A');
   });
+
+  // Transcript-hydrated scenarios
+  it('should render transcript-hydrated large cached token count', () => {
+    const ctx = makeCtx({ status: { token_metrics: { cached_tokens: 3_200_000 } } });
+
+    const result = TokensCachedWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('3.2M');
+  });
+
+  it('should render zero cached tokens', () => {
+    const ctx = makeCtx({ status: { token_metrics: { cached_tokens: 0 } } });
+
+    const result = TokensCachedWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('0');
+  });
 });
