@@ -19,6 +19,7 @@ export { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.wi
 export { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktree.widget.js';
 export { ModelWidget, ModelSchema } from './model/model.widget.js';
 export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
+export { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
 export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 export { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
 export { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
@@ -38,6 +39,7 @@ import { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktre
 import { ModelWidget, ModelSchema } from './model/model.widget.js';
 import { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
 import { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
+import { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
 import { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 import { TextWidget, TextSchema } from './text/text.widget.js';
 import { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
@@ -66,6 +68,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   gitWorktree: { widget: GitWorktreeWidget, schema: GitWorktreeSchema },
   model: { widget: ModelWidget, schema: ModelSchema },
   contextUsage: { widget: ContextUsageWidget, schema: ContextUsageSchema },
+  sessionClock: { widget: SessionClockWidget, schema: SessionClockSchema },
   sessionUsage: { widget: SessionUsageWidget, schema: SessionUsageSchema },
   weeklyUsage: { widget: WeeklyUsageWidget, schema: WeeklyUsageSchema },
   weeklySonnet: { widget: WeeklySonnetWidget, schema: WeeklySonnetSchema },
