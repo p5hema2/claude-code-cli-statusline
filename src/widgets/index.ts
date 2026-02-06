@@ -29,6 +29,7 @@ export { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
 export { TokensInputWidget, TokensInputSchema } from './tokens-input/tokens-input.widget.js';
 export { TokensOutputWidget, TokensOutputSchema } from './tokens-output/tokens-output.widget.js';
 export { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-cached.widget.js';
+export { VersionWidget, VersionSchema } from './version/version.widget.js';
 export { TextWidget, TextSchema } from './text/text.widget.js';
 export { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
 
@@ -49,6 +50,7 @@ import { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-c
 import { TokensInputWidget, TokensInputSchema } from './tokens-input/tokens-input.widget.js';
 import { TokensOutputWidget, TokensOutputSchema } from './tokens-output/tokens-output.widget.js';
 import { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
+import { VersionWidget, VersionSchema } from './version/version.widget.js';
 import { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
 import { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
 import { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
@@ -84,6 +86,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   tokensInput: { widget: TokensInputWidget, schema: TokensInputSchema },
   tokensOutput: { widget: TokensOutputWidget, schema: TokensOutputSchema },
   tokensCached: { widget: TokensCachedWidget, schema: TokensCachedSchema },
+  version: { widget: VersionWidget, schema: VersionSchema },
   text: { widget: TextWidget, schema: TextSchema },
   separator: { widget: SeparatorWidget, schema: SeparatorSchema },
 };
