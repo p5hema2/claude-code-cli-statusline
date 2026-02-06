@@ -59,4 +59,21 @@ describe('SessionClockWidget', () => {
     const plain = stripAnsi(result!);
     expect(plain).toBe('Session: N/A');
   });
+
+  // Transcript-hydrated scenarios (formatDuration output formats)
+  it('should render transcript-hydrated short duration', () => {
+    const ctx = makeCtx({ status: { session_duration: '<1m' } });
+
+    const result = SessionClockWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('<1m');
+  });
+
+  it('should render transcript-hydrated hours-only duration', () => {
+    const ctx = makeCtx({ status: { session_duration: '3hr' } });
+
+    const result = SessionClockWidget.render(ctx);
+    const plain = stripAnsi(result!);
+    expect(plain).toBe('3hr');
+  });
 });
