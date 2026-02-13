@@ -25,6 +25,7 @@ export const sheriffConfig: SheriffConfig = {
     // Core layer - business logic
     // Widget subdirectories are directly importable within core:widgets boundary.
     'src/widgets': 'core:widgets',
+    'src/widgets/api-duration': 'core:widgets',
     'src/widgets/shared': 'core:widgets',
     'src/widgets/mock': 'core:widgets',
     'src/widgets/context-threshold': 'core:widgets',
