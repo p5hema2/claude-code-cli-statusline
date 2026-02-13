@@ -1,5 +1,5 @@
 /**
- * Weekly OAuth Apps widget tests
+ * Weekly Cowork widget tests
  */
 
 import { describe, it, expect } from 'vitest';
@@ -7,11 +7,11 @@ import { describe, it, expect } from 'vitest';
 import type { RenderContext } from '../../types/index.js';
 import { stripAnsi } from '../../utils/index.js';
 
-import { WeeklyOAuthAppsWidget } from './weekly-oauth-apps.widget.js';
+import { WeeklyCoworkWidget } from './weekly-cowork.widget.js';
 
-describe('WeeklyOAuthAppsWidget', () => {
+describe('WeeklyCoworkWidget', () => {
   it('should have correct name', () => {
-    expect(WeeklyOAuthAppsWidget.name).toBe('weeklyOAuthApps');
+    expect(WeeklyCoworkWidget.name).toBe('weeklyCowork');
   });
 
   it('should return null when no usage data', () => {
@@ -28,11 +28,11 @@ describe('WeeklyOAuthAppsWidget', () => {
       settings: {},
     };
 
-    const result = WeeklyOAuthAppsWidget.render(ctx);
+    const result = WeeklyCoworkWidget.render(ctx);
     expect(result).toBeNull();
   });
 
-  it('should return null when weekly_oauth_apps is null', () => {
+  it('should return null when weekly_cowork is null', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test',
@@ -47,14 +47,14 @@ describe('WeeklyOAuthAppsWidget', () => {
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
         weekly_oauth_apps: null,
-      weekly_cowork: null,
+        weekly_cowork: null,
         extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const result = WeeklyOAuthAppsWidget.render(ctx);
+    const result = WeeklyCoworkWidget.render(ctx);
     expect(result).toBeNull();
   });
 
@@ -72,15 +72,15 @@ describe('WeeklyOAuthAppsWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-        weekly_oauth_apps: { reset_time: '2026-02-20T00:00:00Z', percent_used: 15 },
-      weekly_cowork: null,
+        weekly_oauth_apps: null,
+        weekly_cowork: { reset_time: '2026-02-20T00:00:00Z', percent_used: 15 },
         extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const result = WeeklyOAuthAppsWidget.render(ctx);
+    const result = WeeklyCoworkWidget.render(ctx);
     expect(result).toBeTruthy();
 
     const plain = stripAnsi(result!);
@@ -101,19 +101,18 @@ describe('WeeklyOAuthAppsWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-        weekly_oauth_apps: { reset_time: '2026-02-20T00:00:00Z', percent_used: 50 },
-      weekly_cowork: null,
+        weekly_oauth_apps: null,
+        weekly_cowork: { reset_time: '2026-02-20T00:00:00Z', percent_used: 50 },
         extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const result = WeeklyOAuthAppsWidget.render(ctx);
+    const result = WeeklyCoworkWidget.render(ctx);
     expect(result).toBeTruthy();
 
     const plain = stripAnsi(result!);
-    // Should contain percentage and some time indicator
     expect(plain).toContain('50');
   });
 
@@ -131,21 +130,20 @@ describe('WeeklyOAuthAppsWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-        weekly_oauth_apps: { reset_time: '2026-02-20T00:00:00Z', percent_used: 80 },
-      weekly_cowork: null,
+        weekly_oauth_apps: null,
+        weekly_cowork: { reset_time: '2026-02-20T00:00:00Z', percent_used: 80 },
         extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const config = { widget: 'weeklyOAuthApps', options: { showResetTime: false } };
-    const result = WeeklyOAuthAppsWidget.render(ctx, config);
+    const config = { widget: 'weeklyCowork', options: { showResetTime: false } };
+    const result = WeeklyCoworkWidget.render(ctx, config);
     expect(result).toBeTruthy();
 
     const plain = stripAnsi(result!);
     expect(plain).toContain('80');
-    // Should not contain parentheses that wrap reset time
     expect(plain).not.toMatch(/\([^)]+\)/);
   });
 });

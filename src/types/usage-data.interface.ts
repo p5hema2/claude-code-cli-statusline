@@ -35,6 +35,8 @@ export interface UsageResponse {
   seven_day_sonnet: UsageLimit;
   /** 7-day limit for OAuth apps usage */
   seven_day_oauth_apps: UsageLimit | null;
+  /** 7-day limit for Cowork feature usage */
+  seven_day_cowork: UsageLimit | null;
   /** Extra usage credits for overuse tracking */
   extra_usage: ExtraUsage;
 }
@@ -71,6 +73,8 @@ export interface UsageCache {
   weekly_sonnet: CachedUsageEntry;
   /** 7-day OAuth apps usage */
   weekly_oauth_apps: CachedUsageEntry | null;
+  /** 7-day Cowork feature usage */
+  weekly_cowork: CachedUsageEntry | null;
   /** Extra usage credits tracking */
   extra_usage: CachedExtraUsage;
 }
