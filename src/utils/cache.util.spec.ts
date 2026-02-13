@@ -45,6 +45,7 @@ describe('loadCacheFromDisk', () => {
       },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -116,6 +117,7 @@ describe('saveCacheToDisk', () => {
       },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -138,6 +140,7 @@ describe('saveCacheToDisk', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -160,6 +163,7 @@ describe('saveCacheToDisk', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -180,6 +184,7 @@ describe('saveCacheToDisk', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -210,6 +215,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -225,6 +231,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -240,6 +247,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -256,6 +264,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -270,6 +279,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -284,6 +294,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -300,6 +311,7 @@ describe('isCacheValid', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -324,6 +336,7 @@ describe('refreshUsageCache', () => {
       },
       seven_day_oauth_apps: null,
       seven_day_cowork: null,
+      seven_day_opus: null,
       seven_day_sonnet: {
         utilization: 0.60,
         resets_at: '2026-02-08T00:00:00Z',
@@ -357,6 +370,7 @@ describe('refreshUsageCache', () => {
       },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
     expect(result?.timestamp).toBeGreaterThan(0);
@@ -391,6 +405,7 @@ describe('refreshUsageCache', () => {
       },
       seven_day_oauth_apps: null,
       seven_day_cowork: null,
+      seven_day_opus: null,
       seven_day_sonnet: {
         utilization: 0.60,
         resets_at: '2026-02-08T00:00:00Z',
@@ -432,6 +447,7 @@ describe('loadUsageCache', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -453,6 +469,7 @@ describe('loadUsageCache', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -461,6 +478,7 @@ describe('loadUsageCache', () => {
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
       seven_day_cowork: null,
+      seven_day_opus: null,
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: {
         is_enabled: false,
@@ -492,6 +510,7 @@ describe('loadUsageCache', () => {
       seven_day: { utilization: 0.45, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
       seven_day_cowork: null,
+      seven_day_opus: null,
       seven_day_sonnet: { utilization: 0.60, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
@@ -513,6 +532,7 @@ describe('loadUsageCache', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -556,6 +576,7 @@ describe('waitForPendingRefresh', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -564,6 +585,7 @@ describe('waitForPendingRefresh', () => {
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
       seven_day_cowork: null,
+      seven_day_opus: null,
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: {
         is_enabled: false,
@@ -596,6 +618,7 @@ describe('waitForPendingRefresh', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -607,6 +630,7 @@ describe('waitForPendingRefresh', () => {
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
       seven_day_cowork: null,
+      seven_day_opus: null,
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
@@ -627,6 +651,7 @@ describe('waitForPendingRefresh', () => {
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 

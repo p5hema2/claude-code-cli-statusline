@@ -37,6 +37,8 @@ export interface UsageResponse {
   seven_day_oauth_apps: UsageLimit | null;
   /** 7-day limit for Cowork feature usage */
   seven_day_cowork: UsageLimit | null;
+  /** 7-day limit specifically for Opus model */
+  seven_day_opus: UsageLimit | null;
   /** Extra usage credits for overuse tracking */
   extra_usage: ExtraUsage;
 }
@@ -75,6 +77,8 @@ export interface UsageCache {
   weekly_oauth_apps: CachedUsageEntry | null;
   /** 7-day Cowork feature usage */
   weekly_cowork: CachedUsageEntry | null;
+  /** 7-day Opus model usage */
+  weekly_opus: CachedUsageEntry | null;
   /** Extra usage credits tracking */
   extra_usage: CachedExtraUsage;
 }
