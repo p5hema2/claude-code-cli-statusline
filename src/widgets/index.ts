@@ -19,6 +19,7 @@ export { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.wi
 export { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktree.widget.js';
 export { ModelWidget, ModelSchema } from './model/model.widget.js';
 export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
+export { ContextThresholdWidget, ContextThresholdSchema } from './context-threshold/index.js';
 export { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 export { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
 export { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
@@ -44,6 +45,7 @@ export { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.j
 import type { WidgetSchema, Widget } from '../types/index.js';
 
 import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
+import { ContextThresholdWidget, ContextThresholdSchema } from './context-threshold/index.js';
 import { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
 import { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 import { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
@@ -92,6 +94,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   gitWorktree: { widget: GitWorktreeWidget, schema: GitWorktreeSchema },
   model: { widget: ModelWidget, schema: ModelSchema },
   contextUsage: { widget: ContextUsageWidget, schema: ContextUsageSchema },
+  contextThreshold: { widget: ContextThresholdWidget, schema: ContextThresholdSchema },
   extraUsage: { widget: ExtraUsageWidget, schema: ExtraUsageSchema },
   sessionClock: { widget: SessionClockWidget, schema: SessionClockSchema },
   sessionId: { widget: SessionIdWidget, schema: SessionIdSchema },
