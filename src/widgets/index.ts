@@ -24,6 +24,7 @@ export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-
 export { ContextThresholdWidget, ContextThresholdSchema } from './context-threshold/index.js';
 export { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 export { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
+export { SessionCostWidget, SessionCostSchema } from './session-cost/index.js';
 export { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
 export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 export { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
@@ -59,6 +60,7 @@ import { ModelWidget, ModelSchema } from './model/model.widget.js';
 import { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
 import { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.js';
 import { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
+import { SessionCostWidget, SessionCostSchema } from './session-cost/index.js';
 import { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
 import { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 import { TextWidget, TextSchema } from './text/text.widget.js';
@@ -103,6 +105,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   contextThreshold: { widget: ContextThresholdWidget, schema: ContextThresholdSchema },
   extraUsage: { widget: ExtraUsageWidget, schema: ExtraUsageSchema },
   sessionClock: { widget: SessionClockWidget, schema: SessionClockSchema },
+  sessionCost: { widget: SessionCostWidget, schema: SessionCostSchema },
   sessionId: { widget: SessionIdWidget, schema: SessionIdSchema },
   sessionUsage: { widget: SessionUsageWidget, schema: SessionUsageSchema },
   weeklyUsage: { widget: WeeklyUsageWidget, schema: WeeklyUsageSchema },
