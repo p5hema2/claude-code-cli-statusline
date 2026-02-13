@@ -18,7 +18,7 @@ export const SessionUsageSchema: WidgetSchema = {
   meta: {
     displayName: 'Session Usage',
     description: 'Current session usage for OAuth users',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     bar: {

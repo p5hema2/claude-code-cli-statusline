@@ -32,10 +32,14 @@ export const state = {
   },
   // Category collapse state (all expanded by default)
   categoryCollapseState: {
-    location: true,
+    environment: true,
+    layout: true,
+    git: true,
     model: true,
-    usage: true,
-    editor: true,
+    tokens: true,
+    limits: true,
+    context: true,
+    session: true,
   },
 };
 

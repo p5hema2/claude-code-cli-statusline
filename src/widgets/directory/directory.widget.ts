@@ -18,7 +18,7 @@ export const DirectorySchema: WidgetSchema = {
   meta: {
     displayName: 'Directory',
     description: 'Current working directory path',
-    category: 'location',
+    category: 'environment',
   },
   options: {
     content: { color: 'blue' },

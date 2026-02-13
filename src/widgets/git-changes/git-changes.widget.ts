@@ -7,7 +7,7 @@ export const GitChangesSchema: WidgetSchema = {
   meta: {
     displayName: 'Git Changes',
     description: 'Git diff statistics (insertions/deletions)',
-    category: 'location',
+    category: 'git',
   },
   options: {
     content: { color: 'white' },

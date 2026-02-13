@@ -18,7 +18,7 @@ export const WeeklySonnetSchema: WidgetSchema = {
   meta: {
     displayName: 'Weekly Sonnet',
     description: 'Weekly Sonnet model usage limit',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     bar: {

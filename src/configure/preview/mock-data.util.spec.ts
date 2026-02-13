@@ -13,7 +13,7 @@ import { getDefaultWidgetStates, generateMockContext } from './mock-data.util.js
 function makeSchema(id: string, previewStates: WidgetSchema['previewStates'] = []): WidgetSchema {
   return {
     id,
-    meta: { displayName: id, description: '', category: 'usage' },
+    meta: { displayName: id, description: '', category: 'session' },
     previewStates,
   };
 }

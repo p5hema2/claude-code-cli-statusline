@@ -18,7 +18,7 @@ export const WeeklyCoworkSchema: WidgetSchema = {
   meta: {
     displayName: 'Weekly Cowork Apps',
     description: '7-day Cowork usage limit',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     bar: {

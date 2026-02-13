@@ -7,7 +7,7 @@ export const TokensOutputSchema: WidgetSchema = {
   meta: {
     displayName: 'Tokens (Output)',
     description: 'Output tokens generated this session',
-    category: 'usage',
+    category: 'tokens',
   },
   options: {
     content: { color: 'white' },

@@ -7,7 +7,7 @@ export const TokensInputSchema: WidgetSchema = {
   meta: {
     displayName: 'Tokens (Input)',
     description: 'Input tokens consumed this session',
-    category: 'usage',
+    category: 'tokens',
   },
   options: {
     content: { color: 'white' },

@@ -15,7 +15,7 @@ export const ContextUsageSchema: WidgetSchema = {
   meta: {
     displayName: 'Context Usage',
     description: 'Context window usage percentage',
-    category: 'usage',
+    category: 'context',
   },
   options: {
     bar: {

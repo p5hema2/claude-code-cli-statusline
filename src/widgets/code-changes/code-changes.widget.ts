@@ -16,7 +16,7 @@ export const CodeChangesSchema: WidgetSchema = {
   meta: {
     displayName: 'Code Changes',
     description: 'Lines added/removed',
-    category: 'usage',
+    category: 'session',
   },
   options: {
     content: { color: 'white' },

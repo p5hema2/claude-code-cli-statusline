@@ -14,7 +14,7 @@ export const ContextThresholdSchema: WidgetSchema = {
   meta: {
     displayName: 'Context Threshold',
     description: 'Warning when exceeding 200K tokens',
-    category: 'usage',
+    category: 'context',
   },
   options: {
     content: { color: 'red' },

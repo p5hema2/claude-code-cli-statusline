@@ -15,7 +15,7 @@ export const VimModeSchema: WidgetSchema = {
   meta: {
     displayName: 'Vim Mode',
     description: 'Current Vim editing mode',
-    category: 'editor',
+    category: 'environment',
   },
   options: {
     content: {

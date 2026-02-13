@@ -17,7 +17,7 @@ export const TextSchema: WidgetSchema = {
   meta: {
     displayName: 'Text',
     description: 'Static text with optional color',
-    category: 'location',
+    category: 'layout',
   },
   options: {
     content: { color: 'white' },

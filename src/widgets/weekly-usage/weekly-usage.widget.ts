@@ -17,7 +17,7 @@ export const WeeklyUsageSchema: WidgetSchema = {
   meta: {
     displayName: 'Weekly Usage',
     description: 'Weekly usage limit progress',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     bar: {

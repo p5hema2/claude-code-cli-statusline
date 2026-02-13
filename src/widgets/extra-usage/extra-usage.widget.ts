@@ -17,7 +17,7 @@ export const ExtraUsageSchema: WidgetSchema = {
   meta: {
     displayName: 'Extra Usage',
     description: 'Overuse credits tracking',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     content: { color: 'yellow' },
