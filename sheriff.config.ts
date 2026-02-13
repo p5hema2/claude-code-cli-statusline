@@ -27,6 +27,7 @@ export const sheriffConfig: SheriffConfig = {
     'src/widgets': 'core:widgets',
     'src/widgets/shared': 'core:widgets',
     'src/widgets/mock': 'core:widgets',
+    'src/widgets/context-threshold': 'core:widgets',
     'src/widgets/extra-usage': 'core:widgets',
     'src/widgets/weekly-oauth-apps': 'core:widgets',
     'src/widgets/weekly-cowork': 'core:widgets',
