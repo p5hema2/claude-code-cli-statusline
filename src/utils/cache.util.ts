@@ -101,6 +101,12 @@ function responseToCache(response: UsageResponse): UsageCache {
           percent_used: response.seven_day_cowork.utilization,
         }
       : null,
+    weekly_opus: response.seven_day_opus
+      ? {
+          reset_time: response.seven_day_opus.resets_at,
+          percent_used: response.seven_day_opus.utilization,
+        }
+      : null,
     extra_usage: {
       is_enabled: response.extra_usage.is_enabled,
       monthly_limit: response.extra_usage.monthly_limit,

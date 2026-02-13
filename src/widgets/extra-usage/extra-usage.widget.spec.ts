@@ -48,6 +48,7 @@ describe('ExtraUsageWidget', () => {
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
         extra_usage: {
           is_enabled: false,
           monthly_limit: null,
@@ -79,6 +80,7 @@ describe('ExtraUsageWidget', () => {
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
         extra_usage: {
           is_enabled: true,
           monthly_limit: 100.0,
@@ -114,6 +116,7 @@ describe('ExtraUsageWidget', () => {
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
         extra_usage: {
           is_enabled: true,
           monthly_limit: 100.0,
@@ -149,6 +152,7 @@ describe('ExtraUsageWidget', () => {
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
         extra_usage: {
           is_enabled: true,
           monthly_limit: 100.0,
@@ -185,6 +189,7 @@ describe('ExtraUsageWidget', () => {
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
       weekly_oauth_apps: null,
       weekly_cowork: null,
+      weekly_opus: null,
         extra_usage: {
           is_enabled: true,
           monthly_limit: 100.0,

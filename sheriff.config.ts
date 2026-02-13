@@ -30,6 +30,7 @@ export const sheriffConfig: SheriffConfig = {
     'src/widgets/extra-usage': 'core:widgets',
     'src/widgets/weekly-oauth-apps': 'core:widgets',
     'src/widgets/weekly-cowork': 'core:widgets',
+    'src/widgets/weekly-opus': 'core:widgets',
     'src/utils': 'core:utils',
 
     // Feature layer - application features
