@@ -44,6 +44,7 @@ describe('loadCacheFromDisk', () => {
         percent_used: 0.60,
       },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -114,6 +115,7 @@ describe('saveCacheToDisk', () => {
         percent_used: 0.60,
       },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -135,6 +137,7 @@ describe('saveCacheToDisk', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -156,6 +159,7 @@ describe('saveCacheToDisk', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -175,6 +179,7 @@ describe('saveCacheToDisk', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -204,6 +209,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -218,6 +224,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -232,6 +239,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -247,6 +255,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -260,6 +269,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -273,6 +283,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -288,6 +299,7 @@ describe('isCacheValid', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -311,6 +323,7 @@ describe('refreshUsageCache', () => {
         resets_at: '2026-02-08T00:00:00Z',
       },
       seven_day_oauth_apps: null,
+      seven_day_cowork: null,
       seven_day_sonnet: {
         utilization: 0.60,
         resets_at: '2026-02-08T00:00:00Z',
@@ -343,6 +356,7 @@ describe('refreshUsageCache', () => {
         percent_used: 0.60,
       },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
     expect(result?.timestamp).toBeGreaterThan(0);
@@ -376,6 +390,7 @@ describe('refreshUsageCache', () => {
         resets_at: '2026-02-08T00:00:00Z',
       },
       seven_day_oauth_apps: null,
+      seven_day_cowork: null,
       seven_day_sonnet: {
         utilization: 0.60,
         resets_at: '2026-02-08T00:00:00Z',
@@ -416,6 +431,7 @@ describe('loadUsageCache', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -436,6 +452,7 @@ describe('loadUsageCache', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -443,6 +460,7 @@ describe('loadUsageCache', () => {
       five_hour: { utilization: 0.30, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
+      seven_day_cowork: null,
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: {
         is_enabled: false,
@@ -472,8 +490,9 @@ describe('loadUsageCache', () => {
     vi.mocked(fetchUsage).mockResolvedValue({
       five_hour: { utilization: 0.25, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.45, resets_at: '2026-02-08T00:00:00Z' },
-      seven_day_sonnet: { utilization: 0.60, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
+      seven_day_cowork: null,
+      seven_day_sonnet: { utilization: 0.60, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
 
@@ -493,6 +512,7 @@ describe('loadUsageCache', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -535,6 +555,7 @@ describe('waitForPendingRefresh', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -542,6 +563,7 @@ describe('waitForPendingRefresh', () => {
       five_hour: { utilization: 0.30, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
+      seven_day_cowork: null,
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: {
         is_enabled: false,
@@ -573,6 +595,7 @@ describe('waitForPendingRefresh', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
@@ -583,6 +606,7 @@ describe('waitForPendingRefresh', () => {
       five_hour: { utilization: 0.30, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_oauth_apps: null,
+      seven_day_cowork: null,
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
@@ -602,6 +626,7 @@ describe('waitForPendingRefresh', () => {
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
       weekly_oauth_apps: null,
+      weekly_cowork: null,
       extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
