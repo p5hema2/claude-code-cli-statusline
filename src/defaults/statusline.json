@@ -40,6 +40,10 @@
       { "widget": "apiDuration" },
       { "widget": "separator" },
       { "widget": "codeChanges" }
+    ],
+    [
+      { "widget": "text", "options": { "text": "💡 To configure: " }, "color": "dim" },
+      { "widget": "text", "options": { "text": "npx @p5hema2/claude-code-cli-statusline --configure" }, "color": "cyan" }
     ]
   ]
 }

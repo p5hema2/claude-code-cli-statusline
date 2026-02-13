@@ -8,15 +8,41 @@ A customizable statusline for Claude Code CLI with **OAuth usage metrics**.
 
 ## Features
 
+### Location & Environment
 - 📁 **Directory** - Fish-shell style shortened path
 - 🌿 **Git Branch** - Current branch with status indicators (`*+?↑↓`)
+- 📝 **Git Changes** - Lines added/removed in session
+- 🔀 **Git Worktree** - Current worktree name
 - 🤖 **Model** - Current Claude model name
-- 📊 **Context Usage** - Context window utilization bar
-- ⏱️ **5-Hour Session** - OAuth API usage (rolling session limit)
-- 📅 **7-Day Usage** - OAuth API usage (weekly all models)
-- 🎯 **7-Day Sonnet** - OAuth API usage (weekly Sonnet-specific)
 - 🎨 **Output Style** - Current output style indicator
 - ⌨️ **Vim Mode** - Current vim mode with color coding
+- 📌 **Version** - CLI version number
+- 🆔 **Session ID** - Current session identifier
+
+### Token Metrics (Tier 2: Transcript-Hydrated)
+- 🔢 **Tokens (Input)** - Input tokens consumed
+- 📤 **Tokens (Output)** - Output tokens generated
+- 💾 **Tokens (Cached)** - Cached tokens (write + read)
+- 📖 **Tokens (Cache Read)** - Cache read tokens only
+- 🔢 **Tokens (Total)** - Total token count
+- 🔄 **Turn Count** - Number of conversation turns
+
+### OAuth Usage Limits
+- ⏱️ **Session Usage** - 5-hour rolling session limit
+- 📅 **Weekly Usage** - 7-day all models usage
+- 🎯 **Weekly Sonnet** - 7-day Sonnet-specific usage
+- 🔷 **Weekly Opus** - 7-day Opus-specific usage
+- 📱 **Weekly OAuth Apps** - 7-day OAuth apps usage
+- 👥 **Weekly Cowork** - 7-day Cowork feature usage
+- 💳 **Extra Usage** - Overuse credits tracking (Max plan)
+
+### Context & Performance
+- 📊 **Context Usage** - Context window utilization bar
+- ⚠️ **Context Threshold** - Warning when >200K tokens
+- ⏲️ **API Duration** - Total API response time
+- 💰 **Session Cost** - Session cost in USD
+- ⏰ **Session Clock** - Elapsed session time
+- 📅 **Usage Age** - Time since last usage query
 
 ## Unique Feature: OAuth Usage Metrics
 
@@ -74,281 +100,75 @@ The GUI features:
 
 ### Manual Configuration
 
-Create `~/.claude/statusline-settings.json` to customize:
+Create `~/.claude/statusline-settings.json`:
 
 ```json
 {
-  "widgets": {
-    "directory": { "enabled": true },
-    "gitBranch": { "enabled": true },
-    "model": { "enabled": true },
-    "contextUsage": { "enabled": true },
-    "sessionUsage": { "enabled": true },
-    "weeklyUsage": { "enabled": true },
-    "weeklySonnet": { "enabled": false },
-    "outputStyle": { "enabled": true },
-    "vimMode": { "enabled": true }
-  },
-  "separator": "|",
-  "cacheTtl": 60000
-}
-```
-
-### Multi-Row Layout
-
-Configure multiple rows using the `rows` option:
-
-```json
-{
+  "cacheTtl": 60000,
   "rows": [
-    { "widgets": ["directory", "gitBranch", "model"] },
-    { "widgets": ["contextUsage", "sessionUsage", "weeklyUsage", "vimMode"] }
+    [
+      { "widget": "directory", "color": "blue" },
+      { "widget": "separator" },
+      { "widget": "gitBranch" },
+      { "widget": "separator" },
+      { "widget": "model" }
+    ],
+    [
+      { "widget": "contextUsage" },
+      { "widget": "separator" },
+      { "widget": "sessionUsage" },
+      { "widget": "separator" },
+      { "widget": "weeklyUsage" }
+    ]
   ]
 }
 ```
 
-### Settings Reference
-
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `widgets.<name>.enabled` | boolean | true | Enable/disable specific widget |
-| `separator` | string | `\|` | Character between widgets |
-| `cacheTtl` | number | 60000 | Cache TTL in ms (5 min) |
-| `rows` | array | - | Multi-row layout configuration |
+**Configuration Options:**
+- `cacheTtl` - OAuth cache duration in milliseconds (default: 60000 = 5 minutes)
+- `rows` - Array of widget rows, each row is an array of widget configs
+- Widget configs support `widget`, `color`, and `options` properties
+- Use the GUI (`--configure`) for easier configuration with live preview
 
 ### Available Widgets
 
-| Widget | Description |
-|--------|-------------|
-| `directory` | Current working directory (fish-style) |
-| `gitBranch` | Git branch with status indicators |
-| `model` | Claude model name |
-| `contextUsage` | Context window usage bar |
-| `sessionUsage` | 5-hour session usage (OAuth) |
-| `weeklyUsage` | 7-day all models usage (OAuth) |
-| `weeklySonnet` | 7-day Sonnet usage (OAuth) |
-| `outputStyle` | Output style name |
-| `vimMode` | Vim mode indicator |
+**Location & Environment:**
+- `directory` - Current working directory (fish-style)
+- `gitBranch` - Git branch with status indicators
+- `gitChanges` - Git diff statistics
+- `gitWorktree` - Current worktree name
+- `model` - Claude model name
+- `outputStyle` - Output style indicator
+- `vimMode` - Vim mode with color coding
+- `version` - CLI version number
+- `sessionId` - Session identifier
+- `separator` - Visual separator
+- `text` - Custom static text
 
-## Configuration API Reference
+**Token Metrics (Tier 2):**
+- `tokensInput` - Input tokens consumed
+- `tokensOutput` - Output tokens generated
+- `tokensCached` - Cached tokens (combined)
+- `tokensCacheRead` - Cache read tokens only
+- `tokensTotal` - Total token count
+- `turnCount` - Conversation turns
 
-The configuration GUI communicates with a built-in REST API. These endpoints can also be accessed programmatically.
+**OAuth Usage (Tier 1):**
+- `sessionUsage` - 5-hour rolling limit
+- `weeklyUsage` - 7-day all models
+- `weeklySonnet` - 7-day Sonnet limit
+- `weeklyOpus` - 7-day Opus limit
+- `weeklyOAuthApps` - 7-day OAuth apps
+- `weeklyCowork` - 7-day Cowork feature
+- `extraUsage` - Overuse credits (Max plan)
 
-### GET /api/settings
-
-Retrieve current statusline settings.
-
-**Response:** `200 OK`
-```json
-{
-  "success": true,
-  "data": {
-    "rows": [
-      { "widgets": ["directory", "gitBranch", "model"] }
-    ],
-    "separator": "|",
-    "cacheTtl": 60000
-  }
-}
-```
-
-**cURL Example:**
-```bash
-curl http://localhost:3000/api/settings
-```
-
-### PUT /api/settings
-
-Update statusline settings.
-
-**Request Body:**
-```json
-{
-  "rows": [
-    { "widgets": ["directory", "gitBranch"] }
-  ],
-  "separator": " | ",
-  "cacheTtl": 120000
-}
-```
-
-**Response:** `200 OK`
-```json
-{
-  "success": true,
-  "data": {
-    "rows": [{ "widgets": ["directory", "gitBranch"] }],
-    "separator": " | ",
-    "cacheTtl": 120000
-  }
-}
-```
-
-**Error Response:** `400 Bad Request` (invalid schema)
-```json
-{
-  "success": false,
-  "error": "Invalid settings format"
-}
-```
-
-**cURL Example:**
-```bash
-curl -X PUT http://localhost:3000/api/settings \
-  -H "Content-Type: application/json" \
-  -d '{"rows":[{"widgets":["directory","gitBranch"]}]}'
-```
-
-### POST /api/preview
-
-Generate statusline preview HTML.
-
-**Request Body:**
-```json
-{
-  "settings": {
-    "rows": [{ "widgets": ["directory", "gitBranch"] }]
-  },
-  "terminalWidth": 80,
-  "widgetStates": {
-    "git": { "enabled": true, "dirty": true }
-  },
-  "terminalPalette": "dracula"
-}
-```
-
-**Response:** `200 OK`
-```json
-{
-  "success": true,
-  "data": {
-    "htmlRows": ["<pre>...</pre>"]
-  }
-}
-```
-
-**cURL Example:**
-```bash
-curl -X POST http://localhost:3000/api/preview \
-  -H "Content-Type: application/json" \
-  -d '{"settings":{"rows":[{"widgets":["directory","gitBranch"]}]},"terminalWidth":80}'
-```
-
-### GET /api/widgets
-
-Retrieve widget metadata and schemas.
-
-**Response:** `200 OK`
-```json
-{
-  "success": true,
-  "data": {
-    "widgets": [
-      {
-        "id": "directory",
-        "name": "Directory",
-        "description": "Current working directory (fish-style)",
-        "category": "location",
-        "previewStates": []
-      }
-    ],
-    "categories": [
-      {
-        "id": "location",
-        "name": "location",
-        "widgets": ["directory"]
-      }
-    ],
-    "widgetSchemas": []
-  }
-}
-```
-
-**cURL Example:**
-```bash
-curl http://localhost:3000/api/widgets
-```
-
-### Error Handling
-
-All endpoints return consistent error format:
-
-**500 Internal Server Error:**
-```json
-{
-  "success": false,
-  "error": "Error message description"
-}
-```
-
-## Development
-
-### Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/p5hema2/claude-code-cli-statusline.git
-cd claude-code-cli-statusline
-
-# Install dependencies
-npm install
-```
-
-### Build
-
-```bash
-npm run build              # Full build (TypeScript + GUI + CSS)
-npm run build:production   # Production build with minified CSS
-npm run build:css          # Build Tailwind CSS
-```
-
-### Development Workflow
-
-```bash
-# GUI Development (with live reload)
-npm run dev:configure      # Start config GUI with live console output (--raw flag)
-npm run dev:css            # Watch Tailwind CSS (auto-rebuild on changes)
-
-# CLI Development
-npm run dev                # Watch mode for CLI
-cat scripts/payload.example.json | npm start  # Test with example payload
-```
-
-**Live Development Features:**
-- Cache-Control headers prevent browser caching (changes appear immediately)
-- Server displays URL and file watcher status on startup
-- File changes trigger automatic browser reload (no manual refresh needed)
-- Console output shows real-time feedback from all processes
-
-### Testing
-
-```bash
-npm test                   # Run all tests (unit + E2E)
-npm run test:vitest        # Run unit tests only
-npm run test:e2e           # Run E2E tests (exits cleanly, no auto-open report)
-npm run test:e2e:report    # View last E2E test report
-npm run lint               # Run all linters (ESLint + Sheriff)
-```
-
-### Architecture
-
-See [TECH_STACK.md](TECH_STACK.md) for detailed architecture documentation:
-- Widget registry pattern
-- Config schema validation
-- Module boundaries (Sheriff)
-- FORCE_COLOR bootstrap pattern
-
-### Recent Changes
-
-See [CHANGELOG.md](CHANGELOG.md) for full version history.
-
-## How It Works
-
-1. Claude Code pipes status JSON to stdin
-2. The statusline parses and validates the input
-3. OAuth usage data is fetched (cached for 5 minutes)
-4. Widgets render their respective data
-5. Output is printed to stdout
+**Context & Performance:**
+- `contextUsage` - Context window bar
+- `contextThreshold` - Warning when >200K
+- `apiDuration` - API response time
+- `sessionCost` - Session cost (USD)
+- `sessionClock` - Elapsed time
+- `usageAge` - Query age
 
 ## Requirements
 
