@@ -96,6 +96,7 @@ export function generateMockContext(
       current_session: ZERO_USAGE_ENTRY,
       weekly_all: ZERO_USAGE_ENTRY,
       weekly_sonnet: ZERO_USAGE_ENTRY,
+      weekly_oauth_apps: null,
       extra_usage: mockExtraUsage(),
     };
     for (const fragment of usageFragments) {

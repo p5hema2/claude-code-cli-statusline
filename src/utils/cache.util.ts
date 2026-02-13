@@ -89,6 +89,12 @@ function responseToCache(response: UsageResponse): UsageCache {
       reset_time: response.seven_day_sonnet.resets_at,
       percent_used: response.seven_day_sonnet.utilization,
     },
+    weekly_oauth_apps: response.seven_day_oauth_apps
+      ? {
+          reset_time: response.seven_day_oauth_apps.resets_at,
+          percent_used: response.seven_day_oauth_apps.utilization,
+        }
+      : null,
     extra_usage: {
       is_enabled: response.extra_usage.is_enabled,
       monthly_limit: response.extra_usage.monthly_limit,

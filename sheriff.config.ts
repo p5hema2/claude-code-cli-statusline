@@ -28,6 +28,7 @@ export const sheriffConfig: SheriffConfig = {
     'src/widgets/shared': 'core:widgets',
     'src/widgets/mock': 'core:widgets',
     'src/widgets/extra-usage': 'core:widgets',
+    'src/widgets/weekly-oauth-apps': 'core:widgets',
     'src/utils': 'core:utils',
 
     // Feature layer - application features

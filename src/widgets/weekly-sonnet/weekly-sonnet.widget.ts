@@ -9,7 +9,7 @@ import chalk from 'chalk';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
-import { mockCachedEntry } from '../mock/mock.helper.js';
+import { mockCachedEntry } from '../mock/index.js';
 import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Weekly Sonnet usage widget schema - defines all GUI metadata */
