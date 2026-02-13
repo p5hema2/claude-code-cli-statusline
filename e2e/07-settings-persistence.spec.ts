@@ -27,17 +27,19 @@ test.describe('Settings Persistence', () => {
     await dragDrop.dragFromPaletteToRow('model', 0);
     await page.waitForTimeout(300);
 
-    // Click save button
-    await saveButton.click();
-
-    // Wait for save API call (PUT, not POST)
-    const saveResponse = await page.waitForResponse(
+    // Set up response listener BEFORE clicking (avoid race condition)
+    const saveResponsePromise = page.waitForResponse(
       (response) =>
         response.url().includes('/api/settings') &&
         response.request().method() === 'PUT',
       { timeout: 5000 }
     );
 
+    // Click save button
+    await saveButton.click();
+
+    // Wait for the response
+    const saveResponse = await saveResponsePromise;
     expect(saveResponse.ok()).toBeTruthy();
 
     // Status message should appear (success or just confirmation)

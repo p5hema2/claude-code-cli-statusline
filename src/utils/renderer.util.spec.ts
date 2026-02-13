@@ -32,7 +32,7 @@ vi.mock('../widgets/index.js', () => {
 
   const mockSeparatorWidget: Widget = {
     name: 'separator',
-    render: () => '|',
+    render: () => ' | ',
   };
 
   return {
