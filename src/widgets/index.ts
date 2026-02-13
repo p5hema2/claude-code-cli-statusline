@@ -15,6 +15,7 @@ export { mockCachedEntry, mockTimestampAt, mockExtraUsage } from './mock/index.j
 // Widget exports
 export { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
 export { ApiDurationWidget, ApiDurationSchema } from './api-duration/index.js';
+export { CodeChangesWidget, CodeChangesSchema } from './code-changes/index.js';
 export { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
 export { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.widget.js';
 export { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktree.widget.js';
@@ -48,6 +49,7 @@ import type { WidgetSchema, Widget } from '../types/index.js';
 import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
 import { ContextThresholdWidget, ContextThresholdSchema } from './context-threshold/index.js';
 import { ApiDurationWidget, ApiDurationSchema } from './api-duration/index.js';
+import { CodeChangesWidget, CodeChangesSchema } from './code-changes/index.js';
 import { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
 import { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 import { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
@@ -91,6 +93,7 @@ export interface WidgetEntry {
  */
 export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   apiDuration: { widget: ApiDurationWidget, schema: ApiDurationSchema },
+  codeChanges: { widget: CodeChangesWidget, schema: CodeChangesSchema },
   directory: { widget: DirectoryWidget, schema: DirectorySchema },
   gitBranch: { widget: GitBranchWidget, schema: GitBranchSchema },
   gitChanges: { widget: GitChangesWidget, schema: GitChangesSchema },
