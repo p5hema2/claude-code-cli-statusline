@@ -38,6 +38,18 @@ export const SeparatorSchema: WidgetSchema = {
         ],
         default: '|',
       },
+      {
+        key: 'spaceBefore',
+        type: 'checkbox',
+        label: 'Space Before',
+        default: true,
+      },
+      {
+        key: 'spaceAfter',
+        type: 'checkbox',
+        label: 'Space After',
+        default: true,
+      },
     ],
   },
 };
@@ -45,6 +57,8 @@ export const SeparatorSchema: WidgetSchema = {
 /** Separator options type */
 interface SeparatorOptions {
   text?: string;
+  spaceBefore?: boolean;
+  spaceAfter?: boolean;
 }
 
 export const SeparatorWidget: Widget = {
@@ -53,9 +67,16 @@ export const SeparatorWidget: Widget = {
   render(_ctx: RenderContext, config?: WidgetConfig): string | null {
     const options = config?.options as SeparatorOptions | undefined;
     const text = options?.text ?? '|';
+    const spaceBefore = options?.spaceBefore ?? true;
+    const spaceAfter = options?.spaceAfter ?? true;
+
+    // Build output with spacing
+    let output = text;
+    if (spaceBefore) output = ' ' + output;
+    if (spaceAfter) output = output + ' ';
 
     // Apply color (default to dim if not specified)
     const color = config?.color ?? 'dim';
-    return colorize(text, color);
+    return colorize(output, color);
   },
 };

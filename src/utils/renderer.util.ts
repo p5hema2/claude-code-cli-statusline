@@ -68,7 +68,7 @@ function renderRow(widgetConfigs: WidgetConfig[], ctx: RenderContext): string {
     cleaned.push(item);
   }
 
-  return cleaned.map((item) => item.output).join(' ');
+  return cleaned.map((item) => item.output).join('');
 }
 
 /**
