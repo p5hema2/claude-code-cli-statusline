@@ -7,7 +7,7 @@
  */
 
 import type { GitInfo, StatusJSON, UsageCache, WidgetSchema } from '../../types/index.js';
-import { mockCachedEntry } from '../../widgets/index.js';
+import { mockCachedEntry, mockExtraUsage } from '../../widgets/index.js';
 
 /** Widget state overrides for preview */
 export type WidgetStates = Record<string, string>;
@@ -96,6 +96,7 @@ export function generateMockContext(
       current_session: ZERO_USAGE_ENTRY,
       weekly_all: ZERO_USAGE_ENTRY,
       weekly_sonnet: ZERO_USAGE_ENTRY,
+      extra_usage: mockExtraUsage(),
     };
     for (const fragment of usageFragments) {
       Object.assign(merged, fragment);

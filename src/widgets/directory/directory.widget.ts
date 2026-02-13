@@ -10,7 +10,7 @@
 import { homedir } from 'node:os';
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema } from '../../types/index.js';
-import { getOption, colorizeWithConfig, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getOption, colorizeWithConfig, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Directory widget schema - defines all GUI metadata */
 export const DirectorySchema: WidgetSchema = {

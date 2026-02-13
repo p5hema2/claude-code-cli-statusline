@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Context usage widget schema - defines all GUI metadata */
 export const ContextUsageSchema: WidgetSchema = {

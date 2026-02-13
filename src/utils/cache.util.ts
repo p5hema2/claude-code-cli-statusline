@@ -89,6 +89,12 @@ function responseToCache(response: UsageResponse): UsageCache {
       reset_time: response.seven_day_sonnet.resets_at,
       percent_used: response.seven_day_sonnet.utilization,
     },
+    extra_usage: {
+      is_enabled: response.extra_usage.is_enabled,
+      monthly_limit: response.extra_usage.monthly_limit,
+      used_credits: response.extra_usage.used_credits,
+      utilization: response.extra_usage.utilization,
+    },
   };
 }
 

@@ -1,6 +1,6 @@
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { isGitRepo, getWorktreeName, colorize } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 export const GitWorktreeSchema: WidgetSchema = {
   id: 'gitWorktree',

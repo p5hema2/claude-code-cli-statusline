@@ -6,7 +6,9 @@ export { StatusJSONSchema, type StatusJSON } from './status-json.schema.js';
 export type {
   UsageLimit,
   UsageResponse,
+  ExtraUsage,
   CachedUsageEntry,
+  CachedExtraUsage,
   UsageCache,
 } from './usage-data.interface.js';
 export type {

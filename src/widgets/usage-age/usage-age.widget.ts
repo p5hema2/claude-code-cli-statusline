@@ -10,7 +10,7 @@
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
 import { mockTimestampAt } from '../mock/mock.helper.js';
-import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Usage age widget schema - defines all GUI metadata */
 export const UsageAgeSchema: WidgetSchema = {
