@@ -66,9 +66,26 @@ export function generateMockContext(
 
     const { mockData } = previewState;
 
-    // Merge status partials (each widget sets different top-level fields)
+    // Deep merge status partials to handle nested objects (token_metrics, cost, etc.)
+    // Previously used Object.assign which did shallow merge, causing widgets to
+    // overwrite each other's nested data. Now we deep merge one level to preserve
+    // all fields from multiple widgets contributing to the same nested object.
     if (mockData.status) {
-      Object.assign(status, mockData.status);
+      for (const [key, value] of Object.entries(mockData.status)) {
+        // Guard against prototype pollution (defense-in-depth)
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+          // Deep merge for nested objects (e.g., token_metrics, cost)
+          const existing = status[key];
+          status[key] = existing && typeof existing === 'object' && !Array.isArray(existing)
+            ? { ...existing, ...value }
+            : value;
+        } else {
+          // Direct assignment for primitives
+          status[key] = value;
+        }
+      }
     }
 
     // Collect usage fragments
