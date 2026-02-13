@@ -18,7 +18,7 @@ export const WeeklyOpusSchema: WidgetSchema = {
   meta: {
     displayName: 'Weekly Opus',
     description: '7-day Opus model usage limit',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     bar: {

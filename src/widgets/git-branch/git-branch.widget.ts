@@ -21,7 +21,7 @@ export const GitBranchSchema: WidgetSchema = {
   meta: {
     displayName: 'Git Branch',
     description: 'Git branch name with status indicators',
-    category: 'location',
+    category: 'git',
   },
   options: {
     custom: [

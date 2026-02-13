@@ -19,7 +19,7 @@ export const SeparatorSchema: WidgetSchema = {
   meta: {
     displayName: 'Separator',
     description: 'Visual separator between widgets',
-    category: 'location',
+    category: 'layout',
   },
   options: {
     content: { color: 'dim' },

@@ -7,7 +7,7 @@ export const TokensCachedSchema: WidgetSchema = {
   meta: {
     displayName: 'Tokens (Cached)',
     description: 'Cached tokens from prompt caching',
-    category: 'usage',
+    category: 'tokens',
   },
   options: {
     content: { color: 'cyan' },

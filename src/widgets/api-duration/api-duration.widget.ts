@@ -14,7 +14,7 @@ export const ApiDurationSchema: WidgetSchema = {
   meta: {
     displayName: 'API Duration',
     description: 'API response time',
-    category: 'usage',
+    category: 'session',
   },
   options: {
     content: { color: 'white' },

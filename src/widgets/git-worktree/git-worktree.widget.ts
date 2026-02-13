@@ -7,7 +7,7 @@ export const GitWorktreeSchema: WidgetSchema = {
   meta: {
     displayName: 'Git Worktree',
     description: 'Current git worktree name',
-    category: 'location',
+    category: 'git',
   },
   options: {
     content: { color: 'cyan' },

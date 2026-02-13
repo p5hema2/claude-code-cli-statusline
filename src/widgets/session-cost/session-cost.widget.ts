@@ -14,7 +14,7 @@ export const SessionCostSchema: WidgetSchema = {
   meta: {
     displayName: 'Session Cost',
     description: 'Session cost in USD',
-    category: 'usage',
+    category: 'session',
   },
   options: {
     content: { color: 'green' },

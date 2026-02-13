@@ -18,7 +18,7 @@ export const UsageAgeSchema: WidgetSchema = {
   meta: {
     displayName: 'Query Time',
     description: 'When usage data was last queried (absolute time)',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     custom: [

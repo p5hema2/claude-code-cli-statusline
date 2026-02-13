@@ -18,7 +18,7 @@ import type { StatusJSON } from './status-json.schema.js';
 import type { UsageCache } from './usage-data.interface.js';
 
 /** Category IDs - widgets group themselves into these */
-export type WidgetCategoryId = 'location' | 'model' | 'usage' | 'editor';
+export type WidgetCategoryId = 'environment' | 'layout' | 'git' | 'model' | 'tokens' | 'limits' | 'context' | 'session';
 
 /**
  * Mock data fragments that a preview state contributes to the preview context.

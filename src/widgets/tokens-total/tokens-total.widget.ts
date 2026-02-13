@@ -7,7 +7,7 @@ export const TokensTotalSchema: WidgetSchema = {
   meta: {
     displayName: 'Tokens (Total)',
     description: 'Total token count',
-    category: 'usage',
+    category: 'tokens',
   },
   options: {
     content: { color: 'yellow' },

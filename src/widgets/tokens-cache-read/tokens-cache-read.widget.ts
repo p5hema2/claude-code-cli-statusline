@@ -7,7 +7,7 @@ export const TokensCacheReadSchema: WidgetSchema = {
   meta: {
     displayName: 'Tokens (Cache Read)',
     description: 'Cache read tokens',
-    category: 'usage',
+    category: 'tokens',
   },
   options: {
     content: { color: 'magenta' },

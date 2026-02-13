@@ -64,7 +64,7 @@ function deriveCategories(schemas: WidgetSchema[]): WidgetCategory[] {
 
   // Convert to category array with display names
   // Maintain consistent category order
-  const categoryOrder = ['location', 'model', 'usage', 'editor'];
+  const categoryOrder = ['environment', 'layout', 'git', 'model', 'tokens', 'limits', 'context', 'session'];
 
   return categoryOrder
     .filter((id) => grouped.has(id))

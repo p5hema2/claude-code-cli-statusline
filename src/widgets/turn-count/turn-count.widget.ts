@@ -15,7 +15,7 @@ export const TurnCountSchema: WidgetSchema = {
   meta: {
     displayName: 'Turn Count',
     description: 'Number of conversation turns',
-    category: 'usage',
+    category: 'session',
   },
   options: {
     content: { color: 'white' },

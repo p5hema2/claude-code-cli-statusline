@@ -7,7 +7,7 @@ export const SessionClockSchema: WidgetSchema = {
   meta: {
     displayName: 'Session Clock',
     description: 'Elapsed time since session started',
-    category: 'usage',
+    category: 'session',
   },
   options: {
     content: { color: 'yellow' },

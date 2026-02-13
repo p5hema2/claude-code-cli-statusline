@@ -18,7 +18,7 @@ export const WeeklyOAuthAppsSchema: WidgetSchema = {
   meta: {
     displayName: 'Weekly OAuth Apps',
     description: '7-day OAuth apps usage limit',
-    category: 'usage',
+    category: 'limits',
   },
   options: {
     bar: {
