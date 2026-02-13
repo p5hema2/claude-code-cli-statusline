@@ -13,7 +13,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { getGitInfo, colorize, type GitInfo } from '../../utils/index.js';
-import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Git branch widget schema - defines all GUI metadata */
 export const GitBranchSchema: WidgetSchema = {

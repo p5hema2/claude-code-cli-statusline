@@ -10,7 +10,7 @@ export type { Widget, RenderContext } from '../types/index.js';
 export type { WidgetSchema } from '../types/index.js';
 
 // Mock helpers (re-exported for external consumers like configure/preview)
-export { mockCachedEntry, mockTimestampAt } from './mock/mock.helper.js';
+export { mockCachedEntry, mockTimestampAt, mockExtraUsage } from './mock/mock.helper.js';
 
 // Widget exports
 export { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
@@ -19,6 +19,7 @@ export { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.wi
 export { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktree.widget.js';
 export { ModelWidget, ModelSchema } from './model/model.widget.js';
 export { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
+export { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 export { SessionClockWidget, SessionClockSchema } from './session-clock/session-clock.widget.js';
 export { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
 export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
@@ -38,6 +39,7 @@ import type { WidgetSchema, Widget } from '../types/index.js';
 
 import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
 import { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
+import { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 import { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
 import { GitChangesWidget, GitChangesSchema } from './git-changes/git-changes.widget.js';
 import { GitWorktreeWidget, GitWorktreeSchema } from './git-worktree/git-worktree.widget.js';
@@ -78,6 +80,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   gitWorktree: { widget: GitWorktreeWidget, schema: GitWorktreeSchema },
   model: { widget: ModelWidget, schema: ModelSchema },
   contextUsage: { widget: ContextUsageWidget, schema: ContextUsageSchema },
+  extraUsage: { widget: ExtraUsageWidget, schema: ExtraUsageSchema },
   sessionClock: { widget: SessionClockWidget, schema: SessionClockSchema },
   sessionId: { widget: SessionIdWidget, schema: SessionIdSchema },
   sessionUsage: { widget: SessionUsageWidget, schema: SessionUsageSchema },

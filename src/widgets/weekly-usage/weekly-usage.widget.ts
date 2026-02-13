@@ -9,7 +9,7 @@ import chalk from 'chalk';
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, UsageBarColors } from '../../types/index.js';
 import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js';
 import { mockCachedEntry } from '../mock/mock.helper.js';
-import { getOption, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Weekly usage widget schema - defines all GUI metadata */
 export const WeeklyUsageSchema: WidgetSchema = {

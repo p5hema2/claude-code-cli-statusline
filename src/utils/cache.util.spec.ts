@@ -43,6 +43,7 @@ describe('loadCacheFromDisk', () => {
         reset_time: '2026-02-08T00:00:00Z',
         percent_used: 0.60,
       },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -111,6 +112,7 @@ describe('saveCacheToDisk', () => {
         reset_time: '2026-02-08T00:00:00Z',
         percent_used: 0.60,
       },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -130,6 +132,7 @@ describe('saveCacheToDisk', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(false);
@@ -149,6 +152,7 @@ describe('saveCacheToDisk', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(false);
@@ -166,6 +170,7 @@ describe('saveCacheToDisk', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -193,6 +198,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     const ttl = 5 * 60 * 1000; // 5 minutes
@@ -205,6 +211,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     const ttl = 5 * 60 * 1000; // 5 minutes
@@ -217,6 +224,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     // Default TTL is 5 minutes, so 4 minutes ago should be valid
@@ -230,6 +238,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     expect(isCacheValid(mockCache, ttl)).toBe(false);
@@ -241,6 +250,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     expect(isCacheValid(mockCache)).toBe(false);
@@ -252,6 +262,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     // Future timestamps result in negative age, which is < ttl, so returns true
@@ -265,6 +276,7 @@ describe('isCacheValid', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     expect(isCacheValid(mockCache, 0)).toBe(false);
@@ -290,6 +302,12 @@ describe('refreshUsageCache', () => {
         utilization: 0.60,
         resets_at: '2026-02-08T00:00:00Z',
       },
+      extra_usage: {
+        is_enabled: false,
+        monthly_limit: null,
+        used_credits: null,
+        utilization: null,
+      },
     };
 
     vi.mocked(getAccessToken).mockResolvedValue('test-token');
@@ -311,6 +329,7 @@ describe('refreshUsageCache', () => {
         reset_time: '2026-02-08T00:00:00Z',
         percent_used: 0.60,
       },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
     expect(result?.timestamp).toBeGreaterThan(0);
     expect(writeFileSync).toHaveBeenCalled();
@@ -346,6 +365,12 @@ describe('refreshUsageCache', () => {
         utilization: 0.60,
         resets_at: '2026-02-08T00:00:00Z',
       },
+      extra_usage: {
+        is_enabled: false,
+        monthly_limit: null,
+        used_credits: null,
+        utilization: null,
+      },
     };
 
     vi.mocked(getAccessToken).mockResolvedValue('test-token');
@@ -375,6 +400,7 @@ describe('loadUsageCache', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -393,12 +419,19 @@ describe('loadUsageCache', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     const mockResponse: UsageResponse = {
       five_hour: { utilization: 0.30, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
+      extra_usage: {
+        is_enabled: false,
+        monthly_limit: null,
+        used_credits: null,
+        utilization: null,
+      },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -422,6 +455,7 @@ describe('loadUsageCache', () => {
       five_hour: { utilization: 0.25, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.45, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_sonnet: { utilization: 0.60, resets_at: '2026-02-08T00:00:00Z' },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
 
     const result = await loadUsageCache();
@@ -439,6 +473,7 @@ describe('loadUsageCache', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -479,12 +514,19 @@ describe('waitForPendingRefresh', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     const mockResponse: UsageResponse = {
       five_hour: { utilization: 0.30, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
+      extra_usage: {
+        is_enabled: false,
+        monthly_limit: null,
+        used_credits: null,
+        utilization: null,
+      },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -508,6 +550,7 @@ describe('waitForPendingRefresh', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);
@@ -517,6 +560,7 @@ describe('waitForPendingRefresh', () => {
       five_hour: { utilization: 0.30, resets_at: '2026-02-04T18:00:00Z' },
       seven_day: { utilization: 0.50, resets_at: '2026-02-08T00:00:00Z' },
       seven_day_sonnet: { utilization: 0.65, resets_at: '2026-02-08T00:00:00Z' },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     });
 
     await loadUsageCache();
@@ -533,6 +577,7 @@ describe('waitForPendingRefresh', () => {
       current_session: { reset_time: '2026-02-04T18:00:00Z', percent_used: 0.25 },
       weekly_all: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.45 },
       weekly_sonnet: { reset_time: '2026-02-08T00:00:00Z', percent_used: 0.60 },
+      extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
     };
 
     vi.mocked(existsSync).mockReturnValue(true);

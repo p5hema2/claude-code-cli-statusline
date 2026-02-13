@@ -7,7 +7,7 @@
 
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize } from '../../utils/index.js';
-import { getColor, renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { getColor, renderWidgetWithLabel } from '../shared/index.js';
 
 /** Vim mode widget schema - defines all GUI metadata */
 export const VimModeSchema: WidgetSchema = {

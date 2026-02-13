@@ -1,6 +1,6 @@
 import type { Widget, RenderContext, WidgetConfig, WidgetSchema, ColorValue } from '../../types/index.js';
 import { colorize, formatTokens } from '../../utils/index.js';
-import { renderWidgetWithLabel } from '../shared/widget.helper.js';
+import { renderWidgetWithLabel } from '../shared/index.js';
 
 export const TokensCachedSchema: WidgetSchema = {
   id: 'tokensCached',

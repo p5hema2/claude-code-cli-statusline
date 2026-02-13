@@ -6,7 +6,7 @@
  * generators, keeping mock data co-located with each widget's schema.
  */
 
-import type { CachedUsageEntry } from '../../types/index.js';
+import type { CachedUsageEntry, CachedExtraUsage } from '../../types/index.js';
 
 /**
  * Generate an ISO reset time ~7 days from now
@@ -46,4 +46,18 @@ export function mockTimestampAt(hours: number, minutes: number): number {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   return today.getTime() + hours * 60 * 60 * 1000 + minutes * 60 * 1000;
+}
+
+/**
+ * Create a mock extra usage entry (disabled by default)
+ *
+ * @returns A disabled CachedExtraUsage entry
+ */
+export function mockExtraUsage(): CachedExtraUsage {
+  return {
+    is_enabled: false,
+    monthly_limit: null,
+    used_credits: null,
+    utilization: null,
+  };
 }
