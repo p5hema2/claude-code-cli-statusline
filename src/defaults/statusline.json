@@ -20,6 +20,26 @@
       { "widget": "weeklyUsage" },
       { "widget": "separator" },
       { "widget": "weeklySonnet" }
+    ],
+    [
+      { "widget": "tokensInput" },
+      { "widget": "separator" },
+      { "widget": "tokensOutput" },
+      { "widget": "separator" },
+      { "widget": "tokensCached" },
+      { "widget": "separator" },
+      { "widget": "tokensTotal", "color": "yellow" },
+      { "widget": "separator" },
+      { "widget": "tokensCacheRead", "color": "magenta" }
+    ],
+    [
+      { "widget": "sessionCost", "color": "green" },
+      { "widget": "separator" },
+      { "widget": "turnCount" },
+      { "widget": "separator" },
+      { "widget": "apiDuration" },
+      { "widget": "separator" },
+      { "widget": "codeChanges" }
     ]
   ]
 }
