@@ -1,5 +1,5 @@
 /**
- * Extra usage widget tests
+ * Weekly OAuth Apps widget tests
  */
 
 import { describe, it, expect } from 'vitest';
@@ -7,11 +7,11 @@ import { describe, it, expect } from 'vitest';
 import type { RenderContext } from '../../types/index.js';
 import { stripAnsi } from '../../utils/index.js';
 
-import { ExtraUsageWidget } from './extra-usage.widget.js';
+import { WeeklyOAuthAppsWidget } from './weekly-oauth-apps.widget.js';
 
-describe('ExtraUsageWidget', () => {
+describe('WeeklyOAuthAppsWidget', () => {
   it('should have correct name', () => {
-    expect(ExtraUsageWidget.name).toBe('extraUsage');
+    expect(WeeklyOAuthAppsWidget.name).toBe('weeklyOAuthApps');
   });
 
   it('should return null when no usage data', () => {
@@ -28,11 +28,11 @@ describe('ExtraUsageWidget', () => {
       settings: {},
     };
 
-    const result = ExtraUsageWidget.render(ctx);
+    const result = WeeklyOAuthAppsWidget.render(ctx);
     expect(result).toBeNull();
   });
 
-  it('should return null when extra usage is disabled', () => {
+  it('should return null when weekly_oauth_apps is null', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test',
@@ -46,23 +46,18 @@ describe('ExtraUsageWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-      weekly_oauth_apps: null,
-        extra_usage: {
-          is_enabled: false,
-          monthly_limit: null,
-          used_credits: null,
-          utilization: null,
-        },
+        weekly_oauth_apps: null,
+        extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const result = ExtraUsageWidget.render(ctx);
+    const result = WeeklyOAuthAppsWidget.render(ctx);
     expect(result).toBeNull();
   });
 
-  it('should render with bar and credits when enabled', () => {
+  it('should render usage bar with percentage', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test',
@@ -76,27 +71,21 @@ describe('ExtraUsageWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-      weekly_oauth_apps: null,
-        extra_usage: {
-          is_enabled: true,
-          monthly_limit: 100.0,
-          used_credits: 23.45,
-          utilization: 23.45,
-        },
+        weekly_oauth_apps: { reset_time: '2026-02-20T00:00:00Z', percent_used: 15 },
+        extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const result = ExtraUsageWidget.render(ctx);
+    const result = WeeklyOAuthAppsWidget.render(ctx);
     expect(result).toBeTruthy();
 
     const plain = stripAnsi(result!);
-    expect(plain).toContain('$23.45');
-    expect(plain).toContain('$100.00');
+    expect(plain).toContain('15');
   });
 
-  it('should render only bar when showCredits is false', () => {
+  it('should render with reset time by default', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test',
@@ -110,27 +99,22 @@ describe('ExtraUsageWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-      weekly_oauth_apps: null,
-        extra_usage: {
-          is_enabled: true,
-          monthly_limit: 100.0,
-          used_credits: 23.45,
-          utilization: 23.45,
-        },
+        weekly_oauth_apps: { reset_time: '2026-02-20T00:00:00Z', percent_used: 50 },
+        extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const config = { widget: 'extraUsage', options: { showCredits: false } };
-    const result = ExtraUsageWidget.render(ctx, config);
+    const result = WeeklyOAuthAppsWidget.render(ctx);
     expect(result).toBeTruthy();
 
     const plain = stripAnsi(result!);
-    expect(plain).not.toContain('$23.45');
+    // Should contain percentage and some time indicator
+    expect(plain).toContain('50');
   });
 
-  it('should render only credits when showBar is false', () => {
+  it('should hide reset time when showResetTime is false', () => {
     const ctx: RenderContext = {
       status: {
         current_dir: '/test',
@@ -144,57 +128,20 @@ describe('ExtraUsageWidget', () => {
         current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
         weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
         weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-      weekly_oauth_apps: null,
-        extra_usage: {
-          is_enabled: true,
-          monthly_limit: 100.0,
-          used_credits: 55.75,
-          utilization: 55.75,
-        },
+        weekly_oauth_apps: { reset_time: '2026-02-20T00:00:00Z', percent_used: 80 },
+        extra_usage: { is_enabled: false, monthly_limit: null, used_credits: null, utilization: null },
       },
       terminalWidth: 80,
       settings: {},
     };
 
-    const config = { widget: 'extraUsage', options: { showBar: false } };
-    const result = ExtraUsageWidget.render(ctx, config);
+    const config = { widget: 'weeklyOAuthApps', options: { showResetTime: false } };
+    const result = WeeklyOAuthAppsWidget.render(ctx, config);
     expect(result).toBeTruthy();
 
     const plain = stripAnsi(result!);
-    expect(plain).toContain('$55.75');
-    expect(plain).toContain('$100.00');
-  });
-
-  it('should handle high utilization', () => {
-    const ctx: RenderContext = {
-      status: {
-        current_dir: '/test',
-        model: undefined,
-        vim_mode: undefined,
-        context_window: undefined,
-        output_style: undefined,
-      },
-      usage: {
-        timestamp: Date.now(),
-        current_session: { reset_time: '2026-02-13T10:00:00Z', percent_used: 20 },
-        weekly_all: { reset_time: '2026-02-20T00:00:00Z', percent_used: 30 },
-        weekly_sonnet: { reset_time: '2026-02-20T00:00:00Z', percent_used: 25 },
-      weekly_oauth_apps: null,
-        extra_usage: {
-          is_enabled: true,
-          monthly_limit: 100.0,
-          used_credits: 92.5,
-          utilization: 92.5,
-        },
-      },
-      terminalWidth: 80,
-      settings: {},
-    };
-
-    const result = ExtraUsageWidget.render(ctx);
-    expect(result).toBeTruthy();
-
-    const plain = stripAnsi(result!);
-    expect(plain).toContain('$92.50');
+    expect(plain).toContain('80');
+    // Should not contain parentheses that wrap reset time
+    expect(plain).not.toMatch(/\([^)]+\)/);
   });
 });

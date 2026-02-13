@@ -33,6 +33,8 @@ export interface UsageResponse {
   seven_day: UsageLimit;
   /** 7-day limit specifically for Sonnet model */
   seven_day_sonnet: UsageLimit;
+  /** 7-day limit for OAuth apps usage */
+  seven_day_oauth_apps: UsageLimit | null;
   /** Extra usage credits for overuse tracking */
   extra_usage: ExtraUsage;
 }
@@ -67,6 +69,8 @@ export interface UsageCache {
   weekly_all: CachedUsageEntry;
   /** 7-day Sonnet-specific usage */
   weekly_sonnet: CachedUsageEntry;
+  /** 7-day OAuth apps usage */
+  weekly_oauth_apps: CachedUsageEntry | null;
   /** Extra usage credits tracking */
   extra_usage: CachedExtraUsage;
 }

@@ -1,7 +1,8 @@
 /**
- * Weekly usage widget
+ * Weekly OAuth Apps usage widget
  *
- * Displays the 7-day usage across all models from OAuth API.
+ * Displays the 7-day usage from OAuth-based applications.
+ * Returns null when no OAuth app usage exists.
  */
 
 import chalk from 'chalk';
@@ -11,12 +12,12 @@ import { createUsageBar, colorize, formatResetTime } from '../../utils/index.js'
 import { mockCachedEntry } from '../mock/index.js';
 import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 
-/** Weekly usage widget schema - defines all GUI metadata */
-export const WeeklyUsageSchema: WidgetSchema = {
-  id: 'weeklyUsage',
+/** Weekly OAuth Apps usage widget schema - defines all GUI metadata */
+export const WeeklyOAuthAppsSchema: WidgetSchema = {
+  id: 'weeklyOAuthApps',
   meta: {
-    displayName: 'Weekly Usage',
-    description: 'Weekly usage limit progress',
+    displayName: 'Weekly OAuth Apps',
+    description: '7-day OAuth apps usage limit',
     category: 'usage',
   },
   options: {
@@ -32,7 +33,7 @@ export const WeeklyUsageSchema: WidgetSchema = {
       { key: 'showBar', type: 'checkbox', label: 'Show usage bar', default: true },
       { key: 'showPercent', type: 'checkbox', label: 'Show percentage', default: true },
       { key: 'showResetTime', type: 'checkbox', label: 'Show reset time', default: true },
-      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "7d"' },
+      { key: 'label', type: 'text', label: 'Label Prefix', default: '', maxLength: 20, placeholder: 'e.g., "OAuth"' },
       { key: 'labelColor', type: 'color', label: 'Label Color', default: 'dim' },
       {
         key: 'naVisibility',
@@ -50,33 +51,33 @@ export const WeeklyUsageSchema: WidgetSchema = {
   },
   previewStates: [
     {
-      id: 'low', label: 'Low', description: 'Low weekly usage',
-      mockData: { usage: { weekly_all: mockCachedEntry(20) } },
+      id: 'low', label: 'Low', description: 'Low OAuth apps usage',
+      mockData: { usage: { weekly_oauth_apps: mockCachedEntry(20) } },
     },
     {
-      id: 'medium', label: 'Medium', description: 'Medium weekly usage',
-      mockData: { usage: { weekly_all: mockCachedEntry(50) } },
+      id: 'medium', label: 'Medium', description: 'Medium OAuth apps usage',
+      mockData: { usage: { weekly_oauth_apps: mockCachedEntry(50) } },
     },
     {
-      id: 'high', label: 'High', description: 'High weekly usage',
-      mockData: { usage: { weekly_all: mockCachedEntry(80) } },
+      id: 'high', label: 'High', description: 'High OAuth apps usage',
+      mockData: { usage: { weekly_oauth_apps: mockCachedEntry(80) } },
     },
     {
-      id: 'noOAuth', label: 'No OAuth', description: 'Not using OAuth authentication',
-      mockData: { usage: null },
+      id: 'noData', label: 'No Data', description: 'No OAuth app usage',
+      mockData: { usage: { weekly_oauth_apps: null } },
     },
   ],
 };
 
-export const WeeklyUsageWidget: Widget = {
-  name: 'weeklyUsage',
+export const WeeklyOAuthAppsWidget: Widget = {
+  name: 'weeklyOAuthApps',
 
   render(ctx: RenderContext, config?: WidgetConfig): string | null {
-    if (!ctx.usage?.weekly_all) {
+    if (!ctx.usage?.weekly_oauth_apps) {
       return renderWidgetWithLabel(null, config, 'green');
     }
 
-    const { percent_used, reset_time } = ctx.usage.weekly_all;
+    const { percent_used, reset_time } = ctx.usage.weekly_oauth_apps;
 
     // Get options from inline config
     const barColors = getOption<UsageBarColors>(config, 'barColors');

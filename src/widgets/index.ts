@@ -10,7 +10,7 @@ export type { Widget, RenderContext } from '../types/index.js';
 export type { WidgetSchema } from '../types/index.js';
 
 // Mock helpers (re-exported for external consumers like configure/preview)
-export { mockCachedEntry, mockTimestampAt, mockExtraUsage } from './mock/mock.helper.js';
+export { mockCachedEntry, mockTimestampAt, mockExtraUsage } from './mock/index.js';
 
 // Widget exports
 export { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
@@ -25,6 +25,7 @@ export { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget
 export { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 export { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
 export { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
+export { WeeklyOAuthAppsWidget, WeeklyOAuthAppsSchema } from './weekly-oauth-apps/index.js';
 export { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
 export { OutputStyleWidget, OutputStyleSchema } from './output-style/output-style.widget.js';
 export { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
@@ -56,6 +57,7 @@ import { TokensOutputWidget, TokensOutputSchema } from './tokens-output/tokens-o
 import { UsageAgeWidget, UsageAgeSchema } from './usage-age/usage-age.widget.js';
 import { VersionWidget, VersionSchema } from './version/version.widget.js';
 import { VimModeWidget, VimModeSchema } from './vim-mode/vim-mode.widget.js';
+import { WeeklyOAuthAppsWidget, WeeklyOAuthAppsSchema } from './weekly-oauth-apps/index.js';
 import { WeeklySonnetWidget, WeeklySonnetSchema } from './weekly-sonnet/weekly-sonnet.widget.js';
 import { WeeklyUsageWidget, WeeklyUsageSchema } from './weekly-usage/weekly-usage.widget.js';
 
@@ -86,6 +88,7 @@ export const WIDGET_REGISTRY: Record<string, WidgetEntry> = {
   sessionUsage: { widget: SessionUsageWidget, schema: SessionUsageSchema },
   weeklyUsage: { widget: WeeklyUsageWidget, schema: WeeklyUsageSchema },
   weeklySonnet: { widget: WeeklySonnetWidget, schema: WeeklySonnetSchema },
+  weeklyOAuthApps: { widget: WeeklyOAuthAppsWidget, schema: WeeklyOAuthAppsSchema },
   usageAge: { widget: UsageAgeWidget, schema: UsageAgeSchema },
   outputStyle: { widget: OutputStyleWidget, schema: OutputStyleSchema },
   vimMode: { widget: VimModeWidget, schema: VimModeSchema },
