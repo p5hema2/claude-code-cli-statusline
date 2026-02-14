@@ -16,8 +16,8 @@ import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 export const WeeklyOpusSchema: WidgetSchema = {
   id: 'weeklyOpus',
   meta: {
-    displayName: 'Weekly Opus',
-    description: '7-day Opus model usage limit',
+    displayName: 'Weekly Opus (EXPERIMENTAL)',
+    description: '7-day Opus model usage limit (untested - no account access)',
     category: 'limits',
   },
   options: {
