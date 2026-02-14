@@ -158,10 +158,11 @@ function createSimpleColorConfig(config, defaultColor) {
   group.appendChild(titleEl);
 
   group.appendChild(createColorField('Widget Color', config.color || '', (value) => {
-    if (value) {
-      config.color = value;
-    } else {
+    // Only delete when empty, preserve values that match defaults
+    if (value === '') {
       delete config.color;
+    } else {
+      config.color = value;
     }
     state.isDirty = true;
     updatePreview();
@@ -187,10 +188,11 @@ function createStateColorConfig(config, stateColors) {
   for (const opt of stateColors) {
     const currentValue = config.colors[opt.key] || '';
     grid.appendChild(createColorField(opt.label, currentValue, (value) => {
-      if (value) {
-        config.colors[opt.key] = value;
-      } else {
+      // Only delete when empty, preserve values that match defaults
+      if (value === '') {
         delete config.colors[opt.key];
+      } else {
+        config.colors[opt.key] = value;
       }
       if (Object.keys(config.colors).length === 0) delete config.colors;
       state.isDirty = true;
@@ -227,10 +229,11 @@ function createBarColorConfig(config, schema) {
   for (const bc of barColors) {
     const currentValue = config.options.barColors[bc.key] || '';
     grid.appendChild(createColorField(bc.label, currentValue, (value) => {
-      if (value) {
-        config.options.barColors[bc.key] = value;
-      } else {
+      // Only delete when empty, preserve values that match defaults
+      if (value === '') {
         delete config.options.barColors[bc.key];
+      } else {
+        config.options.barColors[bc.key] = value;
       }
       if (Object.keys(config.options.barColors).length === 0) delete config.options.barColors;
       if (Object.keys(config.options).length === 0) delete config.options;
@@ -611,7 +614,8 @@ function createColorField(label, currentValue, onChange, defaultValue = 'dim') {
     options: ANSI_COLORS,
     currentValue: effectiveValue,
     onChange: (value) => {
-      onChange(value === defaultValue ? '' : value);
+      // Pass actual value to onChange, let callback decide what to save
+      onChange(value);
     },
     renderOption: (el, opt) => {
       const hex = getColorHex(opt.value);
