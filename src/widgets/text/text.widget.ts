@@ -27,7 +27,7 @@ export const TextSchema: WidgetSchema = {
         type: 'text',
         label: 'Text Content',
         default: '',
-        maxLength: 50,
+        maxLength: 100,
         placeholder: 'Enter custom text, emoji, or Unicode...',
       },
     ],

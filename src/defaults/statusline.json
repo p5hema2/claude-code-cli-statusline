@@ -2,48 +2,282 @@
   "cacheTtl": 60000,
   "rows": [
     [
-      { "widget": "directory", "color": "blue" },
-      { "widget": "separator" },
-      { "widget": "gitBranch" },
-      { "widget": "separator" },
-      { "widget": "model" },
-      { "widget": "separator" },
-      { "widget": "outputStyle" },
-      { "widget": "separator" },
-      { "widget": "vimMode" }
+      {
+        "widget": "directory",
+        "color": "blue",
+        "options": {
+          "format": "project-only",
+          "label": "Dir"
+        }
+      },
+      {
+        "widget": "separator",
+        "options": {}
+      },
+      {
+        "widget": "gitBranch",
+        "options": {
+          "label": "Branch"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "gitWorktree",
+        "options": {
+          "label": "Tree"
+        }
+      }
     ],
     [
-      { "widget": "contextUsage" },
-      { "widget": "separator" },
-      { "widget": "sessionUsage" },
-      { "widget": "separator" },
-      { "widget": "weeklyUsage" },
-      { "widget": "separator" },
-      { "widget": "weeklySonnet" }
+      {
+        "widget": "model",
+        "colors": {},
+        "options": {
+          "label": "Model"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "outputStyle",
+        "colors": {},
+        "options": {
+          "label": "Style"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "vimMode",
+        "colors": {},
+        "options": {
+          "label": "Vim"
+        }
+      }
     ],
     [
-      { "widget": "tokensInput" },
-      { "widget": "separator" },
-      { "widget": "tokensOutput" },
-      { "widget": "separator" },
-      { "widget": "tokensCached" },
-      { "widget": "separator" },
-      { "widget": "tokensTotal", "color": "yellow" },
-      { "widget": "separator" },
-      { "widget": "tokensCacheRead", "color": "magenta" }
+      {
+        "widget": "contextUsage",
+        "options": {
+          "barColors": {},
+          "label": "Ctx"
+        }
+      },
+      {
+        "widget": "text",
+        "options": {
+          "text": " ("
+        },
+        "color": "dim"
+      },
+      {
+        "widget": "usageAge",
+        "options": {
+          "naVisibility": "na",
+          "iconColor": "dim",
+          "labelColor": "dim",
+          "timeColor": "dim"
+        }
+      },
+      {
+        "widget": "text",
+        "options": {
+          "text": ")"
+        },
+        "color": "dim"
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "sessionUsage",
+        "options": {
+          "barColors": {},
+          "label": "5h "
+        }
+      }
     ],
     [
-      { "widget": "sessionCost", "color": "green" },
-      { "widget": "separator" },
-      { "widget": "turnCount" },
-      { "widget": "separator" },
-      { "widget": "apiDuration" },
-      { "widget": "separator" },
-      { "widget": "codeChanges" }
+      {
+        "widget": "weeklyUsage",
+        "options": {
+          "barColors": {},
+          "label": "7d "
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "weeklySonnet",
+        "options": {
+          "barColors": {},
+          "label": "7dS"
+        }
+      }
     ],
     [
-      { "widget": "text", "options": { "text": "💡 To configure: " }, "color": "dim" },
-      { "widget": "text", "options": { "text": "npx @p5hema2/claude-code-cli-statusline --configure" }, "color": "cyan" }
+      {
+        "widget": "tokensInput",
+        "options": {
+          "label": "In"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "tokensOutput",
+        "options": {
+          "label": "Out"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "tokensCached",
+        "options": {
+          "label": "Cached"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "tokensTotal",
+        "color": "yellow",
+        "options": {
+          "label": "Total"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "tokensCacheRead",
+        "color": "magenta",
+        "options": {
+          "label": "Read"
+        }
+      }
+    ],
+    [
+      {
+        "widget": "weeklyOAuthApps",
+        "options": {
+          "barColors": {},
+          "label": "OAuth"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "weeklyCowork",
+        "options": {
+          "barColors": {},
+          "label": "Cowork"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "weeklyOpus",
+        "options": {
+          "barColors": {},
+          "label": "Opus"
+        }
+      }
+    ],
+    [
+      {
+        "widget": "extraUsage",
+        "options": {
+          "barColors": {},
+          "label": "Extra"
+        }
+      }
+    ],
+    [
+      {
+        "widget": "sessionCost",
+        "color": "green",
+        "options": {
+          "label": "Cost"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "apiDuration",
+        "options": {
+          "label": "API"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "codeChanges",
+        "options": {
+          "label": "Lines"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "turnCount",
+        "options": {
+          "label": "Turns"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "contextThreshold",
+        "options": {}
+      }
+    ],
+    [
+      {
+        "widget": "sessionId",
+        "options": {
+          "label": "Session"
+        }
+      },
+      {
+        "widget": "separator"
+      },
+      {
+        "widget": "version",
+        "options": {
+          "label": "CLI"
+        }
+      }
+    ],
+    [
+      {
+        "widget": "text",
+        "options": {
+          "text": "To configure use: "
+        }
+      },
+      {
+        "widget": "text",
+        "options": {
+          "text": "npx @p5hema2/claude-code-cli-statusline --configure"
+        },
+        "color": "bold"
+      }
     ]
   ]
 }
