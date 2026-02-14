@@ -305,17 +305,24 @@ function createCustomOptions(config, customOptions) {
       otherGroup.appendChild(titleEl);
 
       for (const opt of indicatorData.otherOptions) {
-        if (opt.type === 'color') {
+        if (opt.type === 'select') {
+          otherGroup.appendChild(createSelectField(opt, config.options));
+        } else if (opt.type === 'checkbox') {
+          otherGroup.appendChild(createCheckboxField(opt, config.options));
+        } else if (opt.type === 'color') {
           otherGroup.appendChild(createColorField(opt.label, config.options[opt.key] || '', (value) => {
-            if (value) {
-              config.options[opt.key] = value;
-            } else {
+            // Only delete when empty, preserve values that match defaults
+            if (value === '') {
               delete config.options[opt.key];
+            } else {
+              config.options[opt.key] = value;
             }
             if (Object.keys(config.options).length === 0) delete config.options;
             state.isDirty = true;
             updatePreview();
           }, opt.default));
+        } else if (opt.type === 'text') {
+          otherGroup.appendChild(createTextField(opt, config.options));
         }
       }
 
@@ -342,7 +349,7 @@ function createCustomOptions(config, customOptions) {
     // Header row
     const header = document.createElement('div');
     header.className = 'indicator-grid-header';
-    header.innerHTML = '<span></span><span>Symbol</span><span>Color</span><span>Show</span>';
+    header.innerHTML = '<span>Status</span><span>Symbol</span><span>Color</span><span>Show</span>';
     grid.appendChild(header);
 
     // Indicator rows
