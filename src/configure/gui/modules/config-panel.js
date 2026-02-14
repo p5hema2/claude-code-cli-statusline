@@ -415,10 +415,11 @@ function createCustomOptions(config, customOptions) {
         container.appendChild(createCheckboxField(opt, config.options));
       } else if (opt.type === 'color') {
         container.appendChild(createColorField(opt.label, config.options[opt.key] || '', (value) => {
-          if (value) {
-            config.options[opt.key] = value;
-          } else {
+          // Only delete when empty, preserve values that match defaults
+          if (value === '') {
             delete config.options[opt.key];
+          } else {
+            config.options[opt.key] = value;
           }
           if (Object.keys(config.options).length === 0) delete config.options;
           state.isDirty = true;
@@ -739,7 +740,8 @@ function createTextField(opt, optionsObj) {
     }
 
     // Update options
-    if (value === opt.default || value === '') {
+    // Only delete when empty, preserve values that match defaults
+    if (value === '') {
       delete optionsObj[opt.key];
     } else {
       optionsObj[opt.key] = value;

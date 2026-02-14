@@ -87,8 +87,8 @@ export function renderWithLabel(
   // Get label color (or use default)
   const labelColor = getOption<ColorValue>(config, 'labelColor') ?? defaultLabelColor;
 
-  // Format: "Label: content"
-  return `${colorizeUtil(label, labelColor)}: ${content}`;
+  // Format: "Label: content" (separator included in colorized label)
+  return `${colorizeUtil(label + ':', labelColor)} ${content}`;
 }
 
 /**
