@@ -3,8 +3,11 @@
 A customizable statusline for Claude Code CLI with **OAuth usage metrics**.
 
 [![npm version](https://badge.fury.io/js/%40p5hema2%2Fclaude-code-cli-statusline.svg)](https://www.npmjs.com/package/@p5hema2/claude-code-cli-statusline)
-[![CI](https://github.com/p5hema2/claude-code-cli-statusline/actions/workflows/ci.yml/badge.svg)](https://github.com/p5hema2/claude-code-cli-statusline/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Preview
+
+![preview.png](preview.png)
 
 ## Features
 
@@ -198,19 +201,3 @@ Create `~/.claude/statusline-settings.json`:
 ## License
 
 MIT © Martin Heß
-
----
-
-## Developed by Smart Commerce SE
-
-<div align="center">
-  <img src="docs/smart-commerce-logo.svg" alt="Smart Commerce SE" width="200">
-  <p><em>This tool was developed by <a href="https://www.smartcommerce.de/en/">Smart Commerce SE</a> — enterprise eCommerce solutions and digital commerce.</em></p>
-
-  **Technology Stack & Services:**
-  Intershop • Shopware • commercetools • Spryker • Emporix • Digital Strategy • Cloud Operations • PIM • AI Solutions
-
-  **Partner:** <a href="https://www.deepr.agency/">deepr agency</a> — Full-service digital partner for branding, web development, and online marketing
-
-  <p><a href="https://www.smartcommerce.de/en/contact/">Get in touch</a></p>
-</div>
