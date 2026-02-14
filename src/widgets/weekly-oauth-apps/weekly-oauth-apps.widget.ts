@@ -16,8 +16,8 @@ import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 export const WeeklyOAuthAppsSchema: WidgetSchema = {
   id: 'weeklyOAuthApps',
   meta: {
-    displayName: 'Weekly OAuth Apps',
-    description: '7-day OAuth apps usage limit',
+    displayName: 'Weekly OAuth Apps (EXPERIMENTAL)',
+    description: '7-day OAuth apps usage limit (untested - no account access)',
     category: 'limits',
   },
   options: {

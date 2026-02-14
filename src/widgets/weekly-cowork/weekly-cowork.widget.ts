@@ -16,8 +16,8 @@ import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 export const WeeklyCoworkSchema: WidgetSchema = {
   id: 'weeklyCowork',
   meta: {
-    displayName: 'Weekly Cowork Apps',
-    description: '7-day Cowork usage limit',
+    displayName: 'Weekly Cowork Apps (EXPERIMENTAL)',
+    description: '7-day Cowork usage limit (untested - no account access)',
     category: 'limits',
   },
   options: {

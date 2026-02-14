@@ -15,8 +15,8 @@ import { getOption, renderWidgetWithLabel } from '../shared/index.js';
 export const ExtraUsageSchema: WidgetSchema = {
   id: 'extraUsage',
   meta: {
-    displayName: 'Extra Usage',
-    description: 'Overuse credits tracking',
+    displayName: 'Extra Usage (EXPERIMENTAL)',
+    description: 'Overuse credits tracking (untested - Max subscribers only)',
     category: 'limits',
   },
   options: {
