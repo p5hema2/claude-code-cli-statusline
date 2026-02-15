@@ -46,11 +46,11 @@
   }
 
   /* Logo inversion for dark theme */
-  header img[alt="Smart Commerce"] {
+  header img {
     filter: brightness(0) invert(1);
   }
 
-  :root.light header img[alt="Smart Commerce"] {
+  :root.light header img {
     filter: none;
   }
 }

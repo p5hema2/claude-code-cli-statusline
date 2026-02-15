@@ -20,7 +20,7 @@ export default {
         },
         border: 'rgb(var(--color-border) / <alpha-value>)',
         accent: {
-          DEFAULT: '#4468F0', // Smart Commerce primary blue
+          DEFAULT: '#4468F0', // Primary blue
           hover: '#3654d6', // Darkened for hover state
         },
         brand: {

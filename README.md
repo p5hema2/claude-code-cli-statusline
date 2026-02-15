@@ -112,7 +112,7 @@ Then update `settings.json` to use `claude-code-cli-statusline` instead of `npx 
 
 ### Visual Configuration GUI
 
-Open a browser-based WYSIWYG editor with **Smart Commerce branding** (built with **Tailwind CSS**):
+Open a browser-based WYSIWYG editor (built with **Tailwind CSS**):
 
 ```bash
 npx @p5hema2/claude-code-cli-statusline --configure
@@ -123,7 +123,7 @@ The GUI features:
 - **Multi-row support** for complex statuslines
 - **Live preview** with different terminal themes
 - **N/A state toggles** to preview various widget states
-- **Modern responsive UI** with Smart Commerce design system
+- **Modern responsive UI** with clean design system
 - **Light theme** optimized for readability and accessibility (WCAG 2.0 AA)
 
 ### Manual Configuration
