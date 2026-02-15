@@ -56,15 +56,15 @@ A fully customizable statusline for Claude Code CLI with **OAuth usage metrics**
 - ⏲️ **API Duration** - Total API response time
 - 📝 **Code Changes** - Lines added/removed by Claude (session total)
 
-## Unique Feature: OAuth Usage Metrics
+## OAuth Usage Metrics
 
-Unlike other statuslines, this tool integrates with Claude Code's OAuth API to show your **real usage limits**:
+Integrates with Claude Code's OAuth API to display usage limits:
 
 - **5-hour session**: Rolling usage within the current session window
 - **7-day total**: Weekly usage across all models
 - **7-day Sonnet**: Weekly Sonnet-specific usage
 
-This helps you manage your API usage and avoid hitting rate limits.
+Provides visibility into API usage to help manage rate limits.
 
 ## Installation
 
@@ -77,11 +77,11 @@ npx @p5hema2/claude-code-cli-statusline@latest --setup
 ```
 
 This will:
-- ✅ Detect your Claude Code installation
-- ✅ Add statusline configuration to `~/.claude/settings.json`
-- ✅ Provide next steps
+- Detect your Claude Code installation
+- Add statusline configuration to `~/.claude/settings.json`
+- Display next steps
 
-**After setup, restart Claude Code CLI to see the statusline!**
+Restart Claude Code CLI after setup to activate the statusline.
 
 ### Manual Setup (Alternative)
 
@@ -112,19 +112,19 @@ Then update `settings.json` to use `claude-code-cli-statusline` instead of `npx 
 
 ### Visual Configuration GUI
 
-Open a browser-based WYSIWYG editor (built with **Tailwind CSS**):
+Open a browser-based WYSIWYG editor:
 
 ```bash
 npx @p5hema2/claude-code-cli-statusline --configure
 ```
 
-The GUI features:
-- **Drag & drop** widgets to arrange your layout
-- **Multi-row support** for complex statuslines
-- **Live preview** with different terminal themes
-- **N/A state toggles** to preview various widget states
-- **Modern responsive UI** with clean design system
-- **Light theme** optimized for readability and accessibility (WCAG 2.0 AA)
+Features:
+- Drag and drop widgets to arrange layout
+- Multi-row support for complex statuslines
+- Live preview with different terminal themes
+- State toggles to preview widget variations
+- Responsive interface with clean design
+- WCAG 2.0 AA compliant accessibility
 
 ### Manual Configuration
 
