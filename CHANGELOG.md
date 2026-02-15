@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.1.2](https://github.com/p5hema2/claude-code-cli-statusline/compare/v1.1.1...v1.1.2) (2026-02-15)
+
 ## [1.1.1](https://github.com/p5hema2/claude-code-cli-statusline/compare/v1.1.0...v1.1.1) (2026-02-15)
 
 
