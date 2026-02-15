@@ -68,29 +68,45 @@ This helps you manage your API usage and avoid hitting rate limits.
 
 ## Installation
 
-### Run without installation (recommended)
+### Automated Setup (Recommended)
+
+Run the setup command to automatically configure Claude Code:
 
 ```bash
-npx @p5hema2/claude-code-cli-statusline@latest
+npx @p5hema2/claude-code-cli-statusline@latest --setup
 ```
 
-### Global installation
+This will:
+- ✅ Detect your Claude Code installation
+- ✅ Add statusline configuration to `~/.claude/settings.json`
+- ✅ Provide next steps
+
+**After setup, restart Claude Code CLI to see the statusline!**
+
+### Manual Setup (Alternative)
+
+If you prefer manual configuration, add to `~/.claude/settings.json`:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "npx @p5hema2/claude-code-cli-statusline@latest"
+  }
+}
+```
+
+**Note:** The key must be `statusLine` (capital L) with `type: "command"` field.
+
+### Global Installation (Optional)
+
+For faster execution, install globally:
 
 ```bash
 npm install -g @p5hema2/claude-code-cli-statusline
 ```
 
-## Claude Code Integration
-
-Add to your Claude Code settings (`~/.claude/settings.json`):
-
-```json
-{
-  "statusline": {
-    "command": "npx @p5hema2/claude-code-cli-statusline@latest"
-  }
-}
-```
+Then update `settings.json` to use `claude-code-cli-statusline` instead of `npx @p5hema2/claude-code-cli-statusline@latest`.
 
 ## Configuration
 

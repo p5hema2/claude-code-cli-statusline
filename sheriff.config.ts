@@ -17,6 +17,7 @@ export const sheriffConfig: SheriffConfig = {
     // Entry points
     'src/index.ts': 'feature:cli',
     'src/main.ts': 'feature:cli',
+    'src/cli.ts': 'feature:cli',
 
     // Domain layer - shared types and defaults
     'src/types': 'domain:types',
@@ -44,6 +45,7 @@ export const sheriffConfig: SheriffConfig = {
     'src/configure': 'feature:configure',
     'src/configure/<server>': 'feature:configure',
     'src/configure/<preview>': 'feature:configure',
+    'src/setup': 'feature:setup',
 
     // Exclude browser JS from Sheriff (not TypeScript)
     'src/configure/gui': noDependencies,
@@ -59,8 +61,9 @@ export const sheriffConfig: SheriffConfig = {
     'core:utils': ['domain:types', 'domain:defaults', 'core:widgets', 'external:*'],
 
     // Feature layer: can import everything except other features
-    'feature:cli': ['domain:*', 'core:*', 'feature:configure', 'external:*'],
+    'feature:cli': ['domain:*', 'core:*', 'feature:configure', 'feature:setup', 'external:*'],
     'feature:configure': ['domain:*', 'core:*', 'external:*'],
+    'feature:setup': ['domain:*', 'core:*', 'external:*'],
 
     // Untagged files: can import anything (permissive for flexibility)
     noTag: ['domain:*', 'core:*', 'feature:*', 'external:*'],

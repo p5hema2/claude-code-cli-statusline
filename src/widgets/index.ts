@@ -47,10 +47,10 @@ export { SeparatorWidget, SeparatorSchema } from './separator/separator.widget.j
 
 import type { WidgetSchema, Widget } from '../types/index.js';
 
-import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
-import { ContextThresholdWidget, ContextThresholdSchema } from './context-threshold/index.js';
 import { ApiDurationWidget, ApiDurationSchema } from './api-duration/index.js';
 import { CodeChangesWidget, CodeChangesSchema } from './code-changes/index.js';
+import { ContextThresholdWidget, ContextThresholdSchema } from './context-threshold/index.js';
+import { ContextUsageWidget, ContextUsageSchema } from './context-usage/context-usage.widget.js';
 import { DirectoryWidget, DirectorySchema } from './directory/directory.widget.js';
 import { ExtraUsageWidget, ExtraUsageSchema } from './extra-usage/index.js';
 import { GitBranchWidget, GitBranchSchema } from './git-branch/git-branch.widget.js';
@@ -64,8 +64,8 @@ import { SessionCostWidget, SessionCostSchema } from './session-cost/index.js';
 import { SessionIdWidget, SessionIdSchema } from './session-id/session-id.widget.js';
 import { SessionUsageWidget, SessionUsageSchema } from './session-usage/session-usage.widget.js';
 import { TextWidget, TextSchema } from './text/text.widget.js';
-import { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-cached.widget.js';
 import { TokensCacheReadWidget, TokensCacheReadSchema } from './tokens-cache-read/index.js';
+import { TokensCachedWidget, TokensCachedSchema } from './tokens-cached/tokens-cached.widget.js';
 import { TokensInputWidget, TokensInputSchema } from './tokens-input/tokens-input.widget.js';
 import { TokensOutputWidget, TokensOutputSchema } from './tokens-output/tokens-output.widget.js';
 import { TokensTotalWidget, TokensTotalSchema } from './tokens-total/index.js';
