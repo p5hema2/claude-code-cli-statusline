@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/p5hema2/claude-code-cli-statusline/compare/v1.1.0...v1.1.1) (2026-02-15)
+
+
+### Features
+
+* **docs:** updated readme.md ([1b6dabf](https://github.com/p5hema2/claude-code-cli-statusline/commit/1b6dabf28a27e74f2f21fb7030e56c18b0207aea))
+
 # [1.1.0](https://github.com/p5hema2/claude-code-cli-statusline/compare/v1.0.1...v1.1.0) (2026-02-15)
 
 
