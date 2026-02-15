@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
 import { parseTranscriptMetrics } from './transcript.util.js';
 
 vi.mock('node:fs', () => ({
