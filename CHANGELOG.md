@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.1.0](https://github.com/p5hema2/claude-code-cli-statusline/compare/v1.0.1...v1.1.0) (2026-02-15)
+
+
+### Features
+
+* **setup:** add --setup flag for automated Claude Code registration ([4081d74](https://github.com/p5hema2/claude-code-cli-statusline/commit/4081d74a2fc30d30a144f31d993f7625be6aab05)), closes [#103](https://github.com/p5hema2/claude-code-cli-statusline/issues/103)
+
 ## [1.0.1](https://github.com/p5hema2/claude-code-cli-statusline/compare/v1.0.0...v1.0.1) (2026-02-15)
 
 * **ci:** update release pipeline
