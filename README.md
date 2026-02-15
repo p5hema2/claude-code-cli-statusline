@@ -1,6 +1,6 @@
 # @p5hema2/claude-code-cli-statusline
 
-A customizable statusline for Claude Code CLI with **OAuth usage metrics**.
+A fully customizable statusline for Claude Code CLI with **OAuth usage metrics**. Configure widgets, colors, labels, lines, and more as you wish.
 
 [![npm version](https://badge.fury.io/js/%40p5hema2%2Fclaude-code-cli-statusline.svg)](https://www.npmjs.com/package/@p5hema2/claude-code-cli-statusline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
