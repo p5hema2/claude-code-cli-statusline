@@ -98,10 +98,10 @@ describe('generateMockContext', () => {
     );
 
     expect(usage).not.toBeNull();
-    expect(usage!.current_session.percent_used).toBe(20);
-    expect(usage!.weekly_sonnet.percent_used).toBe(80);
+    expect(usage!.current_session?.percent_used).toBe(20);
+    expect(usage!.weekly_sonnet?.percent_used).toBe(80);
     // weekly_all should be filled with zero default
-    expect(usage!.weekly_all.percent_used).toBe(0);
+    expect(usage!.weekly_all?.percent_used).toBe(0);
   });
 
   it('should fill default usage fields for missing widget contributions', () => {
@@ -114,10 +114,10 @@ describe('generateMockContext', () => {
     const { usage } = generateMockContext({ sessionUsage: 'medium' }, schemas);
 
     expect(usage).not.toBeNull();
-    expect(usage!.current_session.percent_used).toBe(50);
+    expect(usage!.current_session?.percent_used).toBe(50);
     // Other fields filled with zero defaults
-    expect(usage!.weekly_all.percent_used).toBe(0);
-    expect(usage!.weekly_sonnet.percent_used).toBe(0);
+    expect(usage!.weekly_all?.percent_used).toBe(0);
+    expect(usage!.weekly_sonnet?.percent_used).toBe(0);
     expect(usage!.timestamp).toBeGreaterThan(0);
   });
 

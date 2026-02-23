@@ -27,12 +27,12 @@ export interface ExtraUsage {
 
 /** Response structure from the OAuth usage API */
 export interface UsageResponse {
-  /** 5-hour rolling session limit */
-  five_hour: UsageLimit;
-  /** 7-day limit across all models */
-  seven_day: UsageLimit;
-  /** 7-day limit specifically for Sonnet model */
-  seven_day_sonnet: UsageLimit;
+  /** 5-hour rolling session limit (null on some account plans) */
+  five_hour: UsageLimit | null;
+  /** 7-day limit across all models (null on plans without weekly limits) */
+  seven_day: UsageLimit | null;
+  /** 7-day limit specifically for Sonnet model (null on plans without weekly limits) */
+  seven_day_sonnet: UsageLimit | null;
   /** 7-day limit for OAuth apps usage */
   seven_day_oauth_apps: UsageLimit | null;
   /** 7-day limit for Cowork feature usage */
@@ -67,12 +67,12 @@ export interface CachedExtraUsage {
 export interface UsageCache {
   /** Unix timestamp (ms) when cache was last updated */
   timestamp: number;
-  /** 5-hour session usage */
-  current_session: CachedUsageEntry;
-  /** 7-day all models usage */
-  weekly_all: CachedUsageEntry;
-  /** 7-day Sonnet-specific usage */
-  weekly_sonnet: CachedUsageEntry;
+  /** 5-hour session usage (null if API returns null for five_hour) */
+  current_session: CachedUsageEntry | null;
+  /** 7-day all models usage (null on plans without weekly limits) */
+  weekly_all: CachedUsageEntry | null;
+  /** 7-day Sonnet-specific usage (null on plans without weekly limits) */
+  weekly_sonnet: CachedUsageEntry | null;
   /** 7-day OAuth apps usage */
   weekly_oauth_apps: CachedUsageEntry | null;
   /** 7-day Cowork feature usage */
