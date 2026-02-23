@@ -425,7 +425,68 @@ describe('refreshUsageCache', () => {
     const result = await refreshUsageCache();
 
     expect(result).not.toBeNull();
-    expect(result?.current_session.percent_used).toBe(0.25);
+    expect(result?.current_session?.percent_used).toBe(0.25);
+  });
+
+  it('should handle null seven_day and seven_day_sonnet without crashing', async () => {
+    const mockResponse: UsageResponse = {
+      five_hour: {
+        utilization: 26.0,
+        resets_at: '2026-02-23T16:00:00Z',
+      },
+      seven_day: null,
+      seven_day_sonnet: null,
+      seven_day_oauth_apps: null,
+      seven_day_cowork: null,
+      seven_day_opus: null,
+      extra_usage: {
+        is_enabled: false,
+        monthly_limit: null,
+        used_credits: null,
+        utilization: null,
+      },
+    };
+
+    vi.mocked(getAccessToken).mockResolvedValue('test-token');
+    vi.mocked(fetchUsage).mockResolvedValue(mockResponse);
+    vi.mocked(existsSync).mockReturnValue(true);
+
+    const result = await refreshUsageCache();
+
+    expect(result).not.toBeNull();
+    expect(result?.current_session?.percent_used).toBe(26.0);
+    expect(result?.weekly_all).toBeNull();
+    expect(result?.weekly_sonnet).toBeNull();
+    expect(writeFileSync).toHaveBeenCalled();
+  });
+
+  it('should handle all null usage limits gracefully', async () => {
+    const mockResponse: UsageResponse = {
+      five_hour: null,
+      seven_day: null,
+      seven_day_sonnet: null,
+      seven_day_oauth_apps: null,
+      seven_day_cowork: null,
+      seven_day_opus: null,
+      extra_usage: {
+        is_enabled: false,
+        monthly_limit: null,
+        used_credits: null,
+        utilization: null,
+      },
+    };
+
+    vi.mocked(getAccessToken).mockResolvedValue('test-token');
+    vi.mocked(fetchUsage).mockResolvedValue(mockResponse);
+    vi.mocked(existsSync).mockReturnValue(true);
+
+    const result = await refreshUsageCache();
+
+    expect(result).not.toBeNull();
+    expect(result?.current_session).toBeNull();
+    expect(result?.weekly_all).toBeNull();
+    expect(result?.weekly_sonnet).toBeNull();
+    expect(writeFileSync).toHaveBeenCalled();
   });
 });
 
@@ -607,7 +668,7 @@ describe('waitForPendingRefresh', () => {
     const result = await waitForPendingRefresh();
 
     expect(result).not.toBeNull();
-    expect(result?.current_session.percent_used).toBe(0.30);
+    expect(result?.current_session?.percent_used).toBe(0.30);
   });
 
   it('should clear pending refresh after completion', async () => {

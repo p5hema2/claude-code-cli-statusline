@@ -77,18 +77,24 @@ export function isCacheValid(
 function responseToCache(response: UsageResponse): UsageCache {
   return {
     timestamp: Date.now(),
-    current_session: {
-      reset_time: response.five_hour.resets_at,
-      percent_used: response.five_hour.utilization,
-    },
-    weekly_all: {
-      reset_time: response.seven_day.resets_at,
-      percent_used: response.seven_day.utilization,
-    },
-    weekly_sonnet: {
-      reset_time: response.seven_day_sonnet.resets_at,
-      percent_used: response.seven_day_sonnet.utilization,
-    },
+    current_session: response.five_hour
+      ? {
+          reset_time: response.five_hour.resets_at,
+          percent_used: response.five_hour.utilization,
+        }
+      : null,
+    weekly_all: response.seven_day
+      ? {
+          reset_time: response.seven_day.resets_at,
+          percent_used: response.seven_day.utilization,
+        }
+      : null,
+    weekly_sonnet: response.seven_day_sonnet
+      ? {
+          reset_time: response.seven_day_sonnet.resets_at,
+          percent_used: response.seven_day_sonnet.utilization,
+        }
+      : null,
     weekly_oauth_apps: response.seven_day_oauth_apps
       ? {
           reset_time: response.seven_day_oauth_apps.resets_at,
